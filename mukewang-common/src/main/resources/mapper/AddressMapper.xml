@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Address">
+    <id column="address_id" jdbcType="INTEGER" property="addressId" />
+    <result column="address_uid" jdbcType="INTEGER" property="addressUid" />
+    <result column="address_createTime" jdbcType="TIMESTAMP" property="addressCreatetime" />
+    <result column="address_region" jdbcType="VARCHAR" property="addressRegion" />
+    <result column="address_site" jdbcType="VARCHAR" property="addressSite" />
+    <result column="address_postcode" jdbcType="INTEGER" property="addressPostcode" />
+    <result column="address_phone" jdbcType="VARCHAR" property="addressPhone" />
+    <result column="address_Name" jdbcType="VARCHAR" property="addressName" />
+    <result column="address_IsDefault" jdbcType="VARCHAR" property="addressIsDefault" />
+  </resultMap>
+  <select id="selectByAddressAll" resultMap="BaseResultMap" parameterType="INTEGER">
+    select * from muke_address where address_uid = #{id}
+  </select>
+  <select id="selectByAddressId" resultMap="BaseResultMap" parameterType="INTEGER">
+    select * from muke_address where address_id = #{id}
+  </select>
+  <delete id="deleteAddress" parameterType="INTEGER">
+    delete from muke_address where address_id = #{id};
+  </delete>
+  <insert id="insert" parameterType="com.entity.Address">
+    insert into muke_address (address_id, address_uid, address_createTime, 
+       address_region,address_site,address_postcode,address_phone,address_Name,address_IsDefault)
+    values (#{addressId,jdbcType=INTEGER}, #{addressUid,jdbcType=INTEGER}, #{addressCreatetime,jdbcType=TIMESTAMP}, 
+       #{addressRegion,jdbcType=VARCHAR},#{addressSite},#{addressPostcode},#{addressPhone},#{addressName},#{addressIsDefault})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Address">
+    update muke_address
+    set address_createTime = #{addressCreatetime,jdbcType=TIMESTAMP},
+      address_region = #{addressRegion,jdbcType=VARCHAR},
+      address_site = #{addressSite},
+      address_postcode = #{addressPostcode},
+      address_phone = #{addressPhone},
+      address_Name = #{addressName}
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByDfault">
+    update muke_address
+    set address_IsDefault = 0
+    where address_IsDefault = 1
+  </update>
+  <update id="updateByIsDfaultId" parameterType="Integer">
+    update muke_address
+    set address_IsDefault = 1
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+</mapper>

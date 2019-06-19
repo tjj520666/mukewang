@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>JavaScript版数据结构与算法-慕课网实战</title>
+		<link rel="stylesheet" href="\practiceCourse\css\moco.min.css" type="text/css">
+		<link rel="stylesheet" href="\practiceCourse\css\315-less.css" type="text/css">
+		<link rel="stylesheet" href="\practiceCourse\css\share_style0_16.css">
+		<link merge="false" rel="stylesheet" type="text/css" href="\practiceCourse\css\actualsaved_resource.css">
+		<link rel="stylesheet" href="\layui-v2.4.5\layui\css\layui.css" media="all">
+		<script type="text/javascript" src="\practiceCourse\js\jquery-1.12.4.js"></script>
+		<script src="/layui-v2.4.5/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript">
+           window.onload=function() {
+              $("#cart").click(function () {
+                  $.post("insertShoop",{mvId:[[${mvM.mvId}]],mvPrice:[[${mvM.mvPrice}]]},function(data){
+                      if (data){
+                          alert("添加成功")
+                      }
+                  },"json")
+              })
+                $(".zj").click(function() {
+                    $("#info").css("display", "none");
+                    $("#scomment").css("display", "none");
+                    $("#qiqi").css("display", "block");
+                });
+                $(".kc").click(function() {
+                    $("#info").css("display", "block");
+                    $("#qiqi").css("display", "none");
+                    $("#scomment").css("display", "none");
+                });
+                $(".pj").click(function() {
+                    $("#scomment").css("display", "block");
+                    $("#qiqi").css("display", "none");
+                    $("#info").css("display", "none");
+                });
+
+                $.each($(".hidd"), function (index, curr) {
+                    var hidd = $(this).val();
+                    var starBox = $(this).next();
+                    layui.use(['rate'], function () {
+                        var rate = layui.rate;
+                        //只读
+                        rate.render({
+                            elem: starBox
+                            , value: hidd
+                            , readonly: true
+                        })
+                    });
+                });
+
+            };
+		</script>
+		<style type="text/css">
+			.moco-modal-info {
+				font-size: 14px;
+				line-height: 20px;
+			}
+		</style>
+		<style type="text/css" id="MOCO_ADV_STYLE">
+			#MOCO_TOP_ADVERTISING {
+				width: 100%;
+				min-width: 1152px;
+				max-width: 2560px;
+				height: 40px;
+				overflow: hidden;
+				background: #eee;
+				cursor: pointer;
+				position: relative;
+				z-index: 901
+			}
+
+			#MOCO_TOP_ADVERTISING>img {
+				height: 100%;
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				-webkit-transform: translateX(-50%);
+			}
+
+			#MOCO_TOP_ADVERTISING>.close-adv {
+				color: #000;
+				position: absolute;
+				right: 15%;
+				top: 8px;
+				cursor: pointer;
+				z-index: 1;
+				font-size: 24px;
+			}
+
+			#MOCO_FLOATRIGHT_ADVERTISING {
+				width: 102px;
+				height: 102px;
+				position: fixed;
+				right: 0;
+				top: 50%;
+				margin-top: -218px;
+				cursor: pointer;
+				overflow: hidden;
+				z-index: 901
+			}
+
+			#MOCO_FLOATRIGHT_ADVERTISING .close-adv {
+				position: absolute;
+				right: 3px;
+				top: 5px;
+				cursor: pointer;
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 16px;
+			}
+
+			#MOCO_FLOATRIGHT_ADVERTISING .close-adv:hover {
+				color: rgba(242, 13, 13, 0.8);
+			}
+
+			#MOCO_FLOATRIGHT_ADVERTISING>img {
+				width: 100%;
+			}
+
+			#MOCO_BOTTOM_ADVERTISING {
+				width: 100%;
+				max-height: 200px;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				cursor: pointer;
+				z-index: 2
+			}
+
+			#MOCO_BOTTOM_ADVERTISING>.close-adv {
+				position: absolute;
+				top: 0;
+				right: 10px;
+				font-size: 18px;
+				color: rgba(168, 160, 160, 0.8);
+				transform: translateY(-65%);
+				-ms-transform: translateY(-65%);
+				-webkit-transform: translateY(-65%);
+				z-index: 2;
+			}
+
+			#MOCO_BOTTOM_ADVERTISING>img {
+				width: 100%;
+				display: block;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<!--顶部广告位-->
+		<div class="adv-root" id="moco-top-advertising"></div>
+		<div th:each="mv:${mvM}">
+		<div id="header">
+			<div class="page-container new-header" id="nav">
+				<ul class="nav-item">
+					<li>
+						<a href="/toMain" target="_self" class="imooc">慕课网首页</a>
+					</li>
+					<li>
+						<a href="/fenye" target="_self">免费课程</a>
+					</li>
+					<li>
+						<a href="/practiceCourseSY" class="active" target="_self">实战课程</a>
+					</li>
+					<li>
+						<a href="/toClass" target="_self">就业班<i class="icn-new"></i></a>
+					</li>
+					<li>
+						<a href="#" target="_self">专栏</a>
+					</li>
+					<li>
+						<a href="#" target="_self">手记</a>
+					</li>
+					<li class="search" id="common-nav-search">
+						<a href="javascript:void(0);">
+
+						</a>
+					</li>
+					<li class="input-search hide" id="common-input-search">
+						<div class="input-box">
+							<input type="text" class="nav-search-input" autocomplete="off">
+							<a href="javascript:void(0);" class="nav-searchBtn js-nav-searchBtn">
+
+							</a>
+						</div>
+						<div class="nav-search-box hide">
+							<div class="hot">
+								<h2>热搜</h2>
+								<div class="hot-box">
+									<a href="javascript:void(0)" class="hot-item js-history-search">React</a>
+									<a href="javascript:void(0)" class="hot-item js-history-search">面试</a>
+								</div>
+							</div>
+							<div class="history hide">
+								<h2>最近搜索<a href="javascript:void(0);" class="history-clear js-clear-history">清空</a></h2>
+								<div class="history-box">
+								</div>
+							</div>
+						</div>
+						<div class="nav-correlate-box hide">
+							<div class="correlate">
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="header-right clearfix">
+					<div class="dist-money">
+						<a href="https://order.imooc.com/pay/sharegoods" target="_blank">
+							<div class="redPacket"></div>分享赚学费</a>
+					</div>
+					<div class="app-download" id="js-app-load">
+						<a href="https://www.imooc.com/mobile/app" target="_blank">下载APP</a>
+						<div class="app-load-box clearfix js-load-box">
+							<div class="browser-load-box">
+								<h4>慕课网浏览器 - PC客户端</h4>
+								<a class="app-load-btn" href="https://www.imooc.com/mobile/app" target="_blank">Windows版</a>
+								<span class="browser-load-mac">Mac版开发中，敬请期待…</span>
+							</div>
+							<div class="mobile-load-box">
+								<h4>慕课网APP - 随时随地学编程</h4>
+								<img src="./practiceCourse/image/appload.png" class="l">
+								<div class="r">
+									<a class="app-load-btn" href="https://itunes.apple.com/cn/app/mu-ke-wang/id722179140?mt=8" target="_blank"><i class="icon-apple"></i>App Store下载</a>
+									<a class="app-load-btn" href="https://www.imooc.com/mobile/appdown" target="_blank"><i class="icon-android"></i>Android下载</a>
+									<p>扫描下载慕课网APP</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="shop-cart" id="shop-cart">
+						<a href="/toShoppingCart" class="shop-cart-icon" target="_blank">
+							<span class="imv2-cart js-endcart"></span><span>购物车</span>
+							<!--<span class="shopping_icon js-cart-num" data-ordernum="0" data-cartnum="0" data-prevnum="0" style="display: none">0</span>-->
+						</a>
+						<div class="my-cart" id="js-my-cart"></div>
+					</div>
+					<div id="login-area">
+						<ul class="header-unlogin clearfix">
+							<li class="header-signin">
+								<a href="https://www.imooc.com/user/newlogin" id="js-signin-btn">登录</a> /
+								<a href="https://www.imooc.com/user/newsignup" id="js-signup-btn">注册</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="course-infos-top " style="background-image:url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/5c62a4eb0935fd9520000520.jpg)">
+			<div class="info-wrap">
+				<div class="title-box">
+					<h1 th:text="${mv.mvName}"></h1>
+					<h2 th:text="${mv.mvTitle}"></h2>
+				</div>
+				<!--<div class="hide">-->
+					<!--<h1 class="l">JavaScript版 数据结构与算法</h1>-->
+				<!--</div>-->
+
+			</div>
+			<div class="fixed-wrap" style="bottom:-64px">
+				<div class="con">
+					<!-- 只在未购买和已购买正常转状态显示 -->
+					<div class="time-price clearfix">
+						<div class="no-discount clearfix l">
+							<!-- 没有任何活动 -->
+							<div class="ori-price l">
+								<span>[[${mv.mvPrice}]]￥</span>
+							</div>
+						</div>
+						<div class="can-huabei l">
+							<a href="https://www.imooc.com/help/detail/110" target="_blank">花呗付款</a>
+						</div>
+					</div>
+
+					<div class="info-bar clearfix" style="margin-top:px">
+						<span>难度</span>
+						<span class="nodistance" th:if="${mv.mvDifficultyid==1}">入门</span>
+						<span class="nodistance" th:if="${mv.mvDifficultyid==2}">初级</span>
+						<span class="nodistance" th:if="${mv.mvDifficultyid==3}">中级</span>
+						<span class="nodistance" th:if="${mv.mvDifficultyid==4}">高级</span>
+
+						<span>时长</span>
+						<span class="nodistance">[[${mv.mvDuration}]]小时</span>
+						<input type="hidden" th:id="mvPrice" th:value="${mv.mvPrice}">
+						<span>学习人数</span>
+						<span class="nodistance" th:text="${mv.mvPersonnum}"></span>
+
+						<span>综合评分</span>
+						<span class="nodistance" th:text="${mv.mvScope}"></span>
+					</div>
+
+					<div class="btns">
+						<a th:href="@{/toPayInfo(mvid=${mv.mvId})}" class="js-buy-trigger red-btn gobuy" data-cid="315" data-pay="0" id="buy-trigger">
+							立即购买
+						</a>
+						<a th:id="cart" href="" class="js-addcart addcart" data-cid="315" data-type="1">
+							加购物车
+						</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="infolayout clearfix" id="info">
+		<div class="course-infos-t">
+			<div id="Anchor"></div>
+			<div class="comp-tab-t js-comp-tab">
+				<ul class="clearfix">
+					<li class="comp-tab-item-first comp-tab-item active ">
+						<a class="kc" href="#">课程介绍</a>
+						<div class="borderLine"></div>
+					</li>
+
+					<li class="comp-tab-item ">
+						<a class="zj" href="#">章节目录</a>
+						<div class="borderLine"></div>
+					</li>
+					<li class="comp-tab-item ">
+						<a class="pj" href="#">用户评价</a>
+						<div class="borderLine"></div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="info-video clearfix" style="background-image: url(//img.mukewang.com/szimg/5c62a7ef087f103609000500.jpg);">
+				<div id="zzq1" class="video-dark-box l clearfix" style="display: block">
+					<div class="js-video-btn videoBtn l">
+					<!--<div><i class="sz-play js-enter-tryMedia"></i></div>-->
+					<p></p>
+				</div>
+					<div id="videoInfo" class="l">
+						<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 312px;">
+							<div id="content" style="overflow: hidden; width: auto; height: 312px;">
+								<div class="con">
+									<div class="info-name" th:text="${mv.mvName}"></div>
+									<div class="info-desc" th:text="${mv.mvDetails}">
+									</div>
+								</div>
+
+								<div class="line"></div>
+							</div>
+							<div class="slimScrollBar" style="background: rgb(255, 255, 255); width: 8px; position: absolute; top: 0px; opacity: 1; display: none; border-radius: 8px; z-index: 99; right: 0px; height: 312px;"></div>
+							<div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 0px;"></div>
+						</div>
+
+					</div>
+				</div>
+
+				<div  id="zzq" class="detail-white-box l" style="display: none;">
+					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 336px;">
+						<div class="scrollConTeacher" style="overflow: hidden; width: auto; height: 336px;">
+							<div class="detailContent">
+								<div class="nickname" th:text="${mv.teacher.teacherName}"></div>
+								<div class="jobType" th:text="${mv.teacher.teacherTitle}"></div>
+								<div class="introduce" >
+									<p th:text="${mv.teacher.teacherIntro}"></p>
+								</div>
+							</div>
+							<div class="division clearfix">
+								<h3 class="l">讲师其他课程</h3>
+								<p class="r"></p>
+							</div>
+
+							<!--<div class="recommend clearfix">-->
+								<!--<a href="https://coding.imooc.com/class/98.html" target="_blank">-->
+									<!--<div class="item l clearfix" id="item0" style="margin-right: 32px">-->
+
+										<!--<img alt="ES6零基础教学 解析彩票项目" src="./JavaScript版数据结构与算法-慕课网实战_files/58fea8780001f29c05400300-360-202.jpg" class="l">-->
+
+										<!--<div class="textCon">-->
+											<!--<div class="className">ES6零基础教学 解析彩票项目</div>-->
+											<!--<div class="typeNumCon">-->
+												<!--<span class="type">实战</span>-->
+												<!--<span class="difficulty">中级</span>-->
+												<!--<span class="headImg"></span>-->
+
+												<!--<span class="peopleNum">2239</span>-->
+											<!--</div>-->
+											<!--<div class="priceDiscount clearfix">-->
+												<!--<div class="price l">￥188.00</div>-->
+
+											<!--</div>-->
+
+										<!--</div>-->
+
+									<!--</div>-->
+								<!--</a>-->
+							<!--</div>-->
+						</div>
+						<div class="slimScrollBar" style="background: rgb(217, 221, 225); width: 8px; position: absolute; top: 0px; opacity: 1; display: block; border-radius: 8px; z-index: 99; right: 0px;"></div>
+						<div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 0px;"></div>
+					</div>
+
+				</div>
+
+				<div class="teacher-right-box r">
+					<div class="teacher">
+						<div class="whiteBorder"></div>
+						<a href="http://www.imooc.com/u/5027812" target="_blank">
+							<div class="headPortrait">
+								<img th:src="${mv.teacher.teacherImage}">
+							</div>
+							<div class="nickname" th:text="${mv.teacher.teacherName}"></div>
+						</a>
+						<p th:text="${mv.teacher.teacherTitle}"></p>
+					</div>
+					<div class="jiao" style="display: none;"></div>
+				</div>
+				<script type="text/javascript">
+                    $(".teacher").mouseover(function(){
+                        $("#zzq1").css("display","none");
+                        $("#zzq").css("display","block");
+                        $(".jiao").css("display","block");
+                    });
+                    $(".teacher").mouseout(function(){
+                        $("#zzq1").css("display","block");
+                        $("#zzq").css("display","none");
+                        $(".jiao").css("display","none");
+                    });
+				</script>
+			</div>
+
+		</div>
+
+
+
+			<div class="appendtemplate">
+				<!--ES_BEGIN-->
+				<div class="introduce-content">
+					<div class="section0">
+						<div class="wrap">
+							<div class="content-box clearfix">
+								<h1>全站首门 JavaScript 版数据结构与算法</h1>
+								<h4>夯实算法基础，填补技术短板，助力面试考题最后一公里</h4>
+								<ul>
+									<li>
+										<div class="item-icon"><img src="/practiceCourse/image/section0-i1.png"></div>
+										<p class="small-title">填补前端同学的算法短板</p>
+										<p>提升编程核心内功
+											<br>建立和健全算法知识体系</p>
+									</li>
+									<li>
+										<div class="item-icon"><img src="/practiceCourse/image/section0-i2.png"></div>
+										<p class="small-title">涵盖算法面试各方面</p>
+										<p>包括基础算法、数据结构、进阶算法，由
+											<br>浅入深讲解，透彻理解抽象算法</p>
+									</li>
+									<li>
+										<div class="item-icon"><img src="/practiceCourse/image/section0-i3.png"></div>
+										<p class="small-title">快速刷题高效掌握算法原理与思维</p>
+										<p>算法面试是关键一环
+											<br>冲击大厂前端offer</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="section1">
+						<div class="wrap">
+							<div class="content-box clearfix">
+								<h1>掌握面试中最常见的算法与数据结构</h1>
+								<h4>解析 LeetCode 真题 高效有针对性的准备算法面试</h4>
+								<ul class="base">
+									<li>
+										<p class="small-title t1">- 字符串类 -</p>
+										<p>原型API灵活运用
+											<br>字符串与数组的变换
+											<br>类型转换&amp;位运算</p>
+									</li>
+									<li>
+										<p class="small-title t2">- 数组类 -</p>
+										<p>数学组合实现
+											<br>卡牌分组算法
+											<br>抽象设计挖掘规律
+											<br>二进制编码技巧</p>
+									</li>
+									<li>
+										<p class="small-title t3">- 正则类 -</p>
+										<p>基本用法
+											<br>高级模式匹配
+											<br>实现自定义正则规则</p>
+									</li>
+									<br>
+									<li>
+										<p class="small-title t4">- 排序类 -</p>
+										<p>冒泡&amp;选择排序
+											<br>排序的复杂度
+											<br>魔改排序解难题</p>
+									</li>
+									<li>
+										<p class="small-title t5">- 递归类 -</p>
+										<p>动画演示递归的原理
+											<br>递归的思路与规律
+											<br>应用分析与实现</p>
+									</li>
+								</ul>
+								<ul class="cons">
+									<li>
+										<p class="small-title t6">- 堆 -</p>
+										<p>从零实现堆结构
+											<br>复杂的堆应用（超级丑数）</p>
+									</li>
+									<li>
+										<p class="small-title t7">- 栈 -</p>
+										<p>数组与栈
+											<br>栈在数学运算中的应用
+											<br>矩阵与栈</p>
+									</li>
+									<li>
+										<p class="small-title t8">- 队列 -</p>
+										<p>从零实现队列结构
+											<br>队列的扩展
+											<br>队列的应用实现</p>
+									</li>
+									<br>
+									<li>
+										<p class="small-title t9">- 链表 -</p>
+										<p>零实现链表结构
+											<br>链表的排序
+											<br>链表的环形结构</p>
+									</li>
+									<li>
+										<p class="small-title t10">- 矩阵 -</p>
+										<p>螺旋矩阵
+											<br>矩阵的旋转</p>
+									</li>
+									<li>
+										<p class="small-title t11">- 二叉树 -</p>
+										<p>从零实现二叉树结构
+											<br>对称二叉树
+											<br>二叉搜索树</p>
+									</li>
+								</ul>
+								<ul class="adva">
+									<li>
+										<p class="small-title t12">- 贪心算法 -</p>
+										<p>经典算法的规律总结
+											<br>贪心算法的技巧实现</p>
+									</li>
+									<li>
+										<p class="small-title t13">- 动态规划 -</p>
+										<p>动态规划的原理揭秘
+											<br>不同路径问题的巧实现</p>
+									</li>
+								</ul>
+								<div class="img-box"></div>
+							</div>
+						</div>
+					</div>
+					<div class="section2">
+						<div class="wrap">
+							<div class="content-box clearfix">
+								<h1>贴心的讲解与服务 扫除学习过程中的障碍</h1>
+								<ul>
+									<li>
+										<p class="item-icon"></p>
+										<p>动画+流程图 具象化的展示</p>
+									</li>
+									<li>
+										<p class="item-icon"></p>
+										<p>课后及时答疑</p>
+									</li>
+									<li>
+										<p class="item-icon"></p>
+										<p>解真题 理解算法与数据结构</p>
+									</li>
+									<li>
+										<p class="item-icon"></p>
+										<p>面试经验传授</p>
+									</li>
+									<li>
+										<p class="item-icon"></p>
+										<p>Jest自动化测试 快速验证算法正确率</p>
+									</li>
+									<li>
+										<p class="item-icon"></p>
+										<p>持续提供服务，不定期更新题目</p>
+									</li>
+								</ul>
+								<div class="img-box"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="section4">
+						<div class="wrap">
+							<div class="content-box">
+								<h3>学员专享增值服务</h3>
+								<div class="context-box clearfix">
+									<div class="context-item">
+										<div class="icon-bg">
+
+										</div>
+										<div class="smalle-title">问答专区</div>
+										<p>关于课程的问题都可在问答区随时提问，</p>
+										<p>讲师会进行集中答疑</p>
+									</div>
+									<div class="context-item" style="margin-left:21%">
+										<div class="icon-bg">
+
+									     </div>
+										<div class="smalle-title">源码开放</div>
+										<p>课程案例代码完全开放给你，你可以根据</p>
+										<p>所学知识自行修改、优化</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="section6">
+						<div class="wrap">
+							<div class="content-box clearfix">
+								<div class="context-box">
+									<h1>适合人群</h1>
+									<p>对算法与数据结构感兴趣的同学
+										<br>正在找工作的同学
+										<br>已入职想要提升编程能力的前端同学</p>
+								</div>
+								<div class="context-box">
+									<h1>技术储备要求</h1>
+									<p>具备一定编程经验（不限语言），熟悉ES6语法</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--ES_END-->
+			</div>
+		</div>
+
+
+			<!--
+                        作者：1909413424@qq.com
+                        时间：2019-05-03
+                        描述：视频章节
+                    -->
+			<div id="qiqi" style="display: none;">
+				<div class="course-infos-t ">
+					<div class="comp-tab-t js-comp-tab">
+						<ul class="clearfix">
+							<li class="comp-tab-item-first comp-tab-item">
+								<a class="kc" href="#">课程介绍</a>
+								<div class="borderLine"></div>
+							</li>
+							<li class="comp-tab-item active">
+								<a class="zj" href="#">章节目录</a>
+								<div class="borderLine"></div>
+							</li>
+							<li class="comp-tab-item ">
+								<a class="pj" href="#">用户评价</a>
+								<div class="borderLine"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="w clearfix chapter-div">
+
+					<div class="comp-tabs-pannel class-tab-pannel course-cmt">
+						<div class="chapter-box">
+							<div class="comp-tabs-pannel  outline-list" th:each="sec:${mv.sections}">
+								<ul class="chapter-ul">
+									<li class="chapter clearfix">
+										<div class="chapter-bd l">
+											<h5 class="name" th:text="${sec.sectionTitle}"></h5>
+											<p class="desc" th:text="${sec.sectionIntro}"></p>
+										<ul  th:each="info:${sec.mvinfos}">
+												<li class="go">
+													<a th:href="'infomv?mvinfoId='+${info.mvinfoId}+'&mvId='+${mv.mvId}">
+													<span class="title_info js-watchTrigger" th:text="${info.mvinfoName}"></span>
+													<span class="watch-free js-watchForFree" data-index="0">开始学习</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="chapter-update-state over" style="padding-left: 72px;line-height: 58px;border-bottom: 1px solid #eceef0;color: #93999f;">本课程已完结</div>
+						</div>
+					</div>
+
+					﻿<div class="recommendcourse">
+					<!-- 讲师 -->
+					<div class="recom-box clearfix">
+						<h3 class="box-tit">讲师</h3>
+						<div class="box-bd">
+							<div class="tea-inst">
+								<div class="medias">
+									<a href="#" data-href="https://www.imooc.com/space/teacher/id/5027812" target="_blank">
+										<img th:src="${mv.teacher.teacherImage}" class="media" alt="">
+										<span class="name" th:text="${mv.teacher.teacherName}"></span>
+									</a>
+									<span class="job" th:text="${mv.teacher.teacherTitle}"></span>
+								</div>
+								<p class="desc" th:text="${mv.teacher.teacherIntro}"></p>
+							</div>
+						</div><!-- 讲师 end -->
+						<!-- 课前必学 -->
+					</div>
+				</div></div>
+			</div>
+
+
+			<!--
+                作者：1909413424@qq.com
+                时间：2019-05-03
+                描述：用户评价
+            -->
+			<div id="scomment" style="display: none;">
+				<div class="course-infos-t ">
+					<div class="comp-tab-t js-comp-tab">
+						<ul class="clearfix">
+							<li class="comp-tab-item-first comp-tab-item">
+								<a class="kc" href="#">课程介绍</a>
+								<div class="borderLine"></div>
+							</li>
+							<li class="comp-tab-item ">
+								<a class="zj" href="#">章节目录</a>
+								<div class="borderLine"></div>
+							</li>
+
+							<li class="comp-tab-item active">
+								<a class="pj" href="#">用户评价</a>
+								<div class="borderLine"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="infolayout clearfix">
+					<div class="w clearfix">
+						<div class="comp-tabs-pannel class-tab-pannel course-cmt">
+								<ul class="cmt-list" th:each="pl:${pl}" th:if="${pl.commentType==1}">
+									<li class="cmt-post elist-wrap">
+										<div class="inner">
+											<div class="hd">
+												<a href="#">
+													<img th:src="${pl.user.userHeadimage}" alt="" class="pic">
+													<!--<div class="top-comment">热评</div>-->
+												</a>
+												<a href="#" class="name" th:text="${pl.user.userName}"></a>
+												<input type="hidden" class="hidd" th:value="${pl.commentNumber}"/>
+												<div class="stars" id="test1">
+												</div>
+											</div>
+											<p class="cmt-txt" th:text="${pl.commentContent}"></p>
+
+											<!--<div class="treply">-->
+												<!--<span>讲师回复</span>-->
+												<!--<label class="js-reply-value">感动的我想起了一句诗：“为什么我的眼里常含泪水？因为我对这土地爱得深沉……”</label>-->
+											<!--</div>-->
+										</div>
+									</li>
+								</ul>
+								<!--<div class="page"><span class="disabled_page">首页</span>-->
+									<!--<span class="disabled_page">上一页</span>-->
+									<!--<a href="javascript:void(0)" class="active">1</a>-->
+									<!--<a href="https://coding.imooc.com/class/evaluation/315.html?page=2">2</a>-->
+									<!--<a href="https://coding.imooc.com/class/evaluation/315.html?page=2">下一页</a>-->
+									<!--<a href="https://coding.imooc.com/class/evaluation/315.html?page=2">尾页</a>-->
+								<!--</div>-->
+						</div>
+
+						﻿<div class="recommendcourse">
+						<!-- 讲师 -->
+						<div class="recom-box clearfix">
+							<h3 class="box-tit">讲师</h3>
+							<div class="box-bd">
+								<div class="tea-inst">
+									<div class="medias">
+										<a href="https://www.imooc.com/t/5027812" data-href="https://www.imooc.com/space/teacher/id/5027812" target="_blank">
+											<img th:src="${mv.teacher.teacherImage}" class="media" alt="">
+											<span class="name" th:text="${mv.teacher.teacherName}"></span>
+										</a>
+										<span class="job" th:text="${mv.teacher.teacherTitle}"></span>
+									</div>
+									<p class="desc" th:text="${mv.teacher.teacherIntro}"></p>
+								</div>
+							</div><!-- 讲师 end -->
+							<!-- 课前必学 -->
+							<div class="js-prelearn-evalution" data-id="315">
+								<h3 class="box-tit box-class-tit padbottom0">课前必学</h3>
+								<div class="free-course-list clearfix">
+									<ul>
+										<li class="clearfix">
+											<a href="https://www.imooc.com/learn/955" class="clearfix" target="_blank">
+												<div class="l course-img" style="background-image: url(//www.imooc.com/courseimg/s/cover020_s.jpg);">
+													<div class="cart-color purple">
+													</div>
+												</div>
+												<div class="l content-box">
+													<p class="smalle-title">ES6快速入门</p>
+													<p class="content-text" title="用最通俗、形象的方法描述ES6的强大并教会你正确的学习方法。">用最通俗、形象的方法描述ES6的强大并教会你正确的学习方法。</p>
+													<div class="clearfix learn-detail">
+														初级<span>·</span>51564人在学
+													</div>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div id="footer">
+			<div class="waper">
+				<div class="footerwaper clearfix">
+					<div class="followus r">
+						<a class="followus-weixin" href="javascript:;" target="_blank" title="微信">
+							<div class="flw-weixin-box"></div>
+						</a>
+						<a class="followus-weibo" href="http://weibo.com/u/3306361973" target="_blank" title="新浪微博"></a>
+						<a class="followus-qzone" href="http://user.qzone.qq.com/1059809142/" target="_blank" title="QQ空间"></a>
+					</div>
+					<div class="footer_intro l">
+						<div class="footer_link">
+							<ul>
+								<li>
+									<a href="https://www.imooc.com/" target="_blank">网站首页</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/index/companytrain" target="_blank" title="企业合作">企业合作</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/about/job" target="_blank">人才招聘</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/about/contact" target="_blank">联系我们</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/about/recruit" target="_blank">讲师招募</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/help/cate/19" target="_blank">帮助中心</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/user/feedback?coding" target="_blank">意见反馈</a>
+								</li>
+								<li>
+									<a href="http://daxue.imooc.com/" target="_blank">慕课大学</a>
+								</li>
+								<li>
+									<a href="https://git.imooc.com/" target="_blank">代码托管</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/about/friendly" target="_blank">友情链接</a>
+								</li>
+							</ul>
+						</div>
+						<p>Copyright © 2019 imooc.com All Rights Reserved | 京ICP备 12003892号-11</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="J_GotoTop" class="elevator">
+
+			<a href="#" class="elevator-msg" target="_blank">
+				<i class="sz-feedback"></i>
+				<span class="">意见反馈</span>
+			</a>
+			<a href="#" class="elevator-dist" target="_blank">
+				<i class=""></i>
+				<span class="">去赚学费</span>
+			</a>
+			<a href="#" class="elevator-faq" target="_blank">
+				<i class="sz-help_outline"></i>
+				<span class="">帮助中心</span>
+			</a>
+			<a href="#" target="_blank" class="elevator-app">
+				<i class="sz-appdownload"></i>
+				<span class="">APP下载</span>
+				<div class="elevator-app-box"></div>
+			</a>
+			<a href="#" class="elevator-weixin no-goto" id="js-elevator-weixin">
+				<i class="sz-weixigzh"></i>
+				<span class="">官方微信</span>
+				<div class="elevator-weixin-box"></div>
+			</a>
+			<a href="#" class="elevator-top no-goto" style="display:none" id="backTop">
+				<i class="sz-arrow-up"></i>
+				<span class="">返回顶部</span>
+			</a>
+		</div>
+
+
+	</body>
+</html>

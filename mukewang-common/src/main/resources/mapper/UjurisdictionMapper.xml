@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UjurisdictionMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Ujurisdiction">
+    <id column="ujurisdiction_id" jdbcType="INTEGER" property="ujurisdictionId" />
+    <result column="ujurisdiction_rid" jdbcType="INTEGER" property="ujurisdictionRid" />
+    <result column="ujurisdiction_jurid" jdbcType="INTEGER" property="ujurisdictionJurid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ujurisdiction_id, ujurisdiction_rid, ujurisdiction_jurid
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.UjurisdictionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_ujurisdiction
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_ujurisdiction
+    where ujurisdiction_id = #{ujurisdictionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_ujurisdiction
+    where ujurisdiction_id = #{ujurisdictionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.UjurisdictionExample">
+    delete from muke_ujurisdiction
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Ujurisdiction">
+    insert into muke_ujurisdiction (ujurisdiction_id, ujurisdiction_rid, 
+      ujurisdiction_jurid)
+    values (#{ujurisdictionId,jdbcType=INTEGER}, #{ujurisdictionRid,jdbcType=INTEGER}, 
+      #{ujurisdictionJurid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Ujurisdiction">
+    insert into muke_ujurisdiction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ujurisdictionId != null">
+        ujurisdiction_id,
+      </if>
+      <if test="ujurisdictionRid != null">
+        ujurisdiction_rid,
+      </if>
+      <if test="ujurisdictionJurid != null">
+        ujurisdiction_jurid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ujurisdictionId != null">
+        #{ujurisdictionId,jdbcType=INTEGER},
+      </if>
+      <if test="ujurisdictionRid != null">
+        #{ujurisdictionRid,jdbcType=INTEGER},
+      </if>
+      <if test="ujurisdictionJurid != null">
+        #{ujurisdictionJurid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.UjurisdictionExample" resultType="java.lang.Long">
+    select count(*) from muke_ujurisdiction
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_ujurisdiction
+    <set>
+      <if test="record.ujurisdictionId != null">
+        ujurisdiction_id = #{record.ujurisdictionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ujurisdictionRid != null">
+        ujurisdiction_rid = #{record.ujurisdictionRid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ujurisdictionJurid != null">
+        ujurisdiction_jurid = #{record.ujurisdictionJurid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_ujurisdiction
+    set ujurisdiction_id = #{record.ujurisdictionId,jdbcType=INTEGER},
+      ujurisdiction_rid = #{record.ujurisdictionRid,jdbcType=INTEGER},
+      ujurisdiction_jurid = #{record.ujurisdictionJurid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Ujurisdiction">
+    update muke_ujurisdiction
+    <set>
+      <if test="ujurisdictionRid != null">
+        ujurisdiction_rid = #{ujurisdictionRid,jdbcType=INTEGER},
+      </if>
+      <if test="ujurisdictionJurid != null">
+        ujurisdiction_jurid = #{ujurisdictionJurid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ujurisdiction_id = #{ujurisdictionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Ujurisdiction">
+    update muke_ujurisdiction
+    set ujurisdiction_rid = #{ujurisdictionRid,jdbcType=INTEGER},
+      ujurisdiction_jurid = #{ujurisdictionJurid,jdbcType=INTEGER}
+    where ujurisdiction_id = #{ujurisdictionId,jdbcType=INTEGER}
+  </update>
+</mapper>

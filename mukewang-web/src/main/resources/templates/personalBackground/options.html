@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- saved from url=(0039)https://www.imooc.com/user/oplog?page=1 -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>慕课网</title>
+
+    <link rel="stylesheet" href="/user/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/common-less.css" type="text/css">
+
+
+    <link rel="stylesheet" href="/user/css/moco.min.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/swiper-3.4.2.min.css">
+
+    <!--<script src="/js/push.js.下载"></script>-->
+    <!--&lt;!&ndash;<script type="text/javascript" async="" src="/js/rt.js.下载"></script>&ndash;&gt;-->
+    <!--<script src="/js/hm.js.下载"></script>-->
+    <!--<script type="text/javascript" id="zhuge-js" async="" src="/js/zhuge.min.js.下载"></script>-->
+    <!--<script type="text/javascript">-->
+
+
+    <!--</script>-->
+
+    <link rel="stylesheet" href="/user/css/common-less(1).css" type="text/css">
+    <link rel="stylesheet" href="/user/css/oplog-less.css" type="text/css">
+    <style type="text/css" id="MOCO_ADV_STYLE">
+        #MOCO_TOP_ADVERTISING {
+        width: 100%;
+        min-width: 1152px;
+        max-width: 2560px;
+        height: 40px;
+        overflow: hidden;
+        background: #eee;
+        cursor: pointer;
+        position: relative;
+        z-index: 901
+    }
+
+    #MOCO_TOP_ADVERTISING > img {
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+    }
+
+    #MOCO_TOP_ADVERTISING > .close-adv {
+        color: #000;
+        position: absolute;
+        right: 15%;
+        top: 8px;
+        cursor: pointer;
+        z-index: 1;
+        font-size: 24px;
+    }
+
+    #MOCO_FLOATRIGHT_ADVERTISING {
+        width: 102px;
+        height: 102px;
+        position: fixed;
+        right: 0;
+        top: 50%;
+        margin-top: -218px;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 901
+    }
+
+    #MOCO_FLOATRIGHT_ADVERTISING .close-adv {
+        position: absolute;
+        right: 3px;
+        top: 5px;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+    }
+
+    #MOCO_FLOATRIGHT_ADVERTISING .close-adv:hover {
+        color: rgba(242, 13, 13, 0.8);
+    }
+
+    #MOCO_FLOATRIGHT_ADVERTISING > img {
+        width: 100%;
+    }
+
+    #MOCO_BOTTOM_ADVERTISING {
+        width: 100%;
+        max-height: 200px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+        z-index: 2
+    }
+
+    #MOCO_BOTTOM_ADVERTISING > .close-adv {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        font-size: 18px;
+        color: rgba(168, 160, 160, 0.8);
+        transform: translateY(-65%);
+        -ms-transform: translateY(-65%);
+        -webkit-transform: translateY(-65%);
+        z-index: 2;
+    }
+
+    #MOCO_BOTTOM_ADVERTISING > img {
+        width: 100%;
+        display: block;
+    }</style>
+
+</head>
+
+<body>
+<div id="moco-top-advertising" style="">
+    <div id="MOCO_TOP_ADVERTISING">
+        <div class="close-adv imv2-close_c"></div>
+        <img src="/user/img/5c90a585098a75ae51200080.jpg" width="100%" height="100%" ></div>
+</div>
+<div id="new_header">
+    <div class="page-container new-header clearfix" id="nav">
+        <ul class="nav-item">
+            <li>
+                <a href="" target="_self" class="imooc">慕课网首页</a>
+            </li>
+            <li>
+                <a href="" target="_self">免费课程</a>
+            </li>
+            <li>
+                <a href="" target="_self">实战课程</a>
+            </li>
+            <li>
+                <a href="" class="" target="_self">就业班<i class="icn-new"><img src="/user/img/new.png"/></i></a>
+            </li>
+            <li>
+                <a href="" target="_self">专栏</a>
+            </li>
+            <li>
+                <a href="" target="_self">猿问</a>
+            </li>
+            <li>
+                <a href="" target="_self">手记</a>
+            </li>
+            <!-- <li><a href="//job.imooc.com" target="_self">猿聘<i class="icn-new"></i></a></li> -->
+            <li class="search" id="common-nav-search">
+                <a href="javascript:void(0);">
+                    <i class="imv2-search"></i>
+                </a>
+            </li>
+            <li class="input-search hide" id="common-input-search">
+                <div class="input-box">
+                    <input type="text" class="nav-search-input" autocomplete="off">
+                    <a href="javascript:void(0);" class="nav-searchBtn js-nav-searchBtn">
+                        <i class="imv2-search"></i>
+                    </a>
+                </div>
+                <div class="nav-search-box hide">
+                    <div class="hot">
+                        <h2>热搜</h2>
+                        <div class="hot-box">
+                            <a href="javascript:void(0)" class="hot-item js-history-search">React</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">面试</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">算法</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">Vue.js</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">Python</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">人工智能</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">GO语言</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">小程序</a>
+                        </div>
+                    </div>
+                    <div class="history hide">
+                        <h2>最近搜索<a href="javascript:void(0);" class="history-clear js-clear-history">清空</a></h2>
+                        <div class="history-box">
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-correlate-box hide">
+                    <div class="correlate">
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="header-right clearfix">
+            <div class="dist-money">
+                <a href="" target="_blank">
+                    <div class="redPacket"></div>
+                    分享赚学费</a>
+            </div>
+            <div class="app-download" id="js-app-load">
+                <a href="" target="_blank" style="width:60px;">下载APP</a>
+                <div class="app-load-box clearfix js-load-box">
+                    <div class="browser-load-box">
+                        <h4>慕课网浏览器 - PC客户端</h4>
+                        <a class="app-load-btn" href=""><i class="imv2-windows"></i>Windows版</a>
+                        <span class="browser-load-mac">Mac版开发中，敬请期待…</span>
+                    </div>
+                    <div class="mobile-load-box">
+                        <h4>慕课网APP - 随时随地学编程</h4>
+                        <img src="/user/img/appload.png" class="l">
+                        <div class="r">
+                            <a class="app-load-btn" href="" target="_blank"><i class="icon-apple"></i>App Store下载</a>
+                            <a class="app-load-btn" href="" target="_blank"><i class="icon-android"></i>Android下载</a>
+                            <p>扫描下载慕课网APP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="shop-cart" id="shop-cart">
+                <a href="" class="shop-cart-icon" target="_blank">
+                    <span class="imv2-cart js-endcart"></span><span>购物车</span><span class="shopping_icon js-cart-num"
+                                                                                    data-ordernum="0" data-cartnum="0"
+                                                                                    style="display: none">0</span>
+                </a>
+                <div class="my-cart" id="js-my-cart"></div>
+            </div>
+            <div id="login-area">
+                <ul class="clearfix logined">
+                    <li class="remind_warp">
+                        <i class="msg_remind" style="display: none;"></i>
+                        <a target="_blank" href="">
+                            <i class="imv2-notifications"></i>
+                        </a>
+                    </li>
+                    <li class="user-card-box" id="header-user-card">
+                        <a id="header-avator" class="user-card-item js-header-avator" action-type="my_menu" href="#" target="_self">
+                            <img width="40" height="40" th:attr="src=${session.users.userHeadimage}">
+                            <i class="myspace_remind" style="display: none;"></i>
+                            <span style="display: none;">动态提醒</span>
+                        </a>
+                        <div class="g-user-card">
+                            <div class="card-inner">
+                                <div class="card-top clearfix">
+                                    <a href="https://www.imooc.com/u/index" class="l"><img th:alt="${session.users.userName}"  th:attr="src=${session.users.userHeadimage}"></a>
+                                    <div class="card-top-right-box l">
+                                        <a href="https://www.imooc.com/u/index"><span th:text="${session.users.userName}" class="name text-ellipsis"></span></a>
+                                        <div class="meta">
+                                            <a href="https://www.imooc.com/u/index/experience">经验<b id="js-user-mp">0</b></a>
+                                            <a href="https://www.imooc.com/u/index/credit">积分<b id="js-user-credit">2</b></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user-center-box">
+                                    <ul class="clearfix">
+                                        <li class="l">
+                                            <a href="#" target="_blank"><span class="user-center-icon icon-tick"></span>我的课程</a>
+                                        </li>
+                                        <li class="l">
+                                            <a href="/allOrder" target="_blank"><span class="user-center-icon icon-receipt"></span>订单中心</a>
+                                        </li>
+                                        <li class="l">
+                                            <a href="/personalBackground/Muke" target="_blank"><span class="user-center-icon icon-set"></span>个人设置</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-sets clearfix">
+                                    <a href="https://www.imooc.com/passport/user/logout?referer=//www.imooc.com" class="l">安全退出</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 新人有礼入口 -->
+<a class="newcomer hide index" href="" target="_blank">
+    <i class="js-close imv2-close"></i>
+
+</a>
+
+<div class="bindHintBox js-bindHintBox hide">
+    <div class="pr">
+        为了账号安全，请及时绑定邮箱和手机
+        <a href="" class="ml20 color-red" target="_blank">立即绑定</a>
+        <button class="closeBindHint js-closeBindHint" type="button"></button>
+        <div class="arrow"></div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div class="settings-cont clearfix">
+        <div class="setting-left l">
+            <div class="avator-wapper">
+                <div class="avator-mode">
+                    <img class="avator-img" th:attr="src=${session.users.userHeadimage}"
+                         data-portrait="5b8cf56f0001558202000200" width="92" height="92">
+                    <div class="update-avator">
+                        <p>
+                            <a href="javascript:void(0);" class="js-avator-link">更换头像</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="des-mode">
+                    <p th:text="${session.users.userName}"></p>
+                    <span>ID: 7705830</span>
+                </div>
+            </div>
+            <div class="list-wapper">
+                <h2>账户管理</h2>
+                <div class="line"></div>
+                <ul class="menu">
+                    <li>
+                        <a href="/personalBackground/Muke">账号绑定<span class="arr"><i class="icon-right2"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="/personalBackground/binding" >个人信息<span class="arr"><i class="icon-right2"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="/personalBackground/options" class="on">操作记录<span class="arr"><i class="icon-right2"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="/AddressInfoAll" >收件地址<span class="arr"><i class="icon-right2"></i></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="setting-right">
+            <div class="setting-right-wrap wrap-boxes settings">
+
+                <div class="page-settings">
+                    <div class="common-title">
+                        操作记录<span class="title-tips">通过查看操作类型、登录时间、登录地点和设备可以判断账号是否正常</span>
+                        <a href="javascript:void(0)" class="pull-right js-update-psw">不是我登录的？</a>
+                    </div>
+                    <div class="line"></div>
+                    <div class="setting setting-height paddingBtoom">
+                        <div class="contentBox">
+                            <table class="oplog-list">
+                                <tbody>
+                                <tr>
+                                    <th>类型</th>
+                                    <th>登录时间</th>
+                                    <th>城市</th>
+                                    <th>IP</th>
+                                    <th>登录设备</th>
+                                </tr>
+                                <tr>
+                                    <td>账号登录</td>
+                                    <td>2019.05.06 08:40</td>
+                                    <td>北京市 移动</td>
+                                    <td>117.136.88.38</td>
+                                    <td>web</td>
+                                </tr>
+                                <tr>
+                                    <td>账号登录</td>
+                                    <td>2019.05.04 15:28</td>
+                                    <td>浙江省台州市 电信</td>
+                                    <td>122.226.184.209</td>
+                                    <td>web</td>
+                                </tr>
+                                <tr>
+                                    <td>账号登录</td>
+                                    <td>2019.05.01 10:17</td>
+                                    <td>浙江省台州市 电信</td>
+                                    <td>122.226.184.210</td>
+                                    <td>web</td>
+                                </tr>
+                                <tr>
+                                    <td>账号登录</td>
+                                    <td>2019.04.29 09:41</td>
+                                    <td>湖北省仙桃市 移动</td>
+                                    <td>223.104.21.36</td>
+                                    <td>web</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="page"><span class="disabled_page">首页</span><span class="disabled_page">上一页</span>
+                            <a href="javascript:void(0)" class="active text-page-tag">1</a>
+                            <a href="#">下一页</a>
+                            <a href="#">尾页</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="lottery" id="moco-right-float-advertising"></div>
+        <!--<div id="content-wrapper" class="content-wrapper">
+            <div class="content-iframe" style="overflow: hidden;">
+                <div class="mainContent"  id="content-main" style="margin: 10px 10px 0px; padding: 0px; height: 640px; ">
+                    <iframe class="LRADMS_iframe" name="iframe" id="iframes" width="960" height="100%" src="/personalBackground/Muke2" frameborder="0" scrolling="no" data-id="Muke.html2"></iframe>
+                </div>
+            </div>
+        </div>-->
+
+        <!--<iframe src="muke" id="uploadtarget" name="iframe" frameborder="0" width="100%">-->
+    </div>
+
+</div>
+
+<div id="footer" data="user,setbindsns">
+    <div class="waper">
+        <div class="footerwaper clearfix">
+            <div class="followus r">
+                <a class="followus-weixin" href="javascript:;" target="_blank" title="微信">
+                    <div class="flw-weixin-box"></div>
+                </a>
+                <a class="followus-weibo" href="" target="_blank" title="新浪微博"></a>
+                <a class="followus-qzone" href="" target="_blank" title="QQ空间"></a>
+            </div>
+            <div class="footer_intro l">
+                <div class="footer_link">
+                    <ul>
+                        <li>
+                            <a href="" target="_blank">网站首页</a>
+                        </li>
+                        <li>
+                            <a href="Muke2." target="_blank" title="企业合作">企业合作</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">人才招聘</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">联系我们</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">讲师招募</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">帮助中心</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">意见反馈</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">慕课大学</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">代码托管</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">友情链接</a>
+                        </li>
+                        <!--  <li><a href="/corp/index" target="_blank">合作专区</a></li>
+                <li><a href="/about/us" target="_blank">关于我们</a></li> -->
+                    </ul>
+                </div>
+                <p>Copyright © 2019 imooc.com All Rights Reserved | 京ICP备 12003892号-11 </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="J_GotoTop" class="elevator">
+    <a href="https://www.imooc.com/user/feedback" class="elevator-msg" target="_blank">
+        <i class="icon-feedback"></i>
+        <span class="">意见反馈</span>
+    </a>
+    <a href="https://order.imooc.com/pay/sharegoods" class="elevator-dist" target="_blank">
+        <i class=""></i>
+        <span class="">去赚学费</span>
+    </a>
+    <a href="https://www.imooc.com/help" class="elevator-faq" target="_blank">
+        <i class="icon-ques"></i>
+        <span class="">帮助中心</span>
+    </a>
+    <a href="https://www.imooc.com/mobile/app" target="_blank" class="elevator-app">
+        <i class="icon-appdownload"></i>
+        <span class="">APP下载</span>
+        <div class="elevator-app-box"></div>
+    </a>
+    <a href="javascript:void(0)" class="elevator-weixin no-goto" id="js-elevator-weixin">
+        <i class="icon-wxgzh"></i>
+        <span class="">官方微信</span>
+        <div class="elevator-weixin-box"></div>
+    </a>
+    <a href="javascript:void(0)" class="elevator-top no-goto" style="display:none" id="backTop">
+        <i class="icon-up2"></i>
+        <span class="">返回顶部</span>
+    </a>
+</div>
+
+</body>
+<script type="text/javascript" src="/user/js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="/user/js/ground.js"></script>
+<script type="text/javascript" src="/user/js/background.js"></script>
+</html>

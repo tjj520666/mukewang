@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- saved from url=(0037)https://www.imooc.com/user/setprofile -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>慕课网</title>
+    <link rel="stylesheet" href="/user/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/common-less.css" type="text/css">
+
+    <link rel="stylesheet" href="/user/css/moco.min.css" type="text/css">
+    <link rel="stylesheet" href="/user/css/swiper-3.4.2.min.css">
+
+    <link rel="stylesheet" href="/user/css/common-less(1).css" type="text/css">
+    <link rel="stylesheet" href="/user/css/profile-less.css" type="text/css">
+    <link charset="utf-8" rel="stylesheet" href="/user/css/layer.css">
+</head>
+<script type="text/javascript">
+    var OP_CONFIG = {
+        "module": "u",
+        "page": "index",
+        "userInfo": {
+            "uid": 7705830,
+            "uidaes": "AkkyePatWM4,"
+        }
+    };
+    var isLogin = 1;
+    var is_choice = "";
+    var seajsTimestamp = "v=201905061820";
+    var _msg_unread = 0;
+    var _not_unread = 0;
+    var _cart_num = 0;
+    var ownName = "2437051540@qq.com"
+</script>
+
+<style type="text/css" id="MOCO_ADV_STYLE">
+    #MOCO_TOP_ADVERTISING {
+        width: 100%;
+        min-width: 1152px;
+        max-width: 2560px;
+        height: 40px;
+        overflow: hidden;
+        background: #eee;
+        cursor: pointer;
+        position: relative;
+        z-index: 901
+    }
+
+    #MOCO_TOP_ADVERTISING>img {
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+    }
+
+    #MOCO_TOP_ADVERTISING>.close-adv {
+        color: #000;
+        position: absolute;
+        right: 15%;
+        top: 8px;
+        cursor: pointer;
+        z-index: 1;
+        font-size: 24px;
+    }
+
+    #MOCO_FLOATRIGHT_ADVERTISING {
+        width: 102px;
+        height: 102px;
+        position: fixed;
+        right: 0;
+        top: 50%;
+        margin-top: -218px;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 901
+    }
+
+    #MOCO_FLOATRIGHT_ADVERTISING .close-adv {
+        position: absolute;
+        right: 3px;
+        top: 5px;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+    }
+
+    #MOCO_FLOATRIGHT_ADVERTISING .close-adv:hover {
+        color: rgba(242, 13, 13, 0.8);
+    }
+
+    #MOCO_FLOATRIGHT_ADVERTISING>img {
+        width: 100%;
+    }
+
+    #MOCO_BOTTOM_ADVERTISING {
+        width: 100%;
+        max-height: 200px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+        z-index: 2
+    }
+
+    #MOCO_BOTTOM_ADVERTISING>.close-adv {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        font-size: 18px;
+        color: rgba(168, 160, 160, 0.8);
+        transform: translateY(-65%);
+        -ms-transform: translateY(-65%);
+        -webkit-transform: translateY(-65%);
+        z-index: 2;
+    }
+
+    #MOCO_BOTTOM_ADVERTISING>img {
+        width: 100%;
+        display: block;
+    }
+</style>
+
+<body>
+<div id="moco-top-advertising" style="">
+    <div id="MOCO_TOP_ADVERTISING">
+        <div class="close-adv imv2-close_c"></div>
+        <img src="/user/img/5c90a585098a75ae51200080.jpg" width="100%" height="100%" ></div>
+</div>
+<div id="new_header">
+    <div class="page-container new-header clearfix" id="nav">
+        <ul class="nav-item">
+            <li>
+                <a href="/toMain" target="_self" class="imooc">慕课网首页</a>
+            </li>
+            <li>
+                <a href="" target="_self">免费课程</a>
+            </li>
+            <li>
+                <a href="" target="_self">实战课程</a>
+            </li>
+            <li>
+                <a href="" class="" target="_self">就业班<i class="icn-new"><img src="/user/img/new.png"/></i></a>
+            </li>
+            <li>
+                <a href="" target="_self">专栏</a>
+            </li>
+            <li>
+                <a href="" target="_self">猿问</a>
+            </li>
+            <li>
+                <a href="" target="_self">手记</a>
+            </li>
+            <!-- <li><a href="//job.imooc.com" target="_self">猿聘<i class="icn-new"></i></a></li> -->
+            <li class="search" id="common-nav-search">
+                <a href="javascript:void(0);">
+                    <i class="imv2-search"></i>
+                </a>
+            </li>
+            <li class="input-search hide" id="common-input-search">
+                <div class="input-box">
+                    <input type="text" class="nav-search-input" autocomplete="off">
+                    <a href="javascript:void(0);" class="nav-searchBtn js-nav-searchBtn">
+                        <i class="imv2-search"></i>
+                    </a>
+                </div>
+                <div class="nav-search-box hide">
+                    <div class="hot">
+                        <h2>热搜</h2>
+                        <div class="hot-box">
+                            <a href="javascript:void(0)" class="hot-item js-history-search">React</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">面试</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">算法</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">Vue.js</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">Python</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">人工智能</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">GO语言</a>
+                            <a href="javascript:void(0)" class="hot-item js-history-search">小程序</a>
+                        </div>
+                    </div>
+                    <div class="history hide">
+                        <h2>最近搜索<a href="javascript:void(0);" class="history-clear js-clear-history">清空</a></h2>
+                        <div class="history-box">
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-correlate-box hide">
+                    <div class="correlate">
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="header-right clearfix">
+            <div class="dist-money">
+                <a href="" target="_blank">
+                    <div class="redPacket"></div>
+                    分享赚学费</a>
+            </div>
+            <div class="app-download" id="js-app-load">
+                <a href="" target="_blank" style="width:60px;">下载APP</a>
+                <div class="app-load-box clearfix js-load-box">
+                    <div class="browser-load-box">
+                        <h4>慕课网浏览器 - PC客户端</h4>
+                        <a class="app-load-btn" href=""><i class="imv2-windows"></i>Windows版</a>
+                        <span class="browser-load-mac">Mac版开发中，敬请期待…</span>
+                    </div>
+                    <div class="mobile-load-box">
+                        <h4>慕课网APP - 随时随地学编程</h4>
+                        <img src="/user/img/appload.png" class="l">
+                        <div class="r">
+                            <a class="app-load-btn" href="" target="_blank"><i class="icon-apple"></i>App Store下载</a>
+                            <a class="app-load-btn" href="" target="_blank"><i class="icon-android"></i>Android下载</a>
+                            <p>扫描下载慕课网APP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="shop-cart" id="shop-cart">
+                <a href="" class="shop-cart-icon" target="_blank">
+                    <span class="imv2-cart js-endcart"></span><span>购物车</span><span class="shopping_icon js-cart-num"
+                                                                                    data-ordernum="0" data-cartnum="0"
+                                                                                    style="display: none">0</span>
+                </a>
+                <div class="my-cart" id="js-my-cart"></div>
+            </div>
+            <div id="login-area">
+                <ul class="clearfix logined">
+                    <li class="remind_warp">
+                        <i class="msg_remind" style="display: none;"></i>
+                        <a target="_blank" href="">
+                            <i class="imv2-notifications"></i>
+                        </a>
+                    </li>
+                    <li class="user-card-box" id="header-user-card">
+                        <a id="header-avator" class="user-card-item js-header-avator" action-type="my_menu" href="#" target="_self">
+                            <img width="40" height="40" th:attr="src=${session.users.userHeadimage}">
+                            <i class="myspace_remind" style="display: none;"></i>
+                            <span style="display: none;">动态提醒</span>
+                        </a>
+                        <div class="g-user-card">
+                            <div class="card-inner">
+                                <div class="card-top clearfix">
+                                    <a href="https://www.imooc.com/u/index" class="l"><img th:alt="${session.users.userName}"  th:attr="src=${session.users.userHeadimage}"></a>
+                                    <div class="card-top-right-box l">
+                                        <a href="https://www.imooc.com/u/index"><span th:text="${session.users.userName}" class="name text-ellipsis"></span></a>
+                                        <div class="meta">
+                                            <a href="https://www.imooc.com/u/index/experience">经验<b id="js-user-mp">0</b></a>
+                                            <a href="https://www.imooc.com/u/index/credit">积分<b id="js-user-credit">2</b></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user-center-box">
+                                    <ul class="clearfix">
+                                        <li class="l">
+                                            <a href="#" target="_blank"><span class="user-center-icon icon-tick"></span>我的课程</a>
+                                        </li>
+                                        <li class="l">
+                                            <a href="/allOrder" target="_blank"><span class="user-center-icon icon-receipt"></span>订单中心</a>
+                                        </li>
+                                        <li class="l">
+                                            <a href="/personalBackground/Muke" target="_blank"><span class="user-center-icon icon-set"></span>个人设置</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="card-sets clearfix">
+                                    <a href="https://www.imooc.com/passport/user/logout?referer=//www.imooc.com" class="l">安全退出</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 新人有礼入口 -->
+<a class="newcomer hide index" href="" target="_blank">
+    <i class="js-close imv2-close"></i>
+
+</a>
+
+<div class="bindHintBox js-bindHintBox hide">
+    <div class="pr">
+        为了账号安全，请及时绑定邮箱和手机
+        <a href="" class="ml20 color-red" target="_blank">立即绑定</a>
+        <button class="closeBindHint js-closeBindHint" type="button"></button>
+        <div class="arrow"></div>
+    </div>
+</div>
+
+<div id="main">
+
+    <div class="settings-cont clearfix">
+        <div class="setting-left l">
+            <div class="avator-wapper">
+                <div class="avator-mode">
+                    <img class="avator-img" th:attr="src=${session.users.userHeadimage}"
+                         data-portrait="5b8cf56f0001558202000200" width="92" height="92">
+                    <div class="update-avator">
+                        <p>
+                            <a href="javascript:void(0);" class="js-avator-link">更换头像</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="des-mode">
+                    <p th:text="${session.users.userName}"></p>
+                    <span>ID: 7705830</span>
+                </div>
+            </div>
+            <div class="list-wapper">
+                <h2>账户管理</h2>
+                <div class="line"></div>
+                <ul class="menu">
+                    <li>
+                        <a href="/personalBackground/Muke" >账号绑定<span class="arr"><i class="icon-right2"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="/personalBackground/binding" class="on" >个人信息<span class="arr"><i class="icon-right2"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="/personalBackground/options" >操作记录<span class="arr"><i class="icon-right2"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="/AddressInfoAll" >收件地址<span class="arr"><i class="icon-right2"></i></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="setting-right">
+            <div class="setting-right-wrap wrap-boxes settings">
+
+                <div class="formBox">
+                    <div id="setting-profile" class="setting-wrap setting-profile">
+                        <div class="common-title">
+                            个人信息
+                            <a href="#"  class="pull-right js-edit-info"><i
+                                    class="icon-note"></i>编辑</a>
+                        </div>
+                        <div class="line"></div>
+                        <div class="info-wapper">
+                            <div class="info-box clearfix">
+                                <label class="pull-left">昵称</label>
+                                <div class="pull-left" th:text="${session.users.userName}"></div>
+                            </div>
+                            <div class="info-box clearfix">
+                                <label class="pull-left">职位</label>
+                                <div class="pull-left" th:if="${session.users.position} == null">未设置</div>
+                                <div class="pull-left" th:if="${session.users.position} != null">[[${session.users.position.name}]]</div>
+                            </div>
+                            <!--<div class="info-box clearfix">
+                                <label class="pull-left">城市</label>
+                                <div class="pull-left">
+                                    未设置
+                                </div>
+                            </div>-->
+                            <div class="info-box clearfix">
+                                <label class="pull-left">性别</label>
+                                <div class="pull-left" th:text="${session.users.userSex}">
+                                </div>
+                            </div>
+                            <div class="info-box clearfix">
+                                <label class="pull-left">个性签名[[${session.users.userSignature}]]</label>
+                                <div class="pull-left" th:if="${session.users.userSignature} == null">未设置</div>
+                                <div class="pull-left" th:if="${session.users.userSignature} != null ">[[${session.users.userSignature}]]</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--<div class="lottery" id="moco-right-float-advertising"></div>-->
+        <div class="moco-modal-overlay" style="z-index: 901; opacity: 1; display:none;">
+            <div class="moco-modal-layer" style="z-index: 901; visibility: visible; left: 524px; top: 143.5px;">
+                <div class="moco-modal-title">
+                    <div><span>编辑个人信息</span><a href="javascript:void(0)"
+                                               class="moco-icon-close moco-modal-close js-modal-close"></a></div>
+                </div>
+                <div class="moco-modal-inner">
+                    <div class="moco-modal-dialog" style="display: block;">
+                        <div class="edit-info">
+                            <form class="js-wapper-form" id="profile">
+                                <div class="moco-form-group">
+                                    <label  class="moco-control-label">昵称：</label>
+                                    <div class="moco-control-input">
+                                        <input type="text" name="userName" id="nick" autocomplete="off"
+                                               data-validate="require-nick" class="moco-form-control" th:value="${session.users.userName}"
+                                               placeholder="请输入昵称">
+                                        <div class="rlf-tip-wrap errorHint color-red"></div>
+                                    </div>
+                                </div>
+                                <div class="moco-form-group">
+                                    <label  class="moco-control-label">职位：</label>
+                                    <div class="moco-control-input">
+                                        <select class="moco-form-control rlf-select" name="userPositionId" hidefocus="true" id="job"
+                                                data-validate="require-select">
+                                            <option value="0">请选择职位</option>
+                                            <option value="1">Web前端工程师</option>
+                                            <option value="3">Java开发工程师</option>
+                                            <option value="4">UI设计师</option>
+                                            <option value="2">学生</option>
+                                        </select>
+                                        <div class="rlf-tip-wrap errorHint color-red"></div>
+                                    </div>
+                                </div>
+                                <!--<div class="moco-form-group wlfg-wrap">
+                                    <label  class="moco-control-label">所在地区：</label>
+                                    <div class="moco-control-input profile-address">
+                                        <select id="province-select" class="moco-form-control" hidefocus="true">
+                                            <option value="0">省</option>
+                                            <option value="1">北京</option>
+                                            <option value="2">天津</option>
+                                            <option value="3">河北</option>
+                                            <option value="4">山西</option>
+                                            <option value="5">内蒙古</option>
+                                            <option value="6">辽宁</option>
+                                            <option value="7">吉林</option>
+                                            <option value="8">黑龙江</option>
+                                            <option value="9">上海</option>
+                                            <option value="10">江苏</option>
+                                            <option value="11">浙江</option>
+                                            <option value="12">安徽</option>
+                                            <option value="13">福建</option>
+                                            <option value="14">江西</option>
+                                            <option value="15">山东</option>
+                                            <option value="16">河南</option>
+                                            <option value="17">湖北</option>
+                                            <option value="18">湖南</option>
+                                            <option value="19">广东</option>
+                                            <option value="20">海南</option>
+                                            <option value="21">广西</option>
+                                            <option value="22">甘肃</option>
+                                            <option value="23">陕西</option>
+                                            <option value="24">新疆</option>
+                                            <option value="25">青海</option>
+                                            <option value="26">宁夏</option>
+                                            <option value="27">重庆</option>
+                                            <option value="28">四川</option>
+                                            <option value="29">贵州</option>
+                                            <option value="30">云南</option>
+                                            <option value="31">西藏</option>
+                                            <option value="32">台湾</option>
+                                            <option value="33">澳门</option>
+                                            <option value="34">香港</option>
+                                            <option value="100">其他</option>
+                                        </select>
+                                        <select class="moco-form-control" id="city-select" hidefocus="true">
+                                            <option value="0">市</option>
+                                        </select>
+                                        <select class="moco-form-control mr0" id="area-select" hidefocus="true">
+                                            <option value="0">区县</option>
+                                        </select>
+                                        <div class="rlf-tip-wrap errorHint color-red"></div>
+                                    </div>
+                                </div>-->
+                                <div class="moco-form-group wlfg-wrap">
+                                    <label  class="moco-control-label h16 lh16">性别：</label>
+                                    <div class="moco-control-input rlf-group rlf-radio-group">
+                                        <label><input type="radio" hidefocus="true" value="保密" checked="checked"
+                                                      name="userSex">保密</label>
+                                        <label><input type="radio" hidefocus="true" value="男" name="userSex" checked="checked">男</label>
+                                        <label><input type="radio" hidefocus="true" value="女" name="userSex">女</label>
+                                        <div class="rlf-tip-wrap errorHint color-red"></div>
+                                    </div>
+                                </div>
+                                <div class="moco-form-group wlfg-wrap">
+                                    <label  class="moco-control-label">个性签名：</label>
+                                    <div class="moco-control-input">
+                                        <div class="pr">
+                                    <textarea name="userSignature" id="aboutme" rows="5"
+                                              class="noresize js-sign moco-form-control" ></textarea>
+                                            <p class="numCanInput js-numCanInput ">还可以输入128个字符</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wlfg-wrap clearfix"><label class="moco-control-label" ></label>
+                                    <div class="moco-control-input"><a href="javascript:void(0);" id="profile-submit"
+                                                                       class="moco-btn moco-btn-blue marR10">确定</a> <a
+                                            href="javascript:void(0);" class="moco-btn moco-btn-normal js-modal-close">取消</a>
+                                        <p class="js-gerror g_error"></p></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="moco-modal-blackout js-moco-modal-cancel" style="z-index: 900; opacity: 0.7; width: 1536px; height: 850px; display: none;"></div>
+
+
+        <!--<div id="content-wrapper" class="content-wrapper">
+            <div class="content-iframe" style="overflow: hidden;">
+                <div class="mainContent"  id="content-main" style="margin: 10px 10px 0px; padding: 0px; height: 640px; ">
+                    <iframe class="LRADMS_iframe" name="iframe" id="iframes" width="960" height="100%" src="/personalBackground/Muke2" frameborder="0" scrolling="no" data-id="Muke.html2"></iframe>
+                </div>
+            </div>
+        </div>-->
+
+        <!--<iframe src="muke" id="uploadtarget" name="iframe" frameborder="0" width="100%">-->
+
+    </div>
+
+</div>
+
+<div id="footer" data="user,setbindsns">
+    <div class="waper">
+        <div class="footerwaper clearfix">
+            <div class="followus r">
+                <a class="followus-weixin" href="javascript:;" target="_blank" title="微信">
+                    <div class="flw-weixin-box"></div>
+                </a>
+                <a class="followus-weibo" href="" target="_blank" title="新浪微博"></a>
+                <a class="followus-qzone" href="" target="_blank" title="QQ空间"></a>
+            </div>
+            <div class="footer_intro l">
+                <div class="footer_link">
+                    <ul>
+                        <li>
+                            <a href="" target="_blank">网站首页</a>
+                        </li>
+                        <li>
+                            <a href="Muke2." target="_blank" title="企业合作">企业合作</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">人才招聘</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">联系我们</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">讲师招募</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">帮助中心</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">意见反馈</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">慕课大学</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">代码托管</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">友情链接</a>
+                        </li>
+                        <!--  <li><a href="/corp/index" target="_blank">合作专区</a></li>
+                <li><a href="/about/us" target="_blank">关于我们</a></li> -->
+                    </ul>
+                </div>
+                <p>Copyright © 2019 imooc.com All Rights Reserved | 京ICP备 12003892号-11 </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="J_GotoTop" class="elevator">
+    <a href="https://www.imooc.com/user/feedback" class="elevator-msg" target="_blank">
+        <i class="icon-feedback"></i>
+        <span class="">意见反馈</span>
+    </a>
+    <a href="https://order.imooc.com/pay/sharegoods" class="elevator-dist" target="_blank">
+        <i class=""></i>
+        <span class="">去赚学费</span>
+    </a>
+    <a href="https://www.imooc.com/help" class="elevator-faq" target="_blank">
+        <i class="icon-ques"></i>
+        <span class="">帮助中心</span>
+    </a>
+    <a href="https://www.imooc.com/mobile/app" target="_blank" class="elevator-app">
+        <i class="icon-appdownload"></i>
+        <span class="">APP下载</span>
+        <div class="elevator-app-box"></div>
+    </a>
+    <a href="javascript:void(0)" class="elevator-weixin no-goto" id="js-elevator-weixin">
+        <i class="icon-wxgzh"></i>
+        <span class="">官方微信</span>
+        <div class="elevator-weixin-box"></div>
+    </a>
+    <a href="javascript:void(0)" class="elevator-top no-goto" style="display:none" id="backTop">
+        <i class="icon-up2"></i>
+        <span class="">返回顶部</span>
+    </a>
+</div>
+
+<script type="text/javascript" src="/user/js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="/user/js/ground.js"></script>
+<script type="text/javascript" src="/user/js/background.js"></script>
+</body>
+</html>

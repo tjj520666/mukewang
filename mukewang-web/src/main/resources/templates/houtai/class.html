@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<link rel="shortcut icon" href="/houtai/img/favicon.ico" >
+		<meta charset="UTF-8">
+		<title>类别管理</title>
+		<link rel="stylesheet" href="/houtai/css/bootstrap.css" />
+
+	</head>
+
+	<body style="background-color: #e6ecf5;">
+		
+		<!-- 类别新增模态框 -->
+		<div class="modal fade" id="classAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="addModalLabel">类别新增</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="addClass">
+							<div class="form-group" >
+								<label for="inputCategoryTitle" class="col-sm-2 control-label">标题</label>
+								<div class="col-sm-6">
+									<input type="title" class="form-control" name="categoryTitle" id="inputCategoryTitle" placeholder="Title">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputCategoryType" class="col-sm-2 control-label">分类级别</label>
+								<div class="col-sm-6">
+									<input type="type" class="form-control"  name="categoryType" id="inputCategoryType" placeholder="Type"  >
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="updatecategoryParentid" class="col-sm-2 control-label">父类ID</label>
+								<div class="col-sm-6">
+									<p>当级别为1级时,此项可不选</p>
+									<select   class="form-control selectpicker show-tick reset"  name="categoryParentid" id="addcategoryParentid" >
+										<option value="0">请选择</option>
+									</select>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn addbtn-primary">保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--
+
+        	修改模态框
+        -->
+		<div class="modal fade" id="classUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="updateModalLabel">类别修改</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="updateClass">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<input type="hidden" class="form-control" name="categoryId" id="updateCategoryId" >
+								</div>
+							</div>
+							<div class="form-group">
+							<label for="updatecategoryTitle" class="col-sm-2 control-label">标题</label>
+							<div class="col-sm-6">
+								<input type="name" class="form-control" name="categoryTitle" id="updatecategoryTitle" placeholder="Title">
+							</div>
+						</div>
+							<div class="form-group">
+								<label for="updatecategoryType" class="col-sm-2 control-label">分类级别</label>
+								<div class="col-sm-6">
+									<input type="type" class="form-control"  name="categoryType" id="updatecategoryType" placeholder="Type">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="updatecategoryParentid" class="col-sm-2 control-label">父级分类</label>
+								<div class="col-sm-6">
+									<p>只修改分类级别时,此项可不选</p>
+									<select   class="form-control selectpicker show-tick reset"  name="categoryParentid" id="updatecategoryParentid" >
+												<option value="0">请选择</option>
+									</select>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn updatebtn-primary" >更新</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="operation" style="margin: 40px 0px">
+
+			<div style="margin-left:800px;" >
+				<button class="btn btn-info" id="class_add_modal_btn">
+					<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+					新增
+				</button>
+				<button class="btn btn-danger" id="class_delete_all_btn">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					删除选中
+				</button>
+			</div>
+		</div>
+
+
+
+
+		<div class="user">
+			<table class="table table-striped" id="user_table">
+				<thead>
+					<tr>
+						<th><input type="checkbox" id="check_all" /></th>
+						<th>#</th>
+						<th>标题</th>
+						<th>分类级别</th>
+						<th>父级分类</th>
+						<th>操作</th>
+					</tr>
+
+					<tr th:each="class:${class.list}">
+						<th><input type="checkbox" class="check_item" /></th>
+						<th th:text="${class.categoryId}"></th>
+						<th th:text="${class.categoryTitle}"></th>
+						<th th:text="${class.categoryType}"></th>
+						<th th:text="${class.categoryParentid}"></th>
+						<th>
+							<button class="btn btn-primary" id="class_update_modal_btn" th:value="${class.categoryId}">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span>
+								编辑
+							</button>
+							<button class="btn btn-danger" id="class_del_modal_btn" th:value="${class.categoryId}">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true" ></span>
+								删除
+							</button>
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1">
+				当前第 <strong th:text="${class.pageNum}"></strong> 页,
+				总共 <strong th:text="${class.pages}"></strong> 页,
+				总共 <strong th:text="${class.total}"></strong> 条数据;
+			</div>
+			<div class="col-md-6">
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li>
+							<a th:href="@{/getClass(pn=1)}" aria-label="Previous" >
+								<span aria-hidden="true">首页</span>
+							</a>
+						</li>
+
+						<li >
+							<a th:if="${class.hasPreviousPage}" th:href="@{/getClass(pn=${class.pageNum-1})}" aria-label="Previous" >
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li th:each="pns:${class.navigatepageNums}" th:class="${pns==class.getPageNum()?'active':''}">
+							<a th:href="@{/getClass(pn=${pns})}" th:text="${pns}"></a>
+						</li>
+
+						<li>
+							<a th:if="${class.hasNextPage}" th:href="@{/getClass(pn=${class.pageNum+1})}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+						<li>
+
+							<a th:href="@{/getClass(pn=${class.pages})}" aria-label="Previous" >
+								<span aria-hidden="true" disabled="disabled">末页</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="/houtai/js/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="/houtai/js/bootstrap.js"></script>
+	<script type="text/javascript"></script>
+	<script>
+		$(function() {
+			//点击新增按钮弹出新增模态框
+			$("#class_add_modal_btn").click(function() {
+				$("#classAddModal").modal({
+					backdrop: "static"
+				});
+					if (inputCategoryType!=1){
+                        $.post("selectAllClass",function(data){
+                            for(var i=0;data.length;i++){
+                                $("#addcategoryParentid").append("<option value='"+data[i].categoryId+"'>"+data[i].categoryTitle+"</option>");
+                            }
+                        })
+				}
+
+			});
+
+            //点击新增按钮
+            $(".addbtn-primary").click(function () {
+                var mc= $("#addClass").serialize();
+                var url="[[@{/getClass(pn)}]]=";
+                $.post("addMvCategory",mc,function (data) {
+                    if(data!=null){
+                        alert("添加成功!");
+                        window.location.href=url+[[${class.pages}+1]];
+                        $("#classAddModal").modal('hide');
+                    }
+                });
+            });
+			
+			//点击修改按钮弹出修改模态框
+			$(".btn-primary").click(function() {
+				$("#classUpdateModal").modal({
+					backdrop: "static"
+				});
+                var id=$(this).attr("value");
+				$.post("selectAllClass",function(data){
+                    for(var i=0;data.length;i++){
+                            $("#updatecategoryParentid").append("<option value='"+data[i].categoryId+"'>"+data[i].categoryTitle+"</option>");
+                    }
+				})
+
+                $.post("selectMvCategoryById",{"id":id},function (data) {
+
+                    $("#updateCategoryId").val(data.categoryId);
+                    $("#updatecategoryTitle").val(data.categoryTitle);
+                    $("#updatecategoryType").val(data.categoryType);
+                    $("#updatecategoryParentid").val(data.categoryParentid);
+                });
+			});
+
+            //修改分类信息
+            $(".updatebtn-primary").click(function () {
+                mc=$("#updateClass").serialize();
+                var url="[[@{/getClass(pn)}]]=";
+                $.post("updatemvCaregory",mc,function (data) {
+                    if (data!=null){
+                        window.location.href=url+[[${class.getPageNum()}]];
+                        $("#classUpdateModal").modal('hide');
+                        alert("更新成功!");
+                    }
+                })
+            })
+
+
+
+
+            //点击全选
+            $("#check_all").click(function () {
+                $(".check_item").prop("checked",$(this).prop("checked"));
+            });
+
+            //都选中后权重全选按钮
+            $(document).on("click",".check_item",function () {
+                var flag = $(".check_item:checked").length==$(".check_item").length;
+                $("#check_all").prop("checked",flag);
+
+            });
+
+
+
+            //点击删除
+            $(".btn-danger").click(function() {
+                var url="[[@{/getClass(pn)}]]=";
+                var ids=$(this).attr("value");
+                if (ids!=null&&ids!="") {
+                    if (confirm("确定要删除该分类吗?")) {
+
+                        $.post("delClass", {"ids": ids}, function (data) {
+                            if (data != null && data != "") {
+                                window.location.href = url + [[${class.getPageNum()}]];
+                                alert("删除成功");
+
+                            }
+                        });
+                    }
+                }
+            });
+
+            var classId ="";
+            //删除选中的信息
+            $("#class_delete_all_btn").click(function () {
+                var url="[[@{/getClass(pn)}]]=";
+                $.each($(".check_item:checked"),function(){
+                    classId += $(this).parents("tr").find("th:eq(1)").text()+"-";
+                });
+                classId = classId.substring(0,classId.length-1);
+                if (classId!=""&&classId!=null) {
+                    if (confirm("确认删除吗?")) {
+                        $.post("delClass",{"ids":classId}, function (data) {
+                            if (data!=null&&data!="") {
+                                window.location.href = url + [[${class.getPageNum()}]];
+                                alert("删除成功!");
+                            }
+                        });
+
+                    }
+				}else{
+                    alert("请先选择再进行此操作!");
+				}
+
+            });
+
+
+			
+		});
+	</script>
+
+</html>

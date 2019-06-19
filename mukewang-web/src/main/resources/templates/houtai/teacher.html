@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<link rel="shortcut icon" href="houtai/img/favicon.ico" >
+		<meta charset="UTF-8">
+		<title>教师管理</title>
+		<link rel="stylesheet" href="houtai/css/bootstrap.css" />
+	</head>
+
+	<body style="background-color: #e6ecf5;">
+		<!-- 教师新增模态框 -->
+		<div class="modal fade" id="userAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">教师新增</h4>
+					</div>
+					<div class="modal-body">
+						<form id="submitForm" class="form-horizontal"  th:action="@{infoTeacherFile}" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<label for="inputName" class="col-sm-2 control-label">姓名</label>
+								<div class="col-sm-6">
+									<input type="name" class="form-control" name="teacherName" id="inputName" placeholder="teacherName">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputUserId" class="col-sm-2 control-label">用户</label>
+								<div class="col-sm-6">
+									<select   class="form-control selectpicker show-tick reset" name="teacherUid" id="inputUserId"  placeholder="inputUserId">
+
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputTeacherTitle" class="col-sm-2 control-label">标签</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="inputTeacherTitle" name="teacherTitle" placeholder="teacherTitle">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputTeacherIntro" class="col-sm-2 control-label">简介</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="inputTeacherIntro" name="teacherIntro" placeholder="teacherIntro">
+								</div>
+							</div>
+
+
+
+
+
+							<div class="form-group">
+								<label for="inputTeacherMv" class="col-sm-2 control-label">视频</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="inputTeacherMv"  name="teacherMv" placeholder="teacherMv">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputTeacherShizhan" class="col-sm-2 control-label">实战</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="inputTeacherShizhan" name="teacherShizhan" placeholder="teacherShizhan">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputTeacherShouji" class="col-sm-2 control-label">手记</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="inputTeacherShouji" name="teacherShouji" placeholder="teacherShouji">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputTeacherFans" class="col-sm-2 control-label">粉丝</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  name="teacherFans" id="inputTeacherFans" placeholder="teacherTitle">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputFiles" class="col-sm-2 control-label">图片</label>
+								<div class="col-sm-6">
+									<input type="File" class="form-control" name="file" id="inputFiles">
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn addbtn-primary">保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		 <!--用户修改模态框-->
+		<div class="modal fade" id="userUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="updateModalLabel">教师修改</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="updateTeacher" th:action="@{updateTeacher}" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<input type="hidden" class="form-control" name="teacherId" id="updateTeacherId" >
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputName" class="col-sm-2 control-label">姓名</label>
+								<div class="col-sm-6">
+									<input type="name" class="form-control" name="teacherName" id="updateName" placeholder="teacherName">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputTeacherTitle" class="col-sm-2 control-label">标签</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="updateTeacherTitle" name="teacherTitle" placeholder="teacherTitle">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputTeacherIntro" class="col-sm-2 control-label">简介</label>
+								<div class="col-sm-6">
+									<textarea type="text" class="form-control"  id="updateTeacherIntro" name="teacherIntro" placeholder="teacherIntro"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputTeacherMv" class="col-sm-2 control-label">视频</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="updateTeacherMv"  name="teacherMv" placeholder="teacherMv">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputTeacherShizhan" class="col-sm-2 control-label">实战</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="updateTeacherShizhan" name="teacherShizhan" placeholder="teacherShizhan">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputTeacherShouji" class="col-sm-2 control-label">手记</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="updateTeacherShouji" name="teacherShouji" placeholder="teacherShouji">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputTeacherFans" class="col-sm-2 control-label">粉丝</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"  id="updateTeacherFans" name="teacherFans" placeholder="teacherTitle">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputFiles" class="col-sm-2 control-label">图片</label>
+								<div class="col-sm-6">
+									<input type="File" class="form-control" name="file" id="updateFiles">
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn updatebtn-primary">更新</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+
+		<div class="operation" style="margin: 30px 0px">
+			<div style="margin-left:870px;" >
+				<button class="btn btn-info" id="user_add_modal_btn">
+					<span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ></span>
+					新增
+				</button>
+				<button class="btn btn-danger" id="user_delete_all_btn">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					删除选中
+				</button>
+			</div>
+		</div>
+
+		<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped" id="user_table">
+				<thead>
+					<tr>
+						<th><input type="checkbox" id="check_all" /></th>
+						<th>#</th>
+						<th>姓名</th>
+						<th>用户</th>
+						<th>视频</th>
+						<th>粉丝</th>
+						<th>图片</th>
+						<th>操作</th>
+					</tr>
+					<tr th:each="teacher:${teacher.list}">
+						<th><input type="checkbox" class="check_item" /></th>
+						<th th:text="${teacher.teacherId}"></th>
+						<th th:text="${teacher.teacherName}"></th>
+						<th th:text="${teacher.users.userName}"></th>
+						<th th:text="${teacher.teacherMv}"></th>
+						<th th:text="${teacher.teacherFans}"></th>
+						<th th:text="${teacher.teacherImage}"></th>
+
+						<th>
+									<button class="btn btn-primary" id="user_update_modal_btn" th:value="${teacher.teacherId}">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								编辑
+							</button>
+							<button class="btn btn-danger" id="user_del_modal_btn" th:value="${teacher.teacherId}">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								删除
+							</button>
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1">
+				当前第 <strong th:text="${teacher.pageNum}"></strong> 页,
+				总共 <strong th:text="${teacher.pages}"></strong> 页,
+				总共 <strong th:text="${teacher.total}"></strong> 条数据;
+			</div>
+			<div class="col-md-6">
+				<nav aria-label="Page navigation">
+
+					<ul class="pagination">
+						<li>
+							<a th:href="@{/getTeacher(pn=1)}" aria-label="Previous" >
+								<span aria-hidden="true">首页</span>
+							</a>
+						</li>
+
+						<li >
+							<a th:if="${teacher.hasPreviousPage}" th:href="@{/getTeacher(pn=${teacher.pageNum-1})}" aria-label="Previous" >
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li th:each="pns:${teacher.navigatepageNums}" th:class="${pns==teacher.getPageNum()?'active':''}">
+							<a th:href="@{/getTeacher(pn=${pns})}" th:text="${pns}" id="pageNum"></a>
+						</li>
+
+						<li>
+							<a th:if="${teacher.hasNextPage}" th:href="@{/getTeacher(pn=${teacher.pageNum+1})}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+						<li>
+
+							<a th:href="@{/getTeacher(pn=${teacher.pages})}" aria-label="Previous" >
+								<span aria-hidden="true" disabled="disabled">末页</span>
+							</a>
+						</li>
+					</ul>
+
+				</nav>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="houtai/js/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="houtai/js/bootstrap.js"></script>
+	<script type="text/javascript"></script>
+	<script>
+		$(function() {
+			//点击新增按钮弹出新增模态框
+			$("#user_add_modal_btn").click(function() {
+				$("#userAddModal").modal({
+					backdrop: "static"
+				});
+				$.post("getUsers",function (data) {
+                    $("#inputUserId").html("");
+
+                    for(var i=0;data.length;i++){
+                        $("#inputUserId").append("<option value='"+data[i].userId+"'>"+data[i].userName+"</option>");
+                    }
+                })
+			});
+			//点击修改按钮弹出修改模态框
+			$(".btn-primary").click(function() {
+				$("#userUpdateModal").modal({
+					backdrop: "static"
+				});
+                var id=$(this).attr("value");
+                $.post("getTeacherById",{"id":id},function (data) {
+                    $("#updateUserId").html("");
+                    $("#updateTeacherId").val(data.teacherId);
+                    $("#updateName").val(data.teacherName);
+                    $("#updateTeacherIntro").val(data.teacherIntro);
+                    $("#updateTeacherTitle").val(data.teacherTitle);
+                    $("#updateTeacherMv").val(data.teacherMv);
+                    $("#updateTeacherShizhan").val(data.teacherShizhan);
+                    $("#updateTeacherShouji").val(data.teacherShouji);
+                    $("#updateTeacherFans").val(data.teacherFans);
+
+
+                });
+			});
+
+
+
+
+			//点击删除
+            $(".btn-danger").click(function() {
+               var url="[[@{/getTeacher(pn)}]]=";
+                var ids=$(this).attr("value");
+                if (ids!=null&&ids!=""){
+                    if (confirm("确定要删除该教师吗?")){
+                        $.post("delTeacher",{"ids":ids},function (data) {
+                            if (data!=null&&data!=""){
+                                window.location.href=url+[[${teacher.getPageNum()}]];
+                                alert("删除成功");
+
+                            }
+                        });
+                    }
+				}
+			});
+
+			var teacherId ="";
+            //删除选中的信息
+			$("#user_delete_all_btn").click(function () {
+               var url="[[@{/getTeacher(pn)}]]=";
+				$.each($(".check_item:checked"),function(){
+                    teacherId += $(this).parents("tr").find("th:eq(1)").text()+"-";
+                });
+                teacherId = teacherId.substring(0,teacherId.length-1);
+               if (teacherId!=""&&teacherId!=null){
+                   if (confirm("确认删除吗?")) {
+                       $.post("delTeacher",{"ids":teacherId}, function (data) {
+                           if (data!=null&&data!="") {
+                               window.location.href = url + [[${teacher.getPageNum()}]];
+                               alert("删除成功!");
+                           }
+                       });
+
+                   }
+			   }else{
+                   alert("请先选择再进行此操作!");
+			   }
+
+				});
+
+
+			//点击全选
+            $("#check_all").click(function () {
+				$(".check_item").prop("checked",$(this).prop("checked"));
+            });
+
+			//都选中后选中全选按钮
+			$(document).on("click",".check_item",function () {
+                 var flag = $(".check_item:checked").length==$(".check_item").length;
+				 $("#check_all").prop("checked",flag);
+
+             });
+
+			//点击新增按钮
+			$(".addbtn-primary").click(function () {
+				$("#submitForm").submit();
+            });
+
+			//点击修改按钮
+            $(".updatebtn-primary").click(function () {
+                $("#updateTeacher").submit();
+            });
+
+
+
+
+
+
+
+
+
+
+		});
+
+	</script>
+
+</html>

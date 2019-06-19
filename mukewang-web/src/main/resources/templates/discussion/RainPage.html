@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>
+			IT技术文章_慕课网手记
+		</title>
+
+		<link rel="stylesheet" href="\discussion\css\rpmoco.min.css" type="text/css">
+		<link rel="stylesheet" href="\discussion\css\rpsaved_resource.css" type="text/css">
+		<style type="text/css" id="MOCO_ADV_STYLE">
+			#MOCO_TOP_ADVERTISING {
+				width: 100%;
+				min-width: 1152px;
+				max-width: 2560px;
+				height: 40px;
+				overflow: hidden;
+				background: #eee;
+				cursor: pointer;
+				position: relative;
+				z-index: 901
+			}
+			
+			#MOCO_TOP_ADVERTISING>img {
+				height: 100%;
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				-webkit-transform: translateX(-50%);
+			}
+			
+			#MOCO_TOP_ADVERTISING>.close-adv {
+				color: #000;
+				position: absolute;
+				right: 15%;
+				top: 8px;
+				cursor: pointer;
+				z-index: 1;
+				font-size: 24px;
+			}
+			
+			#MOCO_FLOATRIGHT_ADVERTISING {
+				width: 102px;
+				height: 102px;
+				position: fixed;
+				right: 0;
+				top: 50%;
+				margin-top: -218px;
+				cursor: pointer;
+				overflow: hidden;
+				z-index: 901
+			}
+			
+			#MOCO_FLOATRIGHT_ADVERTISING .close-adv {
+				position: absolute;
+				right: 3px;
+				top: 5px;
+				cursor: pointer;
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 16px;
+			}
+			
+			#MOCO_FLOATRIGHT_ADVERTISING .close-adv:hover {
+				color: rgba(242, 13, 13, 0.8);
+			}
+			
+			#MOCO_FLOATRIGHT_ADVERTISING>img {
+				width: 100%;
+			}
+			
+			#MOCO_BOTTOM_ADVERTISING {
+				width: 100%;
+				max-height: 200px;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				cursor: pointer;
+				z-index: 2
+			}
+			
+			#MOCO_BOTTOM_ADVERTISING>.close-adv {
+				position: absolute;
+				top: 0;
+				right: 10px;
+				font-size: 18px;
+				color: rgba(168, 160, 160, 0.8);
+				transform: translateY(-65%);
+				-ms-transform: translateY(-65%);
+				-webkit-transform: translateY(-65%);
+				z-index: 2;
+			}
+			
+			#MOCO_BOTTOM_ADVERTISING>img {
+				width: 100%;
+				display: block;
+			}
+		</style>
+	
+	</head>
+
+	<body>
+		<div id="new_header" class="special-header">
+			<div class="page-container new-header clearfix" id="nav">
+				<ul class="nav-item">
+					<li>
+						<a href="#" target="_self" class="imooc">慕课网首页</a>
+					</li>
+					<li>
+						<a href="fenye" target="_self">免费课程</a>
+					</li>
+					<li>
+						<a href="practiceCourseSY" target="_self">实战课程</a>
+					</li>
+					<li>
+						<a href="#" class="" target="_self">就业班<i class="icn-new"></i></a>
+					</li>
+					<li>
+						<a href="#" target="_self">专栏</a>
+					</li>
+					<li>
+						<a href="shouji" class="active" target="_self">手记</a>
+					</li>
+					
+					<li class="search" id="common-nav-search">
+						<a href="javascript:void(0);">
+							<i class="imv2-search"></i>
+						</a>
+					</li>
+					<li class="input-search hide" id="common-input-search">
+						<div class="input-box">
+							<input type="text" class="nav-search-input" autocomplete="off">
+							<a href="javascript:void(0);" class="nav-searchBtn js-nav-searchBtn">
+								<i class="imv2-search"></i>
+							</a>
+						</div>
+						<div class="nav-search-box hide">
+							<div class="hot">
+								<h2>热搜</h2>
+								<div class="hot-box">
+									<a href="javascript:void(0)" class="hot-item js-history-search">React</a>
+									<a href="javascript:void(0)" class="hot-item js-history-search">面试</a>
+								</div>
+							</div>
+							<div class="history hide">
+								<h2>最近搜索<a href="javascript:void(0);" class="history-clear js-clear-history">清空</a></h2>
+								<div class="history-box">
+								</div>
+							</div>
+						</div>
+						<div class="nav-correlate-box hide">
+							<div class="correlate">
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="header-right clearfix">
+					<div class="dist-money">
+						<a href="https://order.imooc.com/pay/sharegoods" target="_blank">
+							<div class="redPacket"></div>分享赚学费</a>
+					</div>
+					<div class="app-download" id="js-app-load">
+						<a href="https://www.imooc.com/mobile/app" target="_blank" style="width:60px;">下载APP</a>
+						<div class="app-load-box clearfix js-load-box">
+							<div class="browser-load-box">
+								<h4>慕课网浏览器 - PC客户端</h4>
+								<a class="app-load-btn" href="https://www.imooc.com/mobile/app"><i class="imv2-windows"></i>Windows版</a>
+								<span class="browser-load-mac">Mac版开发中，敬请期待…</span>
+							</div>
+							<div class="mobile-load-box">
+								<h4>慕课网APP - 随时随地学编程</h4>
+								<img src="/discussion/image/appload.png" class="l">
+								<div class="r">
+									<a class="app-load-btn" href="https://itunes.apple.com/cn/app/mu-ke-wang/id722179140?mt=8" target="_blank"><i class="icon-apple"></i>App Store下载</a>
+									<a class="app-load-btn" href="https://www.imooc.com/mobile/appdown" target="_blank"><i class="icon-android"></i>Android下载</a>
+									<p>扫描下载慕课网APP</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="shop-cart" id="shop-cart">
+						<a href="https://order.imooc.com/pay/cart" class="shop-cart-icon" target="_blank">
+							<span class="imv2-cart js-endcart"></span><span>购物车</span><span class="shopping_icon js-cart-num" data-ordernum="0" data-cartnum="0" style="display: none">0</span>
+						</a>
+						<div class="my-cart" id="js-my-cart"></div>
+					</div>
+					<div id="login-area">
+						<ul class="header-unlogin clearfix">
+							<li class="header-signin">
+								<a href="#" id="js-signin-btn">登录</a> /
+								<a href="#" id="js-signup-btn">注册</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="bindHintBox js-bindHintBox hide">
+			<div class="pr">
+				为了账号安全，请及时绑定邮箱和手机
+				<a href="https://www.imooc.com/user/setbindsns" class="ml20 color-red" target="_blank">立即绑定</a>
+				<button class="closeBindHint js-closeBindHint" type="button"></button>
+				<div class="arrow"> </div>
+			</div>
+		</div>
+
+		<div id="main">
+
+			<div class="article container clearfix">
+				<ul class="left_menu l">
+					<li class="m_item active">
+						<a href="https://www.imooc.com/article">推荐</a>
+					</li>
+					<li class="m_item ">
+						<a href="https://www.imooc.com/article/new">最新文章</a>
+					</li>
+					<li class="m_item ">
+						<a href="https://www.imooc.com/article/tools">工具资源</a>
+					</li>
+					<li class="m_item ">
+						<a href="https://www.imooc.com/article/work">职场生活</a>
+					</li>
+					<li class="m_item ">
+						<a href="https://www.imooc.com/article/funny">幽默段子</a>
+					</li>
+					<li class="m_item ">
+						<a href="https://www.imooc.com/article/other">其它</a>
+					</li>
+
+				</ul>
+
+				<div class="centerlist l">
+					<!-- 除了动态关注以外栏目 -->
+					<!-- 推荐页需要展示广告位 -->
+					<div class="bannerBox clearfix">
+						<div class="leftImg l">
+							<a th:href="'shoujiId?articleId=1&articleUid=1'" target="_blank">
+								<img src="/discussion/image/5cd3fb2609ec01a609000383.jpg">
+
+								<div class="bannerDescription">
+									【限时优惠】熟练掌握微服务架构演进过程，抵抗上亿流量突袭
+									专栏上新 |算法大神BoBo老师出品必属精品！
+
+								</div>
+							</a>
+						</div>
+						<div class="rightImg r">
+							<div class="topImg">
+								<a th:href="'shoujiId?articleId=2&articleUid=1'" target="_blank">
+									<img src="/discussion/image/5cd1476b09dcbfe909000383.jpg">
+
+									<div class="bannerDescription2">
+										<span>专栏上新 |算法大神BoBo老师出品必属精品！</span>
+									</div>
+								</a>
+							</div>
+							<div class="bottomImg">
+								<a th:href="'shoujiId?articleId=3&articleUid=2'" target="_blank">
+									<img src="/discussion/image/5ccf9e9008eb273203600202.jpg">
+
+									<div class="bannerDescription2">
+										<span>强大的 VS Code</span>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="article-wrapper" th:each="shouji:${shouji}" th:if="${shouji.articleId>3}">
+						<div class="articleCon js-usercard-box">
+
+							<div class="article-lwrap clearfix">
+								<div class="imgCon l">
+									<img th:src="${shouji.articleImage}">
+								</div>
+
+								<div class="list-content l">
+									<a th:href="'shoujiId?articleId='+${shouji.articleId}+'&articleUid='+${shouji.articleUid}" target="_blank" class="title">
+										<p>[[${shouji.articleTitle}]]</p>
+									</a>
+									<div class="list-bottom clearfix">
+										<!-- 只有推荐页 七日三十日 人们文章，标签页有栏目标签 -->
+										<div class="labels-area l clearfix">
+											<div class="browseNum l">
+												<span>访问人数：[[${shouji.articlePersonnum}]]</span>
+											</div>
+
+										</div>
+										<div class="createTime r" th:text="${shouji.articleTime}">
+											<!--[[${shouji.time}]]-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="footer" data="article,index">
+			<div class="waper">
+				<div class="footerwaper clearfix">
+					<div class="followus r">
+						<a class="followus-weixin" href="javascript:;" target="_blank" title="微信">
+							<div class="flw-weixin-box"></div>
+						</a>
+						<a class="followus-weibo" href="http://weibo.com/u/3306361973" target="_blank" title="新浪微博"></a>
+						<a class="followus-qzone" href="http://user.qzone.qq.com/1059809142/" target="_blank" title="QQ空间"></a>
+					</div>
+					<div class="footer_intro l">
+						<div class="footer_link">
+							<ul>
+								<li>
+									<a href="https://www.imooc.com/" target="_blank">网站首页</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/index/companytrain" target="_blank" title="企业合作">企业合作</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/about/job" target="_blank">人才招聘</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/about/contact" target="_blank">联系我们</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/about/recruit" target="_blank">讲师招募</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/help" target="_blank">帮助中心</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/user/feedback" target="_blank">意见反馈</a>
+								</li>
+								<li>
+									<a href="http://daxue.imooc.com/" target="_blank">慕课大学</a>
+								</li>
+								<li>
+									<a href="https://git.imooc.com/" target="_blank">代码托管</a>
+								</li>
+								<li>
+									<a href="https://www.imooc.com/about/friendly" target="_blank">友情链接</a>
+								</li>
+							</ul>
+						</div>
+						<p>Copyright © 2019 imooc.com All Rights Reserved | 京ICP备 12003892号-11 </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="\discussion\js\jquery-1.11.3.min.js"></script>
+		<script>
+
+		</script>
+	</body>
+</html>

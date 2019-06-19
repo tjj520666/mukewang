@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.RecentlyMapper">
+    <resultMap id="BaseResultMap" type="com.entity.Recently">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="time" jdbcType="TIMESTAMP" property="time" />
+        <result column="mvImage" jdbcType="VARCHAR" property="mvImage" />
+        <result column="mvName" jdbcType="VARCHAR" property="mvName" />
+        <result column="upgrading" jdbcType="INTEGER" property="upgrading" />
+        <result column="thenstudy" jdbcType="INTEGER" property="thenstudy" />
+        <result column="sessionTime" jdbcType="INTEGER" property="sessionTime" />
+        <result column="note" jdbcType="INTEGER" property="note" />
+        <result column="code" jdbcType="INTEGER" property="code" />
+        <result column="quiz" jdbcType="INTEGER" property="quiz" />
+        <result column="classify" jdbcType="INTEGER" property="classify" />
+        <result column="userId" jdbcType="INTEGER" property="userId" />
+        <result column="mvtype" jdbcType="INTEGER" property="mvType" />
+    </resultMap>
+    <select id="selectByUserAll" resultMap="BaseResultMap" parameterType="com.entity.Recently">
+        select * from muke_recently where userid = #{userId} and mvtype = #{mvType}
+    </select>
+
+    <select id="selectByClassIgy" resultMap="BaseResultMap" parameterType="com.entity.Recently">
+        select * from muke_recently where userid = #{userId} and mvtype = #{mvType}
+        <if test="classify != null and classify != 0">
+            AND classify = #{classify}
+        </if>
+    </select>
+
+    <delete id="deleteByRecentlyId" parameterType="Integer">
+          DELETE from muke_recently where id = #{id};
+    </delete>
+
+    <insert id="insert" parameterType="com.entity.Recently">
+    insert into muke_recently (id, time, mvimage,
+      mvName, upgrading, thenstudy,
+      Sessiontime, note, code,
+      quiz, classify, userid,mvtype
+      )
+    values (#{id,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{mvImage,jdbcType=VARCHAR},
+      #{mvName,jdbcType=VARCHAR}, #{upgrading,jdbcType=VARCHAR}, #{thenstudy,jdbcType=INTEGER},
+      #{sessionTime,jdbcType=INTEGER}, #{note,jdbcType=INTEGER}, #{code,jdbcType=INTEGER},
+      #{quiz,jdbcType=INTEGER}, #{classify,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{mvType,jdbcType=INTEGER}
+      )
+  </insert>
+
+</mapper>

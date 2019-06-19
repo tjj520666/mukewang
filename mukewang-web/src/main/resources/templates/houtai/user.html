@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<link rel="shortcut icon" href="/houtai/img/favicon.ico" >
+		<meta charset="UTF-8">
+		<title>用户管理</title>
+		<link rel="stylesheet" href="/houtai/css/bootstrap.css" />
+	</head>
+
+	<body style="background-color: #e6ecf5;">
+		<!-- 用户新增模态框 -->
+		<div class="modal fade" id="userAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">用户新增</h4>
+					</div>
+					<div class="modal-body">
+						<form id="submitForm" class="form-horizontal">
+							<div class="form-group">
+								<label for="inputName" class="col-sm-2 control-label">昵称</label>
+								<div class="col-sm-6">
+									<input type="name" class="form-control" name="userName" id="inputName" placeholder="Nickname">
+									<span id="helpBlock1" class="help-block"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword" class="col-sm-2 control-label">密码</label>
+								<div class="col-sm-6">
+									<input type="password" class="form-control" name="userPassword" id="inputPassword" placeholder="Password">
+									<span id="helpBlock2" class="help-block"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword" class="col-sm-2 control-label">确认密码</label>
+								<div class="col-sm-6">
+									<input type="password" class="form-control"  id="inputPassword1" placeholder="Password">
+									<span id="helpBlock3" class="help-block"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword" class="col-sm-2 control-label">性别</label>
+								<div class="col-sm-10">
+									<label class="radio-inline">
+ 										 <input type="radio" name="userSex"  class="inputSex" value="男" checked="checked"> 男
+									</label>
+									<label class="radio-inline">
+  									<input type="radio" name="userSex"  class="inputSex" value="女"> 女
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="updateuserStatus" class="col-sm-2 control-label">状态</label>
+								<div class="col-sm-6">
+									<select   class="form-control selectpicker show-tick reset" name="userStatus" id="adduserStatus" >
+										<option value="3">普通用户</option>
+										<option value="2">商家管理员</option>
+										<option value="1">用户管理员</option>
+									</select>
+								</div>
+							</div>
+
+
+
+							<div class="form-group">
+								<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+								<div class="col-sm-6">
+									<input type="Email" class="form-control" name="userEmail" id="inputEmail" placeholder="CSSL@email.com">
+									<span id="helpBlock5" class="help-block"></span>
+								</div>
+							</div>
+
+
+
+
+							<div class="form-group">
+								<label for="inputPhone" class="col-sm-2 control-label">电话</label>
+								<div class="col-sm-6">
+									<input type="phone" class="form-control" name="userPhone" id="inputPhone" placeholder="Phone">
+									<span id="helpBlock6" class="help-block"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputAddress" class="col-sm-2 control-label">地址</label>
+								<div class="col-sm-6">
+									<input type="address" class="form-control" name="userAddress" id="inputAddress" placeholder="Address">
+									<span id="helpBlock7" class="help-block"></span>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn addbtn-primary">保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!-- 用户修改模态框 -->
+		<div class="modal fade" id="userUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="updateModalLabel">用户修改</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="updateUser">
+
+							<div class="form-group">
+								<div class="col-sm-6">
+									<input type="hidden" class="form-control" name="userId" id="updateUserId" >
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="updatePhone" class="col-sm-2 control-label">用户名</label>
+								<div class="col-sm-6">
+									<input type="name" class="form-control" name="userName" id="updateName" disabled="disabled">
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="updatePhone" class="col-sm-2 control-label">身份证</label>
+								<div class="col-sm-6">
+									<input type="phone" class="form-control" name="userIdcard" id="updateuserIdcard" disabled="disabled">
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="updateuserAccount" class="col-sm-2 control-label">昵称</label>
+								<div class="col-sm-6">
+									<input type="name" class="form-control" name="userAccount" id="updateuserAccount" >
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="updateSex" class="col-sm-2 control-label">性别</label>
+								<div class="col-sm-10">
+									<label class="radio-inline">
+ 										 <input type="radio" name="userSex"  value="男" checked="checked"> 男
+									</label>
+									<label class="radio-inline">
+										<input type="radio" name="userSex"   value="女"> 女
+									</label>
+								</div>
+
+							</div>
+
+							<div class="form-group">
+								<label for="updateuserStatus" class="col-sm-2 control-label">状态</label>
+								<div class="col-sm-6">
+									<select   class="form-control selectpicker show-tick reset" name="userStatus" id="updateuserStatus" >
+										<option value="1">用户管理员</option>
+										<option value="2">商家管理员</option>
+										<option value="3">普通用户</option>
+									</select>
+								</div>
+							</div>
+
+
+
+
+							<div class="form-group">
+								<label for="updateuserMoney" class="col-sm-2 control-label">账户余额</label>
+								<div class="col-sm-6">
+									<input type="money" class="form-control" name="userMoney" id="updateuserMoney" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+								<div class="col-sm-6">
+									<input type="Email" class="form-control" name="userEmail" id="updateEmail" placeholder="CSSL@email.com">
+									<span id="helpBlock8" class="help-block"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="updatePhone" class="col-sm-2 control-label">电话</label>
+								<div class="col-sm-6">
+									<input type="phone" class="form-control" name="userPhone" id="updatePhone" placeholder="Phone">
+									<span id="helpBlock9" class="help-block"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="updateAddress" class="col-sm-2 control-label">地址</label>
+								<div class="col-sm-6">
+									<input type="address" class="form-control" name="userAddress" id="updateAddress" placeholder="Address">
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn updatebtn-primary">更新</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+
+		<div class="operation" style="margin: 30px 0px">
+			<div style="margin-left:870px;" >
+				<button class="btn btn-info" id="user_add_modal_btn">
+					<span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ></span>
+					新增
+				</button>
+				<button class="btn btn-danger" id="user_delete_all_btn">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					删除选中
+				</button>
+			</div>
+		</div>
+
+		<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped" id="user_table">
+				<thead>
+					<tr>
+						<th><input type="checkbox" id="check_all" /></th>
+						<th>#</th>
+						<th>昵称</th>
+						<th>性别</th>
+						<th>email</th>
+						<th>电话</th>
+						<th>地址</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+					<tr th:each="user:${user.list}">
+						<th><input type="checkbox" class="check_item" /></th>
+						<th th:text="${user.userId}"></th>
+						<th th:text="${user.userName}"></th>
+						<th th:text="${user.userSex}"></th>
+						<th th:text="${user.userEmail}"></th>
+						<th th:text="${user.userPhone}"></th>
+						<th th:text="${user.userAddress}"></th>
+						<!--<th th:text="${user.userStatus}"></th>-->
+						<th th:text="${user.userStatus==1?'管理员':'用户'}"></th>
+						<th>
+									<button class="btn btn-primary" id="user_update_modal_btn" th:value="${user.userId}">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								编辑
+							</button>
+							<button th:if="${user.userId!=session.user.userId}" class="btn btn-danger" id="user_del_modal_btn" th:value="${user.userId}">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								删除
+							</button>
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1">
+				当前第 <strong th:text="${user.pageNum}"></strong> 页,
+				总共 <strong th:text="${user.pages}"></strong> 页,
+				总共 <strong th:text="${user.total}"></strong> 条数据;
+			</div>
+			<div class="col-md-6">
+				<nav aria-label="Page navigation">
+
+					<ul class="pagination">
+						<li>
+							<a th:href="@{/getUser(pn=1)}" aria-label="Previous" >
+								<span aria-hidden="true">首页</span>
+							</a>
+						</li>
+
+						<li >
+							<a th:if="${user.hasPreviousPage}" th:href="@{/getUser(pn=${user.pageNum-1})}" aria-label="Previous" >
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li th:each="pns:${user.navigatepageNums}" th:class="${pns==user.getPageNum()?'active':''}">
+							<a th:href="@{/getUser(pn=${pns})}" th:text="${pns}" id="pageNum"></a>
+						</li>
+
+						<li>
+							<a th:if="${user.hasNextPage}" th:href="@{/getUser(pn=${user.pageNum+1})}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+						<li>
+
+							<a th:href="@{/getUser(pn=${user.pages})}" aria-label="Previous" >
+								<span aria-hidden="true" disabled="disabled">末页</span>
+							</a>
+						</li>
+					</ul>
+
+				</nav>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="/houtai/js/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="/houtai/js/bootstrap.js"></script>
+	<script type="text/javascript"></script>
+	<script>
+		$(function() {
+			//点击新增按钮弹出新增模态框
+			$("#user_add_modal_btn").click(function() {
+
+				$("#userAddModal").modal({
+					backdrop: "static"
+				});
+			});
+			//点击修改按钮弹出修改模态框
+			$(".btn-primary").click(function() {
+				$("#userUpdateModal").modal({
+					backdrop: "static"
+				});
+                var id=$(this).attr("value");
+                $.post("getById",{"id":id},function (data) {
+                    $("#updateName").val(data.userName);
+                    $("#updatePassword").val(data.userPassword);
+                    $("#userUpdateModal input[name=userSex]").val([data.userSex]);
+                    $("#updateuserIdcard").val(data.userIdcard);
+                    $("#updateuserAccount").val(data.userAccount);
+                    $("#updateEmail").val(data.userEmail);
+                    $("#updatePhone").val(data.userPhone);
+                    $("#updateAddress").val(data.userAddress);
+                    $("#updateUserId").val(data.userId);
+                    $("#updateuserMoney").val(data.userMoney);
+                    $("#updateuserStatus").val([data.userStatus]);
+
+                });
+			});
+
+
+			//修改用户
+			$(".updatebtn-primary").click(function () {
+				if (!up()){
+				    return false;
+				}else{
+                    var url="[[@{/getUser(pn)}]]=";
+                    user=$("#updateUser").serialize();
+                    $.post("updateUser",user,function (data) {
+                        if (data!=null){
+                            window.location.href=url+[[${user.getPageNum()}]];
+                            $("#userUpdateModal").modal('hide');
+                            alert("更新成功!");
+                        }
+                    })
+				}
+
+            })
+
+
+
+			//点击删除
+            $(".btn-danger").click(function() {
+               var url="[[@{/getUser(pn)}]]=";
+                var ids=$(this).attr("value");
+                if (ids!=null&&ids!=""){
+                    if (confirm("确定要删除该用户吗?")){
+                        $.post("delUser",{"ids":ids},function (data) {
+                            if (data!=null&&data!=""){
+                                window.location.href=url+[[${user.getPageNum()}]];
+                                alert("删除成功");
+
+                            }
+                        });
+                    }
+				}
+			});
+
+			var userId ="";
+            //删除选中的信息
+			$("#user_delete_all_btn").click(function () {
+               var url="[[@{/getUser(pn)}]]=";
+				$.each($(".check_item:checked"),function(){
+                    userId += $(this).parents("tr").find("th:eq(1)").text()+"-";
+                });
+               userId = userId.substring(0,userId.length-1);
+               if (userId!=""&&userId!=null){
+                   if (confirm("确认删除吗?")) {
+                       $.post("delUser",{"ids":userId}, function (data) {
+                           if (data!=null&&data!="") {
+                               window.location.href = url + [[${user.getPageNum()}]];
+                               alert("删除成功!");
+                           }
+                       });
+
+                   }
+			   }else{
+                   alert("请先选择再进行此操作!");
+			   }
+
+				});
+
+
+			//点击全选
+            $("#check_all").click(function () {
+				$(".check_item").prop("checked",$(this).prop("checked"));
+            });
+
+			//都选中后选中全选按钮
+			$(document).on("click",".check_item",function () {
+                 var flag = $(".check_item:checked").length==$(".check_item").length;
+				 $("#check_all").prop("checked",flag);
+
+             });
+
+			//点击新增按钮
+			$(".addbtn-primary").click(function () {
+                 if(!submitForm()){
+                     return false;
+                 }else{
+                     var user= $("#submitForm").serialize();
+					 var url="[[@{/getUser(pn)}]]=";
+                     $.post("addUser",user,function (data) {
+                         if(data=="1"){
+                             alert("添加成功!");
+                             window.location.href=url+[[${user.pages}]];
+                             $("#userAddModal").modal('hide');
+                         }
+                     });
+                 }
+            });
+
+			//修改表单验证
+			function  up() {
+                var upEmail=$("#updateEmail").val();
+                var reEmail=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+                if(!reEmail.test(upEmail)){
+                    yangzheng("#updateEmail","error","邮箱格式错误");
+                    return false;
+                }else {
+                    yangzheng("#updateEmail","success","");
+
+                }
+
+                var upPhone=$("#updatePhone").val();
+                var rePhone=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+                if (!rePhone.test(upPhone)){
+                    yangzheng("#updatePhone","error","请输入以13开头的11位手机号");
+                    return false;
+                }else{
+                    yangzheng("#updatePhone","success","");
+                }
+
+                return true;
+            }
+
+
+
+
+			//添加表单验证
+            function  submitForm() {
+
+
+
+                //用户名
+                var userName=$("#inputName").val();
+                var regName=/(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
+                if(!regName.test(userName)){
+                    yangzheng("#inputName","error","用户名不可用或已被占用");
+                    return false;
+                }else {
+                    yangzheng("#inputName","success","");
+
+                }
+
+
+                //密码
+                var userPassword=$("#inputPassword").val();
+                var userPassword1=$("#inputPassword1").val();
+                var regPassword=/^[a-zA-Z]\w{5,17}$/;
+                if (!regPassword.test(userPassword)){
+                    yangzheng("#inputPassword","error","请输入以字母开头，长度在6~18之间的密码(只能包含字母、数字和下划线)");
+                    return false;
+                } else{
+                    yangzheng("#inputPassword","success","");
+
+                }
+
+
+                if(userPassword!=userPassword1){
+                    yangzheng("#inputPassword1","error","两次密码输入不一致");
+                    return false;
+				}else{
+                    yangzheng("#inputPassword1","success","");
+
+                }
+
+                //Email
+                var userEmail=$("#inputEmail").val();
+                var regEmail=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+                if(!regEmail.test(userEmail)){
+                    yangzheng("#inputEmail","error","邮箱格式错误");
+                    return false;
+                }else {
+                    yangzheng("#inputEmail","success","");
+
+                }
+
+
+
+
+                //手机号
+                var userPhone=$("#inputPhone").val();
+				var regPhone=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+				if (!regPhone.test(userPhone)){
+				    yangzheng("#inputPhone","error","请输入以13开头的11位手机号");
+				    return false;
+				}else{
+                     yangzheng("#inputPhone","success","");
+				}
+
+			return true;
+
+            }
+
+
+            //验证方法
+            function  yangzheng(ele,status,msg) {
+               	 $(ele).parent().removeClass("has-success has-error");
+               	 $(ele).next("span").text("");
+				if ("success"==status){
+                    $(ele).parent().addClass("has-success");
+                    $(ele).next("span").text(msg);
+				} else if("error"==status){
+                    $(ele).parent().addClass("has-error");
+                    $(ele).next("span").text(msg);
+				}
+            }
+		});
+
+	</script>
+
+</html>

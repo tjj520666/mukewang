@@ -1,0 +1,568 @@
+#footer {
+	margin-top: 0;
+	border-top: none
+}
+
+.course-infos {
+	margin-bottom: 0
+}
+
+h2 {
+	font-weight: 700;
+	font-size: 44px
+}
+
+.introduce-content {
+	margin: 0 auto;
+	overflow: hidden
+}
+
+.wrap {
+	width: 1200px;
+	margin: 0 auto
+}
+
+.bf {
+	font-weight: 700
+}
+
+.fz16 {
+	font-size: 16px
+}
+
+.clear {
+	clear: both
+}
+
+.section0 {
+	width: 100%;
+	height: 430px;
+	position: relative;
+	background: #fff;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section0-bg.png);
+	background-size: cover;
+	background-position: center
+}
+
+.section0 .wrap {
+	height: 100%;
+	box-sizing: border-box;
+	text-align: center
+}
+
+.section0 .wrap .content-box {
+	position: relative;
+	padding-top: 64px;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box
+}
+
+.section0 .wrap .content-box h1 {
+	font-size: 32px;
+	color: #1c1f21;
+	line-height: 48px;
+	margin-bottom: 4px;
+	font-weight: 700;
+	white-space: nowrap
+}
+
+.section0 .wrap .content-box h4 {
+	font-size: 16px;
+	color: #1c1f21;
+	line-height: 24px;
+	margin-bottom: 48px
+}
+
+.section0 .wrap .content-box ul {
+	width: 1024px;
+	height: 302px;
+	margin: 0 auto;
+	background: #fff;
+	box-shadow: 0 12px 24px 0 rgba(33, 28, 28, .1);
+	border-radius: 24px;
+	box-sizing: border-box;
+	padding-top: 81px
+}
+
+.section0 .wrap .content-box ul li {
+	display: inline-block;
+	vertical-align: top;
+	width: 256px
+}
+
+.section0 .wrap .content-box ul li:first-child+li {
+	margin: 0 68px
+}
+
+.section0 .wrap .content-box ul li .item-icon {
+	width: 48px;
+	height: 48px;
+	overflow: hidden;
+	margin: 0 auto
+}
+
+.section0 .wrap .content-box ul li .item-icon img {
+	width: 100%;
+	height: 100%
+}
+
+.section0 .wrap .content-box ul li p {
+	font-size: 14px;
+	color: #1c1f21;
+	line-height: 22px
+}
+
+.section0 .wrap .content-box ul li p.small-title {
+	margin: 16px 0 8px;
+	color: rgba(0, 0, 0, .87);
+	font-size: 16px;
+	line-height: 24px;
+	text-shadow: 0 1px 0 #ffcf00;
+	font-weight: 700
+}
+
+.section1 {
+	width: 100%;
+	height: 1413px;
+	background: #f8fafc
+}
+
+.section1 .wrap {
+	box-sizing: border-box;
+	text-align: center;
+	height: 100%;
+	position: relative
+}
+
+.section1 .wrap .content-box {
+	margin: 0 auto;
+	position: relative;
+	width: 1200px;
+	height: 100%;
+	padding-top: 125px;
+	box-sizing: border-box
+}
+
+.section1 .wrap .content-box h1 {
+	font-size: 32px;
+	color: #1c1f21;
+	line-height: 48px;
+	font-weight: 700;
+	margin-bottom: 4px
+}
+
+.section1 .wrap .content-box h4 {
+	font-size: 16px;
+	color: #1c1f21;
+	text-align: center;
+	line-height: 24px;
+	margin-bottom: 28px
+}
+
+.section1 .wrap .content-box ul {
+	box-sizing: border-box;
+	padding-top: 134px;
+	margin-bottom: 28px!important
+}
+
+.section1 .wrap .content-box ul.base {
+	width: 836px;
+	height: 430px;
+	margin: 0 auto;
+	transform: translateX(35px);
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-u1.png);
+	background-size: 100% 100%;
+	padding-right: 75px
+}
+
+.section1 .wrap .content-box ul.cons {
+	width: 839px;
+	height: 388px;
+	margin: 0 auto;
+	transform: translateX(-40px);
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-u2.png);
+	background-size: 100% 100%;
+	padding-left: 75px
+}
+
+.section1 .wrap .content-box ul.adva {
+	width: 853px;
+	height: 260px;
+	margin: 0 auto;
+	transform: translateX(45px);
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-u3.png);
+	background-size: 100% 100%;
+	padding-right: 90px
+}
+
+.section1 .wrap .content-box ul li {
+	display: inline-block;
+	vertical-align: top;
+	width: 224px;
+	margin-bottom: 28px
+}
+
+.section1 .wrap .content-box ul li p {
+	font-size: 14px;
+	color: #1c1f21;
+	line-height: 22px
+}
+
+.section1 .wrap .content-box ul li p.small-title {
+	position: relative;
+	font-size: 16px;
+	line-height: 24px;
+	text-shadow: 0 1px 0 #ffcf00;
+	margin-bottom: 8px;
+	z-index: 2;
+	font-weight: 700
+}
+
+.section1 .wrap .content-box ul li p.small-title::before {
+	content: '';
+	display: block;
+	background-size: 100% 100%;
+	position: absolute;
+	z-index: -1;
+	top: -6px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t1::before {
+	width: 27px;
+	height: 27px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-1-t1.png);
+	left: 60px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t2::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-1-t2.png);
+	left: 70px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t3::before {
+	width: 30px;
+	height: 27px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-1-t3.png);
+	left: 65px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t4::before {
+	width: 27px;
+	height: 27px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-1-t4.png);
+	left: 60px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t5::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-1-t5.png);
+	left: 72px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t6::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-2-t1.png);
+	left: 75px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t7::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-2-t2.png);
+	left: 80px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t8::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-2-t3.png);
+	left: 78px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t9::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-2-t4.png);
+	left: 75px;
+	top: -10px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t10::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-2-t5.png);
+	left: 75px;
+	top: -8px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t11::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-2-t6.png);
+	left: 72px;
+	top: -10px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t12::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-3-t1.png);
+	left: 62px;
+	top: -8px
+}
+
+.section1 .wrap .content-box ul li p.small-title.t13::before {
+	width: 32px;
+	height: 32px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-3-t2.png);
+	left: 62px;
+	top: -8px
+}
+
+.section1 .wrap .content-box .img-box {
+	width: 489px;
+	height: 512px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section1-1.png);
+	background-size: 100% 100%;
+	position: absolute;
+	bottom: -80px;
+	left: -125px
+}
+
+.section2 {
+	width: 100%;
+	height: 520px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section2-bg.png);
+	background-size: cover
+}
+
+.section2 .wrap {
+	width: 100%;
+	box-sizing: border-box;
+	text-align: center
+}
+
+.section2 .wrap .content-box {
+	width: 1062px;
+	margin: 0 auto;
+	padding-top: 64px;
+	box-sizing: border-box;
+	font-size: 0;
+	position: relative
+}
+
+.section2 .wrap .content-box h1 {
+	font-size: 32px;
+	color: #1c1f21;
+	line-height: 48px;
+	font-weight: 700;
+	margin-bottom: 46px
+}
+
+.section2 .wrap .content-box ul {
+	width: 980px;
+	margin: 0 auto;
+	position: relative;
+	box-sizing: border-box;
+	padding-left: 80px
+}
+
+.section2 .wrap .content-box ul li {
+	display: inline-block;
+	vertical-align: top;
+	width: 50%;
+	box-sizing: border-box;
+	text-align: left;
+	margin-bottom: 32px
+}
+
+.section2 .wrap .content-box ul li p {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	color: #1c1f21;
+	line-height: 24px;
+	white-space: nowrap;
+	font-weight: 700
+}
+
+.section2 .wrap .content-box ul li p.item-icon {
+	width: 48px;
+	height: 48px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section2-icon.png);
+	background-size: 100% 100%;
+	margin-right: 16px
+}
+
+.section2 .wrap .content-box .img-box {
+	width: 331px;
+	height: 291px;
+	background-image: url(/mukewang-web-0.0.1-SNAPSHOT/practiceCourse/image/section2-1.png);
+	background-size: 100% 100%;
+	position: absolute;
+	bottom: -20px;
+	right: -80px
+}
+
+.section4 {
+	width: 99%;
+	max-width: 1156px;
+	height: 232px;
+	margin: -102px auto 0;
+	background-color: #21201f;
+	border-radius: 24px;
+	position: relative
+}
+
+.section4 .wrap {
+	width: 100%;
+	box-sizing: border-box;
+	text-align: center
+}
+
+.section4 .wrap .content-box {
+	width: 1156px;
+	margin: 0 auto;
+	padding: 40px 132px 0;
+	box-sizing: border-box
+}
+
+.section4 .wrap .content-box h3 {
+	font-weight: 700;
+	font-size: 24px;
+	color: #fff;
+	text-align: center;
+	line-height: 36px
+}
+
+.section4 .wrap .content-box .context-box {
+	padding: 0 20px;
+	width: 100%;
+	margin: 24px auto 0;
+	box-sizing: border-box;
+	text-align: left
+}
+
+.section4 .wrap .content-box .context-box .context-item {
+	float: left;
+	position: relative;
+	padding-left: 60px;
+	box-sizing: border-box
+}
+
+.section4 .wrap .content-box .context-box .context-item .icon-bg {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 44px;
+	background-color: #ffd12d;
+	border-radius: 50%;
+	font-size: 24px;
+	text-align: center;
+	color: #21201f;
+	position: absolute;
+	top: 0;
+	left: 0
+}
+
+.section4 .wrap .content-box .context-box .context-item .smalle-title {
+	font-size: 16px;
+	color: #fff;
+	line-height: 24px;
+	font-weight: 700;
+	margin-bottom: 8px
+}
+
+.section4 .wrap .content-box .context-box .context-item p {
+	font-size: 14px;
+	color: #fff;
+	line-height: 22px
+}
+
+.section6 {
+	width: 99%;
+	max-width: 1156px;
+	height: 244px;
+	margin: 24px auto 80px
+}
+
+.section6 .wrap {
+	box-sizing: border-box;
+	text-align: center;
+	width: 100%
+}
+
+.section6 .wrap .content-box {
+	width: 100%;
+	max-width: 1156px;
+	margin: 0 auto
+}
+
+.section6 .wrap .content-box .context-box {
+	float: left;
+	width: 49%;
+	background: #f3f5f6;
+	border-radius: 24px;
+	height: 222px
+}
+
+.section6 .wrap .content-box .context-box h1 {
+	font-size: 24px;
+	color: rgba(0, 0, 0, .87);
+	text-align: center;
+	line-height: 36px;
+	font-weight: 700;
+	padding: 40px 0 24px;
+	text-shadow: 0 2px 0 #ffcf00
+}
+
+.section6 .wrap .content-box .context-box p {
+	font-size: 14px;
+	color: #1c1f21;
+	line-height: 22px;
+	margin: 0 auto;
+	width: 280px;
+	white-space: nowrap
+}
+
+.section6 .wrap .content-box .context-box:first-child {
+	margin-right: 2%
+}
+
+.section6 .wrap .content-box .context-box:first-child p {
+	width: 400px
+}
+
+@media only screen and (min-width:768px) and (max-width:1024px) {
+	.wrap {
+		width: 90%!important
+	}
+	.section0 .wrap .content-box {
+		width: 100%
+	}
+	.section1 .wrap .content-box {
+		width: 100%
+	}
+	.section2 .wrap .content-box {
+		width: 100%
+	}
+	.section4 .wrap .content-box {
+		width: 100%;
+		padding: 40px 7% 0
+	}
+	.section5 .wrap .content-box {
+		width: 100%
+	}
+	.section6 .wrap {
+		width: 99%!important
+	}
+	.section6 .wrap .content-box {
+		width: 100%
+	}
+}

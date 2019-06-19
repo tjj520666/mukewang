@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>慕课网-登录</title>
+		<link rel="stylesheet" href="/user/css/base.css" type="text/css">
+		<link rel="stylesheet" href="/user/css/common-less.css" type="text/css">
+
+		<link rel="stylesheet" href="/user/css/moco.min.css" type="text/css">
+
+
+		<script type="text/javascript">
+			var OP_CONFIG = {
+				"module": "user",
+				"page": "newlogin"
+			};
+			var isLogin = 0;
+			var is_choice = "";
+			var seajsTimestamp = "v=201903261132";
+			var _msg_unread = 0;
+			var _not_unread = 0;
+			var _cart_num = 0;
+		</script>
+		<link rel="stylesheet" href="/user/css/loginsign-less.css">
+		<link rel="stylesheet" href="/user/css/poplogin-less.css" type="text/css">
+		<script type="text/javascript">
+			var fromURL = "";
+		</script>
+		<style type="text/css" id="MOCO_ADV_STYLE">
+			#MOCO_TOP_ADVERTISING {
+				width: 100%;
+				min-width: 1152px;
+				max-width: 2560px;
+				height: 40px;
+				overflow: hidden;
+				background: #eee;
+				cursor: pointer;
+				position: relative;
+				z-index: 901
+			}
+
+			#MOCO_TOP_ADVERTISING>img {
+				height: 100%;
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				-webkit-transform: translateX(-50%);
+			}
+
+			#MOCO_TOP_ADVERTISING>.close-adv {
+				color: #000;
+				position: absolute;
+				right: 15%;
+				top: 8px;
+				cursor: pointer;
+				z-index: 1;
+				font-size: 24px;
+			}
+
+			#MOCO_FLOATRIGHT_ADVERTISING {
+				width: 102px;
+				height: 102px;
+				position: fixed;
+				right: 0;
+				top: 50%;
+				margin-top: -218px;
+				cursor: pointer;
+				overflow: hidden;
+				z-index: 901
+			}
+
+			#MOCO_FLOATRIGHT_ADVERTISING .close-adv {
+				position: absolute;
+				right: 3px;
+				top: 5px;
+				cursor: pointer;
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 16px;
+			}
+
+			#MOCO_FLOATRIGHT_ADVERTISING .close-adv:hover {
+				color: rgba(11, 160, 242, 0.8);
+			}
+
+			#MOCO_FLOATRIGHT_ADVERTISING>img {
+				width: 100%;
+			}
+
+			#MOCO_BOTTOM_ADVERTISING {
+				width: 100%;
+				max-height: 200px;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				cursor: pointer;
+				z-index: 2
+			}
+
+			#MOCO_BOTTOM_ADVERTISING>.close-adv {
+				position: absolute;
+				top: 0;
+				right: 10px;
+				font-size: 18px;
+				color: rgba(168, 160, 160, 0.8);
+				transform: translateY(-65%);
+				-ms-transform: translateY(-65%);
+				-webkit-transform: translateY(-65%);
+				z-index: 2;
+			}
+
+			#MOCO_BOTTOM_ADVERTISING>img {
+				width: 100%;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="head" class="sig-head">
+			<a href="" target="_self" class="sig-img">慕课网</a>
+		</div>
+
+		<div id="main">
+
+			<div class="login-wrap">
+
+				<div id="signin" class="rl-modal">
+
+					<div class="rl-modal-header">
+
+						<h1>
+							<span class="active-title">登录</span>
+							<span class="xa-showSignup">注册</span>
+						</h1>
+
+					</div>
+					<div class="rl-modal-body js-loginWrap">
+
+						<div class="clearfix">
+
+							<form id="signup_form" method="post" autocomplete="off">
+
+								<div id="eamil"  class="rlf-group pr ">
+
+									<div class="rlf-areacode js-code-btn" style="display: none;">
+										+86
+									</div>
+
+									<input type="text"  maxlength="37" name="userPhone" data-validate="require-mobile-phone" autocomplete="off" class="xa-emailOrPhone ipt ipt-email js-own-name" placeholder="请输入登录手机号">
+									<p class="rlf-tip-wrap errorHint color-red" ></p>
+								</div>
+
+								<div id="pwd" class="rlf-group pr">
+
+									<a href="javascript:void(0)" hidefocus="true" class="proclaim-btn js-proclaim is-pwd imv2-visibility_off" tabindex="1">
+										<img width="25px" height="25px" src="/user/img/closefind.png"/>
+									</a>
+
+									<input type="password" name="userPassword" data-validate="require-password" class="ipt ipt-pwd js-loginPassword js-pass-pwd" placeholder="请输入密码" maxlength="16" autocomplete="off">
+
+									<p class="rlf-tip-wrap errorHint color-red "></p>
+
+								</div>
+
+								<div id="pwd2" class="rlf-group pr" style="display: none">
+
+									<a href="javascript:void(0)" hidefocus="true" class="proclaim-btn js-proclaim is-pwd imv2-visibility_off" tabindex="1">
+										<img width="25px" height="25px" src="/user/img/closefind.png"/>
+									</a>
+
+									<input type="password" name="userPassword2" data-validate="require-password" class="ipt ipt-pwd js-loginPassword js-pass-pwd" placeholder="请输入确认密码" maxlength="16" autocomplete="off">
+
+									<p class="rlf-tip-wrap errorHint color-red "></p>
+
+								</div>
+
+								<div id="yzm" class="rlf-group clearfix form-control js-verify-row" style="display: none;">
+
+									<input type="text" name="checkCode" class="ipt ipt-verify l" data-validate="require-string" data-callback="checkverity" maxlength="4" data-minlength="4" placeholder="请输入验证码">
+
+                                   <!-- <div id="v_container" style="width: 200px;height: 50px; display:inline-block;"></div>-->
+
+										<a  href="" hidefocus="true" class="icon-refresh js-verify-refresh" onclick="myReload(); return false;">
+											<img src="/user/img/dianji.png" width="27px" height="27px"/>
+										</a>
+
+										<a href="" hidefocus="true" class="verify-img-wrap js-verify-refresh" onclick="myReload(); return false;">
+											<img src="/pictureCheckCode" id="CreateCheckCode">
+										</a>
+
+										<!--<a href="" onclick="myReload(); return false;"> 看不清,换一个</a>-->
+
+                                    <!--<a href="javascript:void(0)" hidefocus="true" class="verify-img-wrap js-verify-refresh"></a>
+									<a href="javascript:void(0)" hidefocus="true" class="icon-refresh js-verify-refresh"></a>-->
+
+
+									<p class="rlf-tip-wrap errorHint color-red "></p>
+
+								</div>
+
+								<div id="yzm2" class="rlf-group clearfix form-control js-verify-row" style="display: none;">
+
+									<input type="text" name="checkCode" class="ipt ipt-verify l" data-validate="require-string" data-callback="checkverity" maxlength="4" data-minlength="4" placeholder="请输入验证码">
+									<input type="hidden" name="loginyzm">
+
+									<!-- <div id="v_container" style="width: 200px;height: 50px; display:inline-block;"></div>-->
+
+
+									<a href="" id="dx" hidefocus="true" style="margin-top: 5px;" class="verify-img-wrap js-verify-refresh" onclick="myYZM(); return false;">
+										获取验证码
+									</a>
+									<p id="dxx" class="verify-img-wrap js-verify-refresh" style="display: none;margin-top: 5px;"></p>
+
+									<!--<a href="" onclick="myReload(); return false;"> 看不清,换一个</a>-->
+
+									<!--<a href="javascript:void(0)" hidefocus="true" class="verify-img-wrap js-verify-refresh"></a>
+                                    <a href="javascript:void(0)" hidefocus="true" class="icon-refresh js-verify-refresh"></a>-->
+
+
+									<p class="rlf-tip-wrap errorHint color-red "></p>
+
+								</div>
+
+								<div id="fxk" class="rlf-group rlf-appendix form-control  clearfix">
+									<label for="auto-signin" class="rlf-autoin l" hidefocus="true">
+										<input type="checkbox" checked="checked" class="auto-cbx" id="auto-signin">7天内自动登录
+									</label>
+
+									<a href="" class="rlf-forget r" target="_blank" hidefocus="true">无法登录</a>
+
+									<a href="" class="rlf-forget r" target="_blank" hidefocus="true">找回密码</a>
+
+								</div>
+
+								<p class="rlf-tip-globle color-red" id="signin-globle-error"></p>
+
+								<div class="rlf-group clearfix">
+
+									<input type="button" id="log" onclick="submitForm()" value="登录" hidefocus="true" class="moco-btn moco-btn-red moco-btn-lg btn-full xa-login">
+
+								</div>
+
+							</form>
+						</div>
+					</div>
+					<div class="rl-model-footer">
+						<div class="pop-login-sns clearfix" style="display: block"> <span id="loginSMS" class="l rlf-other xa-showPhoneSignin">手机短信登录</span>
+							<!--<a href="javascript:void(0)" hidefocus="true" data-login-sns="/passport/user/tplogin?tp=weibo" class="pop-sns-weibo l"><i class="imv2-weibo"></i></a>
+							<a href="javascript:void(0)" hidefocus="true" data-login-sns="/passport/user/tplogin?tp=weixin" class="pop-sns-weixin l"><i class="imv2-weixin"></i></a>
+							<a href="javascript:void(0)" hidefocus="true" data-login-sns="/passport/user/tplogin?tp=qq" class="pop-sns-qq l"><i class="imv2-qq"></i></a>-->
+						</div>
+						<!--<div class="erweima xa-showQrcode"></div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="vright">© 2019 imooc.com All Rights Reserved 京ICP备 13046642号</div>
+		<script type="text/javascript" src="/user/js/jquery-1.12.4.js" ></script>
+		<script type="text/javascript" src="/user/js/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="/user/js/login.js"></script>
+
+	</body>
+</html>

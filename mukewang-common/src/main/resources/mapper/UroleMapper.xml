@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UroleMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Urole">
+    <id column="urole_id" jdbcType="INTEGER" property="uroleId" />
+    <result column="urole_uid" jdbcType="INTEGER" property="uroleUid" />
+    <result column="urole_rid" jdbcType="INTEGER" property="uroleRid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    urole_id, urole_uid, urole_rid
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.UroleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_urole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_urole
+    where urole_id = #{uroleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_urole
+    where urole_id = #{uroleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.UroleExample">
+    delete from muke_urole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Urole">
+    insert into muke_urole (urole_id, urole_uid, urole_rid
+      )
+    values (#{uroleId,jdbcType=INTEGER}, #{uroleUid,jdbcType=INTEGER}, #{uroleRid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Urole">
+    insert into muke_urole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uroleId != null">
+        urole_id,
+      </if>
+      <if test="uroleUid != null">
+        urole_uid,
+      </if>
+      <if test="uroleRid != null">
+        urole_rid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uroleId != null">
+        #{uroleId,jdbcType=INTEGER},
+      </if>
+      <if test="uroleUid != null">
+        #{uroleUid,jdbcType=INTEGER},
+      </if>
+      <if test="uroleRid != null">
+        #{uroleRid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.UroleExample" resultType="java.lang.Long">
+    select count(*) from muke_urole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_urole
+    <set>
+      <if test="record.uroleId != null">
+        urole_id = #{record.uroleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uroleUid != null">
+        urole_uid = #{record.uroleUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uroleRid != null">
+        urole_rid = #{record.uroleRid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_urole
+    set urole_id = #{record.uroleId,jdbcType=INTEGER},
+      urole_uid = #{record.uroleUid,jdbcType=INTEGER},
+      urole_rid = #{record.uroleRid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Urole">
+    update muke_urole
+    <set>
+      <if test="uroleUid != null">
+        urole_uid = #{uroleUid,jdbcType=INTEGER},
+      </if>
+      <if test="uroleRid != null">
+        urole_rid = #{uroleRid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where urole_id = #{uroleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Urole">
+    update muke_urole
+    set urole_uid = #{uroleUid,jdbcType=INTEGER},
+      urole_rid = #{uroleRid,jdbcType=INTEGER}
+    where urole_id = #{uroleId,jdbcType=INTEGER}
+  </update>
+</mapper>

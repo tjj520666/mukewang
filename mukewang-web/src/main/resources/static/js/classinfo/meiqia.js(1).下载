@@ -1,0 +1,41 @@
+(function (m, ei, q, i, a, j, s) {
+    m[i] = m[i] || function () {
+        (m[i].a = m[i].a || []).push(arguments)
+    };
+    j = ei.createElement(q),
+        s = ei.getElementsByTagName(q)[0];
+    j.async = true;
+    j.charset = 'UTF-8';
+    j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+    s.parentNode.insertBefore(j, s);
+})(window, document, 'script', '_MEIQIA');
+_MEIQIA('entId', 7772);
+// 开启手动模式
+_MEIQIA('manualInit');
+_MEIQIA('startConversation',function(){
+	if(OP_CONFIG.userInfo){
+		$.ajax({
+		    url:'//coding.imooc.com/user/consumeinfo',
+		    type:"get",
+			xhrFields: {
+		        withCredentials: true
+		    },
+		    crossDomain: true,
+		    dataType:'json',
+		    success:function(res){
+		        if(res.result == 1){
+		        	var data = res.data;
+					_MEIQIA('metadata', {
+						"用户ID":data.uid,
+		            	"用户昵称":data.nickname,
+		            	"就业班消费金额":data.class_course_money,
+		            	"实战消费金额":data.coding_course_money,
+		            	"专栏消费金额":data.pay_article_money,
+		            	"语言方向喜好":data.skill.join(",")
+		            });
+		        }
+		    }
+		})
+	}
+})
+

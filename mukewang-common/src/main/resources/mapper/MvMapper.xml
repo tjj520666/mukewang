@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.MvMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Mv">
+    <id column="mv_id" jdbcType="INTEGER" property="mvId" />
+    <result column="mv_id" jdbcType="INTEGER" property="mv" />
+    <result column="mv_name" jdbcType="VARCHAR" property="mvName" />
+    <result column="mv_title" jdbcType="VARCHAR" property="mvTitle" />
+    <result column="mv_details" jdbcType="VARCHAR" property="mvDetails" />
+    <result column="mv_difficultyId" jdbcType="INTEGER" property="mvDifficultyid" />
+    <result column="mv_price" jdbcType="DOUBLE" property="mvPrice" />
+    <result column="mv_type1id" jdbcType="INTEGER" property="mvType1id" />
+    <result column="mv_type2id" jdbcType="INTEGER" property="mvType2id" />
+    <result column="mv_type3id" jdbcType="INTEGER" property="mvType3id" />
+    <result column="mv_image" jdbcType="VARCHAR" property="mvImage" />
+    <result column="mv_scope" jdbcType="DOUBLE" property="mvScope" />
+    <result column="mv_personnum" jdbcType="INTEGER" property="mvPersonnum" />
+    <result column="mv_duration" jdbcType="DOUBLE" property="mvDuration" />
+    <result column="mv_teacherid" jdbcType="INTEGER" property="mvTeacherid" />
+    <result column="mv_teacher" jdbcType="VARCHAR" property="mvTeacher" />
+    <result column="mv_know" jdbcType="VARCHAR" property="mvKnow" />
+    <result column="mv_rs" jdbcType="INTEGER" property="mvRs" />
+    <result column="mv_hotsearch" jdbcType="INTEGER" property="mvHotsearch" />
+
+    <association property="teacher" column="mv_teacherid" javaType="com.entity.Teacher" select="com.dao.TeacherMapper.selectByPrimaryKey"></association>
+    <association property="difficulty" column="mv_difficultyId"  javaType="com.entity.Difficulty" select="com.dao.DifficultyMapper.selectByPrimaryKey"></association>
+    <collection property="sections" ofType="com.entity.Section" select="com.dao.SectionMapper.selectByMvid" column="mv_id"></collection>
+  </resultMap>
+  <resultMap id="sasa" type="com.entity.Mv">
+    <id column="mv_id" jdbcType="INTEGER" property="mvId" />
+    <result column="mv_id" jdbcType="INTEGER" property="mv" />
+    <result column="mv_name" jdbcType="VARCHAR" property="mvName" />
+    <result column="mv_title" jdbcType="VARCHAR" property="mvTitle" />
+    <result column="mv_details" jdbcType="VARCHAR" property="mvDetails" />
+    <result column="mv_difficultyId" jdbcType="INTEGER" property="mvDifficultyid" />
+    <result column="mv_price" jdbcType="DOUBLE" property="mvPrice" />
+    <result column="mv_type1id" jdbcType="INTEGER" property="mvType1id" />
+    <result column="mv_type2id" jdbcType="INTEGER" property="mvType2id" />
+    <result column="mv_type3id" jdbcType="INTEGER" property="mvType3id" />
+    <result column="mv_image" jdbcType="VARCHAR" property="mvImage" />
+    <result column="mv_scope" jdbcType="DOUBLE" property="mvScope" />
+    <result column="mv_personnum" jdbcType="INTEGER" property="mvPersonnum" />
+    <result column="mv_duration" jdbcType="DOUBLE" property="mvDuration" />
+    <result column="mv_teacherid" jdbcType="INTEGER" property="mvTeacherid" />
+    <result column="mv_teacher" jdbcType="VARCHAR" property="mvTeacher" />
+    <result column="mv_know" jdbcType="VARCHAR" property="mvKnow" />
+    <result column="mv_rs" jdbcType="INTEGER" property="mvRs" />
+    <result column="mv_hotsearch" jdbcType="INTEGER" property="mvHotsearch" />
+    <association property="teacher" column="mv_teacherid" javaType="com.entity.Teacher" select="com.dao.TeacherMapper.selectByPrimaryKey"></association>
+    <association property="difficulty" column="mv_difficultyId"  javaType="com.entity.Difficulty" select="com.dao.DifficultyMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mv_id, mv_name, mv_title, mv_details, mv_difficultyId, mv_price, mv_type1id, mv_type2id, 
+    mv_type3id, mv_image, mv_scope, mv_personnum, mv_duration, mv_teacherid, mv_teacher, 
+    mv_know, mv_rs, mv_hotsearch
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.MvExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_mv
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_mv
+    where mv_id = #{mvId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByid"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from muke_mv
+    <where>
+      mv_type2id = #{mvType2id,jdbcType=INTEGER}
+      <if test="mvDifficultyid != null">
+        AND mv_difficultyId=#{mvDifficultyid,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+
+  <!--selectByIdType3-->
+  <select id="selectByIdType3" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from muke_mv
+    <where>
+      mv_type3id = #{mvType3id,jdbcType=INTEGER}
+      <if test="mvDifficultyid != null">
+        AND mv_difficultyId=#{mvDifficultyid,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <!--selectByDiff-->
+  <select id="selectByDiff" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from muke_mv
+    where mv_difficultyId = #{mvDifficultyid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByMvCateId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from muke_mv
+    where mv_type1id = #{param1,jdbcType=INTEGER}
+    limit 0,#{param2,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByAll"  resultMap="sasa">
+    select
+    <include refid="Base_Column_List" />
+    from muke_mv
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_mv
+    where mv_id = #{mvId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.MvExample">
+    delete from muke_mv
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Mv">
+    insert into muke_mv (mv_id, mv_name, mv_title, 
+      mv_details, mv_difficultyId, mv_price, 
+      mv_type1id, mv_type2id, mv_type3id, 
+      mv_image, mv_scope, mv_personnum, 
+      mv_duration, mv_teacherid, mv_teacher, 
+      mv_know, mv_rs, mv_hotsearch
+      )
+    values (#{mvId,jdbcType=INTEGER}, #{mvName,jdbcType=VARCHAR}, #{mvTitle,jdbcType=VARCHAR}, 
+      #{mvDetails,jdbcType=VARCHAR}, #{mvDifficultyid,jdbcType=INTEGER}, #{mvPrice,jdbcType=DOUBLE}, 
+      #{mvType1id,jdbcType=INTEGER}, #{mvType2id,jdbcType=INTEGER}, #{mvType3id,jdbcType=INTEGER}, 
+      #{mvImage,jdbcType=VARCHAR}, #{mvScope,jdbcType=DOUBLE}, #{mvPersonnum,jdbcType=INTEGER}, 
+      #{mvDuration,jdbcType=DOUBLE}, #{mvTeacherid,jdbcType=INTEGER}, #{mvTeacher,jdbcType=VARCHAR}, 
+      #{mvKnow,jdbcType=VARCHAR}, #{mvRs,jdbcType=INTEGER}, #{mvHotsearch,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Mv">
+    insert into muke_mv
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mvId != null">
+        mv_id,
+      </if>
+      <if test="mvName != null">
+        mv_name,
+      </if>
+      <if test="mvTitle != null">
+        mv_title,
+      </if>
+      <if test="mvDetails != null">
+        mv_details,
+      </if>
+      <if test="mvDifficultyid != null">
+        mv_difficultyId,
+      </if>
+      <if test="mvPrice != null">
+        mv_price,
+      </if>
+      <if test="mvType1id != null">
+        mv_type1id,
+      </if>
+      <if test="mvType2id != null">
+        mv_type2id,
+      </if>
+      <if test="mvType3id != null">
+        mv_type3id,
+      </if>
+      <if test="mvImage != null">
+        mv_image,
+      </if>
+      <if test="mvScope != null">
+        mv_scope,
+      </if>
+      <if test="mvPersonnum != null">
+        mv_personnum,
+      </if>
+      <if test="mvDuration != null">
+        mv_duration,
+      </if>
+      <if test="mvTeacherid != null">
+        mv_teacherid,
+      </if>
+      <if test="mvTeacher != null">
+        mv_teacher,
+      </if>
+      <if test="mvKnow != null">
+        mv_know,
+      </if>
+      <if test="mvRs != null">
+        mv_rs,
+      </if>
+      <if test="mvHotsearch != null">
+        mv_hotsearch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mvId != null">
+        #{mvId,jdbcType=INTEGER},
+      </if>
+      <if test="mvName != null">
+        #{mvName,jdbcType=VARCHAR},
+      </if>
+      <if test="mvTitle != null">
+        #{mvTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mvDetails != null">
+        #{mvDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="mvDifficultyid != null">
+        #{mvDifficultyid,jdbcType=INTEGER},
+      </if>
+      <if test="mvPrice != null">
+        #{mvPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mvType1id != null">
+        #{mvType1id,jdbcType=INTEGER},
+      </if>
+      <if test="mvType2id != null">
+        #{mvType2id,jdbcType=INTEGER},
+      </if>
+      <if test="mvType3id != null">
+        #{mvType3id,jdbcType=INTEGER},
+      </if>
+      <if test="mvImage != null">
+        #{mvImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mvScope != null">
+        #{mvScope,jdbcType=DOUBLE},
+      </if>
+      <if test="mvPersonnum != null">
+        #{mvPersonnum,jdbcType=INTEGER},
+      </if>
+      <if test="mvDuration != null">
+        #{mvDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="mvTeacherid != null">
+        #{mvTeacherid,jdbcType=INTEGER},
+      </if>
+      <if test="mvTeacher != null">
+        #{mvTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="mvKnow != null">
+        #{mvKnow,jdbcType=VARCHAR},
+      </if>
+      <if test="mvRs != null">
+        #{mvRs,jdbcType=INTEGER},
+      </if>
+      <if test="mvHotsearch != null">
+        #{mvHotsearch,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.MvExample" resultType="java.lang.Long">
+    select count(*) from muke_mv
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_mv
+    <set>
+      <if test="record.mvId != null">
+        mv_id = #{record.mvId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvName != null">
+        mv_name = #{record.mvName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mvTitle != null">
+        mv_title = #{record.mvTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mvDetails != null">
+        mv_details = #{record.mvDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mvDifficultyid != null">
+        mv_difficultyId = #{record.mvDifficultyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvPrice != null">
+        mv_price = #{record.mvPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mvType1id != null">
+        mv_type1id = #{record.mvType1id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvType2id != null">
+        mv_type2id = #{record.mvType2id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvType3id != null">
+        mv_type3id = #{record.mvType3id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvImage != null">
+        mv_image = #{record.mvImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mvScope != null">
+        mv_scope = #{record.mvScope,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mvPersonnum != null">
+        mv_personnum = #{record.mvPersonnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvDuration != null">
+        mv_duration = #{record.mvDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mvTeacherid != null">
+        mv_teacherid = #{record.mvTeacherid,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvTeacher != null">
+        mv_teacher = #{record.mvTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mvKnow != null">
+        mv_know = #{record.mvKnow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mvRs != null">
+        mv_rs = #{record.mvRs,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvHotsearch != null">
+        mv_hotsearch = #{record.mvHotsearch,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_mv
+    set mv_id = #{record.mvId,jdbcType=INTEGER},
+      mv_name = #{record.mvName,jdbcType=VARCHAR},
+      mv_title = #{record.mvTitle,jdbcType=VARCHAR},
+      mv_details = #{record.mvDetails,jdbcType=VARCHAR},
+      mv_difficultyId = #{record.mvDifficultyid,jdbcType=INTEGER},
+      mv_price = #{record.mvPrice,jdbcType=DOUBLE},
+      mv_type1id = #{record.mvType1id,jdbcType=INTEGER},
+      mv_type2id = #{record.mvType2id,jdbcType=INTEGER},
+      mv_type3id = #{record.mvType3id,jdbcType=INTEGER},
+      mv_image = #{record.mvImage,jdbcType=VARCHAR},
+      mv_scope = #{record.mvScope,jdbcType=DOUBLE},
+      mv_personnum = #{record.mvPersonnum,jdbcType=INTEGER},
+      mv_duration = #{record.mvDuration,jdbcType=DOUBLE},
+      mv_teacherid = #{record.mvTeacherid,jdbcType=INTEGER},
+      mv_teacher = #{record.mvTeacher,jdbcType=VARCHAR},
+      mv_know = #{record.mvKnow,jdbcType=VARCHAR},
+      mv_rs = #{record.mvRs,jdbcType=INTEGER},
+      mv_hotsearch = #{record.mvHotsearch,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Mv">
+    update muke_mv
+    <set>
+      <if test="mvName != null">
+        mv_name = #{mvName,jdbcType=VARCHAR},
+      </if>
+      <if test="mvTitle != null">
+        mv_title = #{mvTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mvDetails != null">
+        mv_details = #{mvDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="mvDifficultyid != null">
+        mv_difficultyId = #{mvDifficultyid,jdbcType=INTEGER},
+      </if>
+      <if test="mvPrice != null">
+        mv_price = #{mvPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mvType1id != null">
+        mv_type1id = #{mvType1id,jdbcType=INTEGER},
+      </if>
+      <if test="mvType2id != null">
+        mv_type2id = #{mvType2id,jdbcType=INTEGER},
+      </if>
+      <if test="mvType3id != null">
+        mv_type3id = #{mvType3id,jdbcType=INTEGER},
+      </if>
+      <if test="mvImage != null">
+        mv_image = #{mvImage,jdbcType=VARCHAR},
+      </if>
+      <if test="mvScope != null">
+        mv_scope = #{mvScope,jdbcType=DOUBLE},
+      </if>
+      <if test="mvPersonnum != null">
+        mv_personnum = #{mvPersonnum,jdbcType=INTEGER},
+      </if>
+      <if test="mvDuration != null">
+        mv_duration = #{mvDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="mvTeacherid != null">
+        mv_teacherid = #{mvTeacherid,jdbcType=INTEGER},
+      </if>
+      <if test="mvTeacher != null">
+        mv_teacher = #{mvTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="mvKnow != null">
+        mv_know = #{mvKnow,jdbcType=VARCHAR},
+      </if>
+      <if test="mvRs != null">
+        mv_rs = #{mvRs,jdbcType=INTEGER},
+      </if>
+      <if test="mvHotsearch != null">
+        mv_hotsearch = #{mvHotsearch,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mv_id = #{mvId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Mv">
+    update muke_mv
+    set mv_name = #{mvName,jdbcType=VARCHAR},
+      mv_title = #{mvTitle,jdbcType=VARCHAR},
+      mv_details = #{mvDetails,jdbcType=VARCHAR},
+      mv_difficultyId = #{mvDifficultyid,jdbcType=INTEGER},
+      mv_price = #{mvPrice,jdbcType=DOUBLE},
+      mv_type1id = #{mvType1id,jdbcType=INTEGER},
+      mv_type2id = #{mvType2id,jdbcType=INTEGER},
+      mv_type3id = #{mvType3id,jdbcType=INTEGER},
+      mv_image = #{mvImage,jdbcType=VARCHAR},
+      mv_scope = #{mvScope,jdbcType=DOUBLE},
+      mv_personnum = #{mvPersonnum,jdbcType=INTEGER},
+      mv_duration = #{mvDuration,jdbcType=DOUBLE},
+      mv_teacherid = #{mvTeacherid,jdbcType=INTEGER},
+      mv_teacher = #{mvTeacher,jdbcType=VARCHAR},
+      mv_know = #{mvKnow,jdbcType=VARCHAR},
+      mv_rs = #{mvRs,jdbcType=INTEGER},
+      mv_hotsearch = #{mvHotsearch,jdbcType=INTEGER}
+    where mv_id = #{mvId,jdbcType=INTEGER}
+  </update>
+</mapper>

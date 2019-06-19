@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DetailMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Detail">
+    <id column="detail_id" jdbcType="INTEGER" property="detailId" />
+    <result column="detail_orderid" jdbcType="INTEGER" property="detailOrderid" />
+    <result column="detail_mvid" jdbcType="INTEGER" property="detailMvid" />
+    <result column="detail_number" jdbcType="INTEGER" property="detailNumber" />
+    <result column="detail_money" jdbcType="DOUBLE" property="detailMoney" />
+    <association property="mv" select="com.dao.MvMapper.selectByPrimaryKey" column="detail_mvid"></association>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    detail_id, detail_orderid, detail_mvid, detail_number, detail_money
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.DetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_order_detail
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_order_detail
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.DetailExample">
+    delete from muke_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Detail">
+    insert into muke_order_detail (detail_id, detail_orderid, detail_mvid, 
+      detail_number, detail_money)
+    values (#{detailId,jdbcType=INTEGER}, #{detailOrderid,jdbcType=INTEGER}, #{detailMvid,jdbcType=INTEGER}, 
+      #{detailNumber,jdbcType=INTEGER}, #{detailMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Detail">
+    insert into muke_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="detailId != null">
+        detail_id,
+      </if>
+      <if test="detailOrderid != null">
+        detail_orderid,
+      </if>
+      <if test="detailMvid != null">
+        detail_mvid,
+      </if>
+      <if test="detailNumber != null">
+        detail_number,
+      </if>
+      <if test="detailMoney != null">
+        detail_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="detailId != null">
+        #{detailId,jdbcType=INTEGER},
+      </if>
+      <if test="detailOrderid != null">
+        #{detailOrderid,jdbcType=INTEGER},
+      </if>
+      <if test="detailMvid != null">
+        #{detailMvid,jdbcType=INTEGER},
+      </if>
+      <if test="detailNumber != null">
+        #{detailNumber,jdbcType=INTEGER},
+      </if>
+      <if test="detailMoney != null">
+        #{detailMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.DetailExample" resultType="java.lang.Long">
+    select count(*) from muke_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <!-- 自定义 -->
+  <select id="selectByExampleId" resultMap="BaseResultMap" parameterType="Integer" >
+    select * from muke_order_detail where detail_orderid = #{id}
+  </select>
+
+  <delete id="deleteDeta" parameterType="java.lang.Integer">
+    delete from muke_order_detail
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </delete>
+
+  <select id="selectByDetaCountAll" resultType="Integer">
+    SELECT count(1) from muke_order_detail
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_order_detail
+    <set>
+      <if test="record.detailId != null">
+        detail_id = #{record.detailId,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailOrderid != null">
+        detail_orderid = #{record.detailOrderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailMvid != null">
+        detail_mvid = #{record.detailMvid,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailNumber != null">
+        detail_number = #{record.detailNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailMoney != null">
+        detail_money = #{record.detailMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_order_detail
+    set detail_id = #{record.detailId,jdbcType=INTEGER},
+      detail_orderid = #{record.detailOrderid,jdbcType=INTEGER},
+      detail_mvid = #{record.detailMvid,jdbcType=INTEGER},
+      detail_number = #{record.detailNumber,jdbcType=INTEGER},
+      detail_money = #{record.detailMoney,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Detail">
+    update muke_order_detail
+    <set>
+      <if test="detailOrderid != null">
+        detail_orderid = #{detailOrderid,jdbcType=INTEGER},
+      </if>
+      <if test="detailMvid != null">
+        detail_mvid = #{detailMvid,jdbcType=INTEGER},
+      </if>
+      <if test="detailNumber != null">
+        detail_number = #{detailNumber,jdbcType=INTEGER},
+      </if>
+      <if test="detailMoney != null">
+        detail_money = #{detailMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Detail">
+    update muke_order_detail
+    set detail_orderid = #{detailOrderid,jdbcType=INTEGER},
+      detail_mvid = #{detailMvid,jdbcType=INTEGER},
+      detail_number = #{detailNumber,jdbcType=INTEGER},
+      detail_money = #{detailMoney,jdbcType=DOUBLE}
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<link rel="shortcut icon" href="/houtai/img/favicon.ico" >
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>imooc后台管理</title>
+		<link rel="stylesheet" href="/houtai/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/houtai/css/index.css">
+		<link rel="stylesheet" href="/houtai/css/_all-skins.css">
+
+	</head>
+
+	<body class="skin-blue sidebar-mini" style="overflow:hidden;">
+			<!--头部信息-->
+			<header class="main-header">
+				<div href="#" target="_blank" class="logo">
+					<span class="logo-mini">服务平台</span>
+					<span class="logo-lg"><img src="/houtai/img/logo.png" style="margin-bottom: 5px;"> </span>
+				</div>
+				<nav class="navbar navbar-static-top" style="height:30px ">
+					
+					<span class="index_top" style="margin-left: 20px;"><strong>IMOOC后台管理系统</strong></span>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown user user-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<img th:src="${session.user.userHeadimage}"  class="user-image" >
+									<span class="hidden-xs">[[${session.user.userName}]]</span>
+								</a>
+								<ul class="dropdown-menu pull-right">
+									<li class="divider"></li>
+									<li>
+										<a th:href="@{/out}"><i class="ace-icon fa fa-power-off"></i>安全退出</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<!--左边导航-->
+			<div class="main-sidebar">
+				<div class="sidebar">
+					<ul class="sidebar-menu" id="sidebar-menu">
+						<!--<li class="header">导航菜单</li>-->
+						<li class="treeview active" id="home">
+							<a th:href="@{/houtai/home}" target="iframe"><i class="fa fa-desktop"></i><span>首页</span><i class="fa fa-angle-left pull-right"></i></a>
+						</li>
+						<li class="treeview" id="user">
+							<a th:href="@{/getUser}" target="iframe"><i class="fa fa-desktop"></i><span>用户管理</span><i class="fa fa-angle-left pull-right"></i></a>
+						</li>
+						<li class="treeview" id="from">
+							<a th:href="@{/getFrom}" target="iframe"><i class="fa fa-desktop"></i><span>订单管理</span><i class="fa fa-angle-left pull-right"></i></a>
+
+						</li>
+						<li class="treeview" id="class">
+							<a th:href="@{/getClass}" target="iframe"><i class="fa fa-desktop"></i><span>分类管理</span><i class="fa fa-angle-left pull-right"></i></a>
+
+						</li>
+						<li class="treeview" id="video">
+							<a th:href="@{/getVideo}" target="iframe"><i class="fa fa-desktop"></i><span>信息管理</span><i class="fa fa-angle-left pull-right"></i></a>
+						</li>
+						<li class="treeview" id="mv">
+							<a th:href="@{/getMV}" target="iframe"><i class="fa fa-desktop"></i><span>视频管理</span><i class="fa fa-angle-left pull-right"></i></a>
+						</li>
+
+						<li class="treeview" id="teacher">
+							<a th:href="@{/getTeacher}" target="iframe"><i class="fa fa-desktop"></i><span>教师管理</span><i class="fa fa-angle-left pull-right"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--中间内容-->
+			<div id="content-wrapper" class="content-wrapper">
+				<div class="content-iframe" style="overflow: hidden;">
+					<div class="mainContent" id="content-main" style="margin: 10px 10px 0px; padding: 0px; height: 640px;">
+						<iframe class="LRADMS_iframe" name="iframe" width="100%" height="100%"  src="home" frameborder="0" data-id="home.html"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/houtai/js/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="/houtai/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/houtai/js/jquery.easyui.min.js"></script>
+		<p style="text-align: center;color: #01FF70;">版权所有:imooc</p>
+	</body>
+	<script type="text/javascript"> </script>
+	<script>
+		$(function(){
+			 $(".treeview").click(function(){
+			 	$(this).attr("class","treeview active");
+			 	$(this).siblings().attr("class","treeview");
+			 })
+
+		})
+	</script>
+</html>

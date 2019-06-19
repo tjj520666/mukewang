@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ShoppingcartMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Shoppingcart">
+    <id column="shoppingcart_id" jdbcType="INTEGER" property="shoppingcartId" />
+    <result column="shoppingcart_uid" jdbcType="INTEGER" property="shoppingcartUid" />
+    <result column="shoppingcart_gid" jdbcType="INTEGER" property="shoppingcartGid" />
+    <result column="shoppingcart_mvid" jdbcType="INTEGER" property="shoppingcartMvid" />
+    <result column="shoppingcart_money" jdbcType="DOUBLE" property="shoppingcartMoney" />
+    <association property="mv" select="com.dao.MvMapper.selectByPrimaryKey" javaType="com.entity.Mv" column="shoppingcart_mvid"></association>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    shoppingcart_id, shoppingcart_uid, shoppingcart_gid, shoppingcart_mvid, shoppingcart_money
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.ShoppingcartExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_shoppingcart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_shoppingcart
+    where shoppingcart_id = #{shoppingcartId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_shoppingcart
+    where shoppingcart_id = #{shoppingcartId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.ShoppingcartExample">
+    delete from muke_shoppingcart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Shoppingcart">
+    insert into muke_shoppingcart (shoppingcart_id, shoppingcart_uid, 
+      shoppingcart_gid, shoppingcart_mvid, shoppingcart_money
+      )
+    values (#{shoppingcartId,jdbcType=INTEGER}, #{shoppingcartUid,jdbcType=INTEGER}, 
+      #{shoppingcartGid,jdbcType=INTEGER}, #{shoppingcartMvid,jdbcType=INTEGER}, #{shoppingcartMoney,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Shoppingcart">
+    insert into muke_shoppingcart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shoppingcartId != null">
+        shoppingcart_id,
+      </if>
+      <if test="shoppingcartUid != null">
+        shoppingcart_uid,
+      </if>
+      <if test="shoppingcartGid != null">
+        shoppingcart_gid,
+      </if>
+      <if test="shoppingcartMvid != null">
+        shoppingcart_mvid,
+      </if>
+      <if test="shoppingcartMoney != null">
+        shoppingcart_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shoppingcartId != null">
+        #{shoppingcartId,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingcartUid != null">
+        #{shoppingcartUid,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingcartGid != null">
+        #{shoppingcartGid,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingcartMvid != null">
+        #{shoppingcartMvid,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingcartMoney != null">
+        #{shoppingcartMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.ShoppingcartExample" resultType="java.lang.Long">
+    select count(*) from muke_shoppingcart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_shoppingcart
+    <set>
+      <if test="record.shoppingcartId != null">
+        shoppingcart_id = #{record.shoppingcartId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shoppingcartUid != null">
+        shoppingcart_uid = #{record.shoppingcartUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shoppingcartGid != null">
+        shoppingcart_gid = #{record.shoppingcartGid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shoppingcartMvid != null">
+        shoppingcart_mvid = #{record.shoppingcartMvid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shoppingcartMoney != null">
+        shoppingcart_money = #{record.shoppingcartMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_shoppingcart
+    set shoppingcart_id = #{record.shoppingcartId,jdbcType=INTEGER},
+      shoppingcart_uid = #{record.shoppingcartUid,jdbcType=INTEGER},
+      shoppingcart_gid = #{record.shoppingcartGid,jdbcType=INTEGER},
+      shoppingcart_mvid = #{record.shoppingcartMvid,jdbcType=INTEGER},
+      shoppingcart_money = #{record.shoppingcartMoney,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Shoppingcart">
+    update muke_shoppingcart
+    <set>
+      <if test="shoppingcartUid != null">
+        shoppingcart_uid = #{shoppingcartUid,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingcartGid != null">
+        shoppingcart_gid = #{shoppingcartGid,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingcartMvid != null">
+        shoppingcart_mvid = #{shoppingcartMvid,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingcartMoney != null">
+        shoppingcart_money = #{shoppingcartMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where shoppingcart_id = #{shoppingcartId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Shoppingcart">
+    update muke_shoppingcart
+    set shoppingcart_uid = #{shoppingcartUid,jdbcType=INTEGER},
+      shoppingcart_gid = #{shoppingcartGid,jdbcType=INTEGER},
+      shoppingcart_mvid = #{shoppingcartMvid,jdbcType=INTEGER},
+      shoppingcart_money = #{shoppingcartMoney,jdbcType=DOUBLE}
+    where shoppingcart_id = #{shoppingcartId,jdbcType=INTEGER}
+  </update>
+</mapper>

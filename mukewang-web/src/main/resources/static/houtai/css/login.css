@@ -1,0 +1,16 @@
+.login{
+	width: 500px;
+	height: 300px;
+	border: 3px solid greenyellow;
+	background-color:skyblue;
+	color: white;
+	margin-left: 480px;
+	margin-top: 150px;
+	 
+}
+
+.login img{
+	margin-left: 150px;
+	margin-bottom: 30px;
+	 
+}

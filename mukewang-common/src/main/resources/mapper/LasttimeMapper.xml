@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.LasttimeMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Lasttime">
+    <id column="lasttime_id" jdbcType="INTEGER" property="lasttimeId" />
+    <result column="lasttime_loginTime" jdbcType="TIMESTAMP" property="lasttimeLogintime" />
+    <result column="lasttime_loginAddress" jdbcType="VARCHAR" property="lasttimeLoginaddress" />
+    <result column="lasttime_ip" jdbcType="VARCHAR" property="lasttimeIp" />
+    <result column="lasttime_loginEquipment" jdbcType="VARCHAR" property="lasttimeLoginequipment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    lasttime_id, lasttime_loginTime, lasttime_loginAddress, lasttime_ip, lasttime_loginEquipment
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.LasttimeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_lasttime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_lasttime
+    where lasttime_id = #{lasttimeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_lasttime
+    where lasttime_id = #{lasttimeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.LasttimeExample">
+    delete from muke_lasttime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Lasttime">
+    insert into muke_lasttime (lasttime_id, lasttime_loginTime, 
+      lasttime_loginAddress, lasttime_ip, lasttime_loginEquipment
+      )
+    values (#{lasttimeId,jdbcType=INTEGER}, #{lasttimeLogintime,jdbcType=TIMESTAMP}, 
+      #{lasttimeLoginaddress,jdbcType=VARCHAR}, #{lasttimeIp,jdbcType=VARCHAR}, #{lasttimeLoginequipment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Lasttime">
+    insert into muke_lasttime
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lasttimeId != null">
+        lasttime_id,
+      </if>
+      <if test="lasttimeLogintime != null">
+        lasttime_loginTime,
+      </if>
+      <if test="lasttimeLoginaddress != null">
+        lasttime_loginAddress,
+      </if>
+      <if test="lasttimeIp != null">
+        lasttime_ip,
+      </if>
+      <if test="lasttimeLoginequipment != null">
+        lasttime_loginEquipment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lasttimeId != null">
+        #{lasttimeId,jdbcType=INTEGER},
+      </if>
+      <if test="lasttimeLogintime != null">
+        #{lasttimeLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttimeLoginaddress != null">
+        #{lasttimeLoginaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttimeIp != null">
+        #{lasttimeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttimeLoginequipment != null">
+        #{lasttimeLoginequipment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.LasttimeExample" resultType="java.lang.Long">
+    select count(*) from muke_lasttime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_lasttime
+    <set>
+      <if test="record.lasttimeId != null">
+        lasttime_id = #{record.lasttimeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lasttimeLogintime != null">
+        lasttime_loginTime = #{record.lasttimeLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lasttimeLoginaddress != null">
+        lasttime_loginAddress = #{record.lasttimeLoginaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lasttimeIp != null">
+        lasttime_ip = #{record.lasttimeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lasttimeLoginequipment != null">
+        lasttime_loginEquipment = #{record.lasttimeLoginequipment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_lasttime
+    set lasttime_id = #{record.lasttimeId,jdbcType=INTEGER},
+      lasttime_loginTime = #{record.lasttimeLogintime,jdbcType=TIMESTAMP},
+      lasttime_loginAddress = #{record.lasttimeLoginaddress,jdbcType=VARCHAR},
+      lasttime_ip = #{record.lasttimeIp,jdbcType=VARCHAR},
+      lasttime_loginEquipment = #{record.lasttimeLoginequipment,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Lasttime">
+    update muke_lasttime
+    <set>
+      <if test="lasttimeLogintime != null">
+        lasttime_loginTime = #{lasttimeLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttimeLoginaddress != null">
+        lasttime_loginAddress = #{lasttimeLoginaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttimeIp != null">
+        lasttime_ip = #{lasttimeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttimeLoginequipment != null">
+        lasttime_loginEquipment = #{lasttimeLoginequipment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lasttime_id = #{lasttimeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Lasttime">
+    update muke_lasttime
+    set lasttime_loginTime = #{lasttimeLogintime,jdbcType=TIMESTAMP},
+      lasttime_loginAddress = #{lasttimeLoginaddress,jdbcType=VARCHAR},
+      lasttime_ip = #{lasttimeIp,jdbcType=VARCHAR},
+      lasttime_loginEquipment = #{lasttimeLoginequipment,jdbcType=VARCHAR}
+    where lasttime_id = #{lasttimeId,jdbcType=INTEGER}
+  </update>
+</mapper>

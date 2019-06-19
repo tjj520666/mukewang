@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0056)http://demo1.mycodes.net/houtai/zonghefuwuOA/book01.html -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="shortcut icon" href="/houtai/img/favicon.ico" >
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>用户管理</title>
+	</head>
+
+	<body style="background-color: #e6ecf5;">
+		<div style="width: 400px;color: white;margin: 80px;">
+			<img th:src="${session.user.userHeadimage}" style="width: 120px;height: 120px;vertical-align:middle;"/>
+			<h1 style="font-family: '微软雅黑';color: #00a0e9">[[${session.user.userName}]],欢迎回来</h1>
+		</div>
+					
+	</body>
+
+</html>

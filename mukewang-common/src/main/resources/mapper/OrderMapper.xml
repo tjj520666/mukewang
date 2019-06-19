@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Order">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="order_uid" jdbcType="INTEGER" property="orderUid" />
+    <result column="order_uname" jdbcType="VARCHAR" property="orderUname" />
+    <result column="order_uaddress" jdbcType="VARCHAR" property="orderUaddress" />
+    <result column="order_createTime" jdbcType="TIMESTAMP" property="orderCreatetime" />
+    <result column="order_expenditure" jdbcType="DOUBLE" property="orderExpenditure" />
+    <result column="order_orderNumber" jdbcType="VARCHAR" property="orderOrdernumber" />
+    <result column="order_state" jdbcType="INTEGER" property="orderState" />
+    <association property="details" select="com.dao.DetailMapper.selectByExampleId" column="order_id"></association>
+  </resultMap>
+
+  <!-- 自定义 -->
+
+  <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="Integer">
+    SELECT * from muke_order where order_state = 2 and order_uid = #{id}
+  </select>
+  <select id="selectByOrderYes" resultMap="BaseResultMap" parameterType="Integer">
+    SELECT * from muke_order where order_state = 1 and order_uid = #{id}
+  </select>
+  <select id="selectByOrderIsYes" resultType="Integer">
+    SELECT count(1) from muke_order where order_state = 1
+  </select>
+
+  <select id="selectByOrderIsNo" resultType="Integer">
+    SELECT count(1) from muke_order where order_state = 2
+  </select>
+
+  <!-- 自定义 -->
+  <select id="selectByOrderAll" parameterType="Integer" resultMap="BaseResultMap">
+      select * from muke_order where order_uid = #{id}
+  </select>
+
+  <delete id="deleteOrderId" parameterType="java.lang.Integer">
+    delete from muke_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    order_id, order_uid, order_uname, order_uaddress, order_createTime, order_expenditure, 
+    order_orderNumber, order_state
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.OrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.OrderExample">
+    delete from muke_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="orderId" parameterType="com.entity.Order">
+    insert into muke_order (order_id, order_uid, order_uname, 
+      order_uaddress, order_createTime, order_expenditure, 
+      order_orderNumber, order_state)
+    values (#{orderId,jdbcType=INTEGER}, #{orderUid,jdbcType=INTEGER}, #{orderUname,jdbcType=VARCHAR}, 
+      #{orderUaddress,jdbcType=VARCHAR}, #{orderCreatetime,jdbcType=TIMESTAMP}, #{orderExpenditure,jdbcType=DOUBLE}, 
+      #{orderOrdernumber,jdbcType=VARCHAR}, #{orderState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Order">
+    insert into muke_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderUid != null">
+        order_uid,
+      </if>
+      <if test="orderUname != null">
+        order_uname,
+      </if>
+      <if test="orderUaddress != null">
+        order_uaddress,
+      </if>
+      <if test="orderCreatetime != null">
+        order_createTime,
+      </if>
+      <if test="orderExpenditure != null">
+        order_expenditure,
+      </if>
+      <if test="orderOrdernumber != null">
+        order_orderNumber,
+      </if>
+      <if test="orderState != null">
+        order_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderUid != null">
+        #{orderUid,jdbcType=INTEGER},
+      </if>
+      <if test="orderUname != null">
+        #{orderUname,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUaddress != null">
+        #{orderUaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatetime != null">
+        #{orderCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderExpenditure != null">
+        #{orderExpenditure,jdbcType=DOUBLE},
+      </if>
+      <if test="orderOrdernumber != null">
+        #{orderOrdernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null">
+        #{orderState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.OrderExample" resultType="java.lang.Long">
+    select count(*) from muke_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_order
+    <set>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderUid != null">
+        order_uid = #{record.orderUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderUname != null">
+        order_uname = #{record.orderUname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderUaddress != null">
+        order_uaddress = #{record.orderUaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCreatetime != null">
+        order_createTime = #{record.orderCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderExpenditure != null">
+        order_expenditure = #{record.orderExpenditure,jdbcType=DOUBLE},
+      </if>
+      <if test="record.orderOrdernumber != null">
+        order_orderNumber = #{record.orderOrdernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderState != null">
+        order_state = #{record.orderState,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_order
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      order_uid = #{record.orderUid,jdbcType=INTEGER},
+      order_uname = #{record.orderUname,jdbcType=VARCHAR},
+      order_uaddress = #{record.orderUaddress,jdbcType=VARCHAR},
+      order_createTime = #{record.orderCreatetime,jdbcType=TIMESTAMP},
+      order_expenditure = #{record.orderExpenditure,jdbcType=DOUBLE},
+      order_orderNumber = #{record.orderOrdernumber,jdbcType=VARCHAR},
+      order_state = #{record.orderState,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Order">
+    update muke_order
+    <set>
+      <if test="orderUid != null">
+        order_uid = #{orderUid,jdbcType=INTEGER},
+      </if>
+      <if test="orderUname != null">
+        order_uname = #{orderUname,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUaddress != null">
+        order_uaddress = #{orderUaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatetime != null">
+        order_createTime = #{orderCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderExpenditure != null">
+        order_expenditure = #{orderExpenditure,jdbcType=DOUBLE},
+      </if>
+      <if test="orderOrdernumber != null">
+        order_orderNumber = #{orderOrdernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null">
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Order">
+    update muke_order
+    set order_uid = #{orderUid,jdbcType=INTEGER},
+      order_uname = #{orderUname,jdbcType=VARCHAR},
+      order_uaddress = #{orderUaddress,jdbcType=VARCHAR},
+      order_createTime = #{orderCreatetime,jdbcType=TIMESTAMP},
+      order_expenditure = #{orderExpenditure,jdbcType=DOUBLE},
+      order_orderNumber = #{orderOrdernumber,jdbcType=VARCHAR},
+      order_state = #{orderState,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

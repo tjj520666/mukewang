@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.RecentlyclassifyMapper">
+    <resultMap id="BaseResultMap" type="com.entity.RecentlyClassify">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="classifyId" jdbcType="INTEGER" property="classifyId" />
+        <result column="classifyName" jdbcType="VARCHAR" property="classifyName" />
+        <result column="userId" jdbcType="INTEGER" property="userId" />
+        <result column="mvtype" jdbcType="INTEGER" property="mvType" />
+    </resultMap>
+    <select id="selectByAll" resultMap="BaseResultMap" parameterType="com.entity.RecentlyClassify">
+        select * from muke_recentlyclassify where userid = #{userId} and mvtype = #{mvType}
+    </select>
+
+    <select id="selectByAllClassify" resultMap="BaseResultMap" parameterType="com.entity.RecentlyClassify">
+      select * from muke_recentlyclassify where userid = #{userId} and mvtype = #{mvType}
+      <if test="classifyId != null">
+        AND classifyId = #{classifyId}
+      </if>
+    </select>
+
+    <delete id="deleteByClassId" parameterType="INTEGER">
+        delete from muke_recentlyclassify where classifyId = #{classifyId}
+    </delete>
+    <insert id="insert" parameterType="com.entity.RecentlyClassify">
+    insert into muke_recentlyclassify (id, classifyId, classifyName,
+      userid, mvtype)
+    values (#{id,jdbcType=INTEGER}, #{classifyId,jdbcType=INTEGER}, #{classifyName,jdbcType=VARCHAR},
+      #{userId,jdbcType=INTEGER}, #{mvType,jdbcType=INTEGER})
+  </insert>
+
+
+</mapper>

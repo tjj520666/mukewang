@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.FollowsMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Follows">
+    <id column="follows_id" jdbcType="INTEGER" property="followsId" />
+    <result column="follows_uid" jdbcType="INTEGER" property="followsUid" />
+    <result column="follows_followid" jdbcType="INTEGER" property="followsFollowid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    follows_id, follows_uid, follows_followid
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.FollowsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_user_follows
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_user_follows
+    where follows_id = #{followsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_user_follows
+    where follows_id = #{followsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.FollowsExample">
+    delete from muke_user_follows
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Follows">
+    insert into muke_user_follows (follows_id, follows_uid, follows_followid
+      )
+    values (#{followsId,jdbcType=INTEGER}, #{followsUid,jdbcType=INTEGER}, #{followsFollowid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Follows">
+    insert into muke_user_follows
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="followsId != null">
+        follows_id,
+      </if>
+      <if test="followsUid != null">
+        follows_uid,
+      </if>
+      <if test="followsFollowid != null">
+        follows_followid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="followsId != null">
+        #{followsId,jdbcType=INTEGER},
+      </if>
+      <if test="followsUid != null">
+        #{followsUid,jdbcType=INTEGER},
+      </if>
+      <if test="followsFollowid != null">
+        #{followsFollowid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.FollowsExample" resultType="java.lang.Long">
+    select count(*) from muke_user_follows
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_user_follows
+    <set>
+      <if test="record.followsId != null">
+        follows_id = #{record.followsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.followsUid != null">
+        follows_uid = #{record.followsUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.followsFollowid != null">
+        follows_followid = #{record.followsFollowid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_user_follows
+    set follows_id = #{record.followsId,jdbcType=INTEGER},
+      follows_uid = #{record.followsUid,jdbcType=INTEGER},
+      follows_followid = #{record.followsFollowid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Follows">
+    update muke_user_follows
+    <set>
+      <if test="followsUid != null">
+        follows_uid = #{followsUid,jdbcType=INTEGER},
+      </if>
+      <if test="followsFollowid != null">
+        follows_followid = #{followsFollowid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where follows_id = #{followsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Follows">
+    update muke_user_follows
+    set follows_uid = #{followsUid,jdbcType=INTEGER},
+      follows_followid = #{followsFollowid,jdbcType=INTEGER}
+    where follows_id = #{followsId,jdbcType=INTEGER}
+  </update>
+</mapper>

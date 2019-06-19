@@ -1,0 +1,1 @@
+define("sc/js/inc/package",["require"],function(){$(".js-package-buy").on("click",function(){if(!OP_CONFIG.isLogin)return void $("#js-signin-btn").trigger("click");if(!$(this).hasClass("disabled")){var i=$(this).attr("data-gid");window.location.href="//order.imooc.com/pay/confirm/goods_ids/7-"+i}})});

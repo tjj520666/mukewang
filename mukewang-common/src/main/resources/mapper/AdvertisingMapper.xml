@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.AdvertisingMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Advertising">
+    <id column="advertising_id" jdbcType="INTEGER" property="advertisingId" />
+    <result column="advertising_image" jdbcType="VARCHAR" property="advertisingImage" />
+    <result column="advertising_href" jdbcType="VARCHAR" property="advertisingHref" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    advertising_id, advertising_image, advertising_href
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.AdvertisingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_advertising
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_advertising
+    where advertising_id = #{advertisingId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_advertising
+    where advertising_id = #{advertisingId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.AdvertisingExample">
+    delete from muke_advertising
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Advertising">
+    insert into muke_advertising (advertising_id, advertising_image, 
+      advertising_href)
+    values (#{advertisingId,jdbcType=INTEGER}, #{advertisingImage,jdbcType=VARCHAR}, 
+      #{advertisingHref,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Advertising">
+    insert into muke_advertising
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="advertisingId != null">
+        advertising_id,
+      </if>
+      <if test="advertisingImage != null">
+        advertising_image,
+      </if>
+      <if test="advertisingHref != null">
+        advertising_href,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="advertisingId != null">
+        #{advertisingId,jdbcType=INTEGER},
+      </if>
+      <if test="advertisingImage != null">
+        #{advertisingImage,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingHref != null">
+        #{advertisingHref,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.AdvertisingExample" resultType="java.lang.Long">
+    select count(*) from muke_advertising
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_advertising
+    <set>
+      <if test="record.advertisingId != null">
+        advertising_id = #{record.advertisingId,jdbcType=INTEGER},
+      </if>
+      <if test="record.advertisingImage != null">
+        advertising_image = #{record.advertisingImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advertisingHref != null">
+        advertising_href = #{record.advertisingHref,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_advertising
+    set advertising_id = #{record.advertisingId,jdbcType=INTEGER},
+      advertising_image = #{record.advertisingImage,jdbcType=VARCHAR},
+      advertising_href = #{record.advertisingHref,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Advertising">
+    update muke_advertising
+    <set>
+      <if test="advertisingImage != null">
+        advertising_image = #{advertisingImage,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingHref != null">
+        advertising_href = #{advertisingHref,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where advertising_id = #{advertisingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Advertising">
+    update muke_advertising
+    set advertising_image = #{advertisingImage,jdbcType=VARCHAR},
+      advertising_href = #{advertisingHref,jdbcType=VARCHAR}
+    where advertising_id = #{advertisingId,jdbcType=INTEGER}
+  </update>
+</mapper>

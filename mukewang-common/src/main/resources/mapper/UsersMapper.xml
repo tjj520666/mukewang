@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Users">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_sex" jdbcType="CHAR" property="userSex" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_idCard" jdbcType="VARCHAR" property="userIdcard" />
+    <result column="user_idCardImage" jdbcType="VARCHAR" property="userIdcardimage" />
+    <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="user_money" jdbcType="DOUBLE" property="userMoney" />
+    <result column="user_school" jdbcType="VARCHAR" property="userSchool" />
+    <result column="user_admissionDate" jdbcType="TIMESTAMP" property="userAdmissiondate" />
+    <result column="user_degreeTypeId" jdbcType="INTEGER" property="userDegreetypeid" />
+    <result column="user_encrypted" jdbcType="VARCHAR" property="userEncrypted" />
+    <result column="user_loginTimeId" jdbcType="INTEGER" property="userLogintimeid" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_signature" jdbcType="VARCHAR" property="userSignature" />
+    <result column="user_headImage" jdbcType="VARCHAR" property="userHeadimage" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+    <result column="user_positionid" jdbcType="INTEGER" property="userPositionId" />
+    <collection property="articles" column="user_id" ofType="com.entity.Article" select="com.dao.ArticleMapper.selectByExampleId"></collection>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, user_name, user_password, user_sex, user_account, user_idCard, user_idCardImage, 
+    user_address, user_money, user_school, user_admissionDate, user_degreeTypeId, user_encrypted, 
+    user_loginTimeId, user_email,user_positionid, user_signature, user_headImage, user_phone, user_status
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.UsersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectBylogin" parameterType="com.entity.UsersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.UsersExample">
+    delete from muke_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Users">
+    insert into muke_user (user_id, user_name, user_password, 
+      user_sex, user_account, user_idCard, 
+      user_idCardImage, user_address, user_money, 
+      user_school, user_admissionDate, user_degreeTypeId, 
+      user_encrypted, user_loginTimeId, user_email, 
+      user_signature, user_headImage, user_phone, 
+      user_status)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userSex,jdbcType=CHAR}, #{userAccount,jdbcType=VARCHAR}, #{userIdcard,jdbcType=VARCHAR}, 
+      #{userIdcardimage,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userMoney,jdbcType=DOUBLE}, 
+      #{userSchool,jdbcType=VARCHAR}, #{userAdmissiondate,jdbcType=TIMESTAMP}, #{userDegreetypeid,jdbcType=INTEGER}, 
+      #{userEncrypted,jdbcType=VARCHAR}, #{userLogintimeid,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userSignature,jdbcType=VARCHAR}, #{userHeadimage,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Users">
+    insert into muke_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userAccount != null">
+        user_account,
+      </if>
+      <if test="userIdcard != null">
+        user_idCard,
+      </if>
+      <if test="userIdcardimage != null">
+        user_idCardImage,
+      </if>
+      <if test="userAddress != null">
+        user_address,
+      </if>
+      <if test="userMoney != null">
+        user_money,
+      </if>
+      <if test="userSchool != null">
+        user_school,
+      </if>
+      <if test="userAdmissiondate != null">
+        user_admissionDate,
+      </if>
+      <if test="userDegreetypeid != null">
+        user_degreeTypeId,
+      </if>
+      <if test="userEncrypted != null">
+        user_encrypted,
+      </if>
+      <if test="userLogintimeid != null">
+        user_loginTimeId,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userSignature != null">
+        user_signature,
+      </if>
+      <if test="userHeadimage != null">
+        user_headImage,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdcard != null">
+        #{userIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdcardimage != null">
+        #{userIdcardimage,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userMoney != null">
+        #{userMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="userSchool != null">
+        #{userSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="userAdmissiondate != null">
+        #{userAdmissiondate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userDegreetypeid != null">
+        #{userDegreetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="userEncrypted != null">
+        #{userEncrypted,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogintimeid != null">
+        #{userLogintimeid,jdbcType=INTEGER},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSignature != null">
+        #{userSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeadimage != null">
+        #{userHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.UsersExample" resultType="java.lang.Long">
+    select count(*) from muke_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_user
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null">
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSex != null">
+        user_sex = #{record.userSex,jdbcType=CHAR},
+      </if>
+      <if test="record.userAccount != null">
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIdcard != null">
+        user_idCard = #{record.userIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIdcardimage != null">
+        user_idCardImage = #{record.userIdcardimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null">
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMoney != null">
+        user_money = #{record.userMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.userSchool != null">
+        user_school = #{record.userSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAdmissiondate != null">
+        user_admissionDate = #{record.userAdmissiondate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userDegreetypeid != null">
+        user_degreeTypeId = #{record.userDegreetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userEncrypted != null">
+        user_encrypted = #{record.userEncrypted,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLogintimeid != null">
+        user_loginTimeId = #{record.userLogintimeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userEmail != null">
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSignature != null">
+        user_signature = #{record.userSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userHeadimage != null">
+        user_headImage = #{record.userHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userStatus != null">
+        user_status = #{record.userStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_sex = #{record.userSex,jdbcType=CHAR},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      user_idCard = #{record.userIdcard,jdbcType=VARCHAR},
+      user_idCardImage = #{record.userIdcardimage,jdbcType=VARCHAR},
+      user_address = #{record.userAddress,jdbcType=VARCHAR},
+      user_money = #{record.userMoney,jdbcType=DOUBLE},
+      user_school = #{record.userSchool,jdbcType=VARCHAR},
+      user_admissionDate = #{record.userAdmissiondate,jdbcType=TIMESTAMP},
+      user_degreeTypeId = #{record.userDegreetypeid,jdbcType=INTEGER},
+      user_encrypted = #{record.userEncrypted,jdbcType=VARCHAR},
+      user_loginTimeId = #{record.userLogintimeid,jdbcType=INTEGER},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_signature = #{record.userSignature,jdbcType=VARCHAR},
+      user_headImage = #{record.userHeadimage,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Users">
+    update muke_user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userAccount != null">
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdcard != null">
+        user_idCard = #{userIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdcardimage != null">
+        user_idCardImage = #{userIdcardimage,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userMoney != null">
+        user_money = #{userMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="userSchool != null">
+        user_school = #{userSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="userAdmissiondate != null">
+        user_admissionDate = #{userAdmissiondate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userDegreetypeid != null">
+        user_degreeTypeId = #{userDegreetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="userEncrypted != null">
+        user_encrypted = #{userEncrypted,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogintimeid != null">
+        user_loginTimeId = #{userLogintimeid,jdbcType=INTEGER},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSignature != null">
+        user_signature = #{userSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeadimage != null">
+        user_headImage = #{userHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Users">
+    update muke_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=CHAR},
+      user_account = #{userAccount,jdbcType=VARCHAR},
+      user_idCard = #{userIdcard,jdbcType=VARCHAR},
+      user_idCardImage = #{userIdcardimage,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_money = #{userMoney,jdbcType=DOUBLE},
+      user_school = #{userSchool,jdbcType=VARCHAR},
+      user_admissionDate = #{userAdmissiondate,jdbcType=TIMESTAMP},
+      user_degreeTypeId = #{userDegreetypeid,jdbcType=INTEGER},
+      user_encrypted = #{userEncrypted,jdbcType=VARCHAR},
+      user_loginTimeId = #{userLogintimeid,jdbcType=INTEGER},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_signature = #{userSignature,jdbcType=VARCHAR},
+      user_headImage = #{userHeadimage,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

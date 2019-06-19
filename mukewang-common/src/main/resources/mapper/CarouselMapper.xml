@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CarouselMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Carousel">
+    <id column="carousel_id" jdbcType="INTEGER" property="carouselId" />
+    <result column="carousel_image" jdbcType="VARCHAR" property="carouselImage" />
+    <result column="carousel_href" jdbcType="VARCHAR" property="carouselHref" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    carousel_id, carousel_image, carousel_href
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.CarouselExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_carousel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from muke_carousel
+    where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_carousel
+    where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.CarouselExample">
+    delete from muke_carousel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Carousel">
+    insert into muke_carousel (carousel_id, carousel_image, carousel_href
+      )
+    values (#{carouselId,jdbcType=INTEGER}, #{carouselImage,jdbcType=VARCHAR}, #{carouselHref,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Carousel">
+    insert into muke_carousel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carouselId != null">
+        carousel_id,
+      </if>
+      <if test="carouselImage != null">
+        carousel_image,
+      </if>
+      <if test="carouselHref != null">
+        carousel_href,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carouselId != null">
+        #{carouselId,jdbcType=INTEGER},
+      </if>
+      <if test="carouselImage != null">
+        #{carouselImage,jdbcType=VARCHAR},
+      </if>
+      <if test="carouselHref != null">
+        #{carouselHref,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.CarouselExample" resultType="java.lang.Long">
+    select count(*) from muke_carousel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_carousel
+    <set>
+      <if test="record.carouselId != null">
+        carousel_id = #{record.carouselId,jdbcType=INTEGER},
+      </if>
+      <if test="record.carouselImage != null">
+        carousel_image = #{record.carouselImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carouselHref != null">
+        carousel_href = #{record.carouselHref,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_carousel
+    set carousel_id = #{record.carouselId,jdbcType=INTEGER},
+      carousel_image = #{record.carouselImage,jdbcType=VARCHAR},
+      carousel_href = #{record.carouselHref,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Carousel">
+    update muke_carousel
+    <set>
+      <if test="carouselImage != null">
+        carousel_image = #{carouselImage,jdbcType=VARCHAR},
+      </if>
+      <if test="carouselHref != null">
+        carousel_href = #{carouselHref,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Carousel">
+    update muke_carousel
+    set carousel_image = #{carouselImage,jdbcType=VARCHAR},
+      carousel_href = #{carouselHref,jdbcType=VARCHAR}
+    where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="alicom-dysms-api" />
+        <module name="alicom-mns-receive-samples" />
+        <module name="aliyun-java-sdk-core" />
+        <module name="aliyun-java-sdk-dysmsapi" />
+        <module name="mukewang-bIOpenDay" />
+        <module name="mukewang-businessBackground" />
+        <module name="mukewang-common" />
+        <module name="mukewang-discussion" />
+        <module name="mukewang-elasticsearch" />
+        <module name="mukewang-employmentClass" />
+        <module name="mukewang-personalBackground" />
+        <module name="mukewang-practiceCourse" />
+        <module name="mukewang-shoppingCart" />
+        <module name="mukewang-shouYe" />
+        <module name="mukewang-specialColumn" />
+        <module name="mukewang-web" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

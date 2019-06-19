@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>
+        慕课网—视频播放
+    </title>
+
+    <link rel="stylesheet" href="\Mv\css\freesaved_resource.css" type="text/css">
+    <link rel="stylesheet" href="\Mv\css\bootstrap.min.css"/>
+    <link rel="stylesheet" href="\Mv\css\reset.css"/>
+    <link rel="stylesheet" href="\layui-v2.4.5\layui\css\layui.css" media="all">
+    <script type="text/javascript" src="\Mv\js\jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="\Mv\js\bootstrap.min.js"></script>
+    <script>
+        function checkCode() {
+            $("#CreateCheckCode").attr("src", $("#CreateCheckCode").attr("src") + "?nocache=" + new Date().getTime());
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+
+<div id="new_header">
+    <div class="page-container new-header clearfix" id="nav">
+        <ul class="nav-item">
+            <li>
+                <a href="/toMain" target="_self" class="imooc">慕课网首页</a>
+            </li>
+            <li>
+                <a href="/fenye" class="active" target="_self">免费课程</a>
+            </li>
+            <li>
+                <a href="/practiceCourseSY" target="_self">实战课程</a>
+            </li>
+            <li>
+                <a href="/toClass" class="" target="_self">就业班<i class="icn-new"></i></a>
+            </li>
+            <li>
+                <a href="#" target="_self">专栏</a>
+            </li>
+            <li>
+                <a href="#" target="_self">手记</a>
+            </li>
+            <li class="search" id="common-nav-search">
+                <a href="#">
+                    <i class="imv2-search"></i>
+                </a>
+            </li>
+            <li class="input-search hide" id="common-input-search">
+                <div class="input-box">
+                    <input type="text" class="nav-search-input" autocomplete="off">
+                    <a href="#" class="nav-searchBtn js-nav-searchBtn">
+                        <i class="imv2-search"></i>
+                    </a>
+                </div>
+                <div class="nav-search-box hide">
+                    <div class="hot">
+                        <h2>热搜</h2>
+                        <div class="hot-box">
+                            <a href="#" class="hot-item js-history-search">React</a>
+                            <a href="#" class="hot-item js-history-search">面试</a>
+                        </div>
+                    </div>
+                    <div class="history hide">
+                        <h2>最近搜索<a href="#" class="history-clear js-clear-history">清空</a></h2>
+                        <div class="history-box">
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-correlate-box hide">
+                    <div class="correlate">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="main" th:each="mvin:${mvinfo}">
+    <div class="f-main clearfix">
+        <div class="main-course-left">
+            <div class="course-info">
+                <div class="course-title" style="font-size: 24px;" th:text="${mvin.mvinfoName}"></div>
+
+                <!--视频播放 th:src="${mvin.mvinfoMv}"-->
+                <div class="course-video">
+                    <video src="http://img.ksbbs.com/asset/Mon_1703/d30e02a5626c066.mp4" width="100%" height="100%" controls preload></video>
+                </div>
+
+                <div class="course-menu">
+                    <span class="menu-item  cur">用户评论</span>
+                </div>
+            </div>
+
+            <!-- 评论-start -->
+                <div class="holle" id="holles"  th:each="mv2:${zjMV.sections}">
+                    <div class="comment clearfix" th:each="com:${mv2.comments}" th:if="${com.commentType==1}">
+                        <div class="comment-header"><img class="lecturer-uimg" th:src="${com.user.userHeadimage}">
+                        </div>
+                        <div class="comment-main">
+                            <div class="user-name" th:text="${com.user.userName}"></div>
+                            <div class="comment-content" th:text="${com.commentContent}"></div>
+                            <div class="comment-footer">
+                                <span>时间：[[${com.commentTime}]]</span><br/>
+                                <span>
+									来自：[[${com.commentSectiontitle}]]
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- 发布评论-start -->
+            <div style="margin-top: 20px; border: 2px solid black;padding-left: 15px">
+                <div>
+                    <span id="commentTitle" style="font-size: 20px;">发布评论:</span>
+                    <span id="commentTip" style="margin-left: 10px;color:#777;">(长度小于200)</span>
+                </div>
+                <form id="commentForm" method="post" style="margin: 1px 0px;">
+                    <input type="hidden" id="commentSectiontitle" name="commentSectiontitle"
+                           th:value="${mvin.section.sectionTitle}"/>
+                    <input type="hidden" id="commentSectionid" name="commentSectionid"
+                           th:value="${mvin.mvinfoSection}"/>
+                    <input type="hidden" id="commentMvid" name="commentMvid" th:value="${mvin.section.sectionMv}"/>
+                    <textarea id="commentContent" name="commentContent" rows="4" cols="110"></textarea>
+
+                    <div>
+                        <span>请为本次课程打星：</span>
+                        <div id="test2"></div>
+                        <input type="hidden" id="su"/>
+                    </div>
+
+                    <div style="margin-top: 10px;" id="tjj">
+                        <input id="indeityCode" name="indeityCode" type="text" placeholder="请输入验证码"
+                               style="border: 1px dashed #000;">
+                        &nbsp;&nbsp;&nbsp;<img src="/pictureCheckCode" id="CreateCheckCode">
+                        <a href="#" onclick="return checkCode()" style="display: inline-block;">看不清,换一张?</a>
+                    </div>
+                    <input type="submit" value="发布" class="btn">
+                </form>
+            </div>
+
+            <!-- 评论-end -->
+        </div>
+
+        <!-- 章节-start -->
+        <div class="main-course-right" th:each="zjmv:${zjMV}">
+            <h4 class="mt-50">所有章节</h4>
+            <div class="video-course-fix-parent">
+                <div class="video-course-fix">
+                    <div class="chapter" style="padding: 0px ;border: none;" th:each="set:${zjmv.sections}">
+                        <a href="javascript:void(0);" class="js-open">
+                            <h3>
+                                <strong th:text="${set.sectionTitle}"></strong>
+                                <span class="drop-down">▼</span>
+                            </h3>
+                        </a>
+                        <ul class="chapter-sub" style="padding-left:10px;" th:each="mvinfo:${set.mvinfos}">
+                            <a th:href="'infoId?mvinfoId='+${mvinfo.mvinfoId}+'&mvId='+${zjmv.mvId}">
+                                <li class="ellipsis video-li" th:text="${mvinfo.mvinfoName}"><i class="icon-video">▶</i>
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 章节-end -->
+    </div>
+</div>
+
+<div id="footer" data="course,learn">
+    <div class="waper">
+        <div class="footerwaper clearfix">
+            <div class="followus r">
+                <a class="followus-weixin" href="javascript:;" target="_blank" title="微信">
+                    <div class="flw-weixin-box"></div>
+                </a>
+                <a class="followus-weibo" href="#" target="_blank" title="新浪微博"></a>
+                <a class="followus-qzone" href="#" target="_blank" title="QQ空间"></a>
+            </div>
+            <div class="footer_intro l">
+                <div class="footer_link">
+                    <ul>
+                        <li>
+                            <a href="#" target="_blank">网站首页</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank" title="企业合作">企业合作</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">人才招聘</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">联系我们</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">讲师招募</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">帮助中心</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">意见反馈</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">慕课大学</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">代码托管</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">友情链接</a>
+                        </li>
+                    </ul>
+                </div>
+                <p>Copyright © 2019 imooc.com All Rights Reserved | 京ICP备 12003892号-11 </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="\layui-v2.4.5\layui\layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+        var $submit = false;
+        $("#indeityCode").blur(function () {
+            var indeityCode = $(this).val();
+            $.post("yzm", {
+                indeityCode: indeityCode
+            }, function (data) {
+                if (data) {
+                    $(".yzm").text("正确！");
+                    $submit = true;
+                } else {
+                    $(".yzm").remove();
+                    $("#tjj").after("<span class='yzm' style='color: red'>验证码错误！</span><br/>");
+                    $submit = false;
+                }
+            });
+        });
+
+        $(".btn").on("click", function () {
+            var commentContent = $.trim($("#commentContent").val());
+            var commentSectiontitle = $("#commentSectiontitle").val();
+            var commentSectionid = $("#commentSectionid").val();
+            var commentMvid = $("#commentMvid").val();
+            var num1 = $("#su").val();
+            if ($submit && commentContent != null && commentContent != "") {
+                $.post("insertcomment", {
+                    commentContent: commentContent,
+                    commentSectiontitle: commentSectiontitle,
+                    commentSectionid: commentSectionid,
+                    commentMvid: commentMvid,
+                    commentNumber: num1
+                }, function (data) {
+
+                    if (parseInt(data.num) > 0) {
+                        var html="<div class=\"comment clearfix\">\n" +
+                            "                        <div class=\"comment-header\"><img class=\"lecturer-uimg\" src="+data.user1.userHeadimage+">\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"comment-main\">\n" +
+                            "                            <div class=\"user-name\">"+data.user1.userName+"</div>\n" +
+                            "                            <div class=\"comment-content\">"+data.comment.commentContent+"</div>\n" +
+                            "                            <div class=\"comment-footer\">\n" +
+                            "                                <span>时间："+data.comment.commentTime+"</span><br/>\n" +
+                            "                                <span>\n" +
+                            "\t\t\t\t\t\t\t\t\t来自："+data.comment.commentSectiontitle+"\n" +
+                            "\t\t\t\t\t\t\t\t</span>\n" +
+                            "                            </div>\n" +
+                            "                        </div>\n" +
+                            "                    </div>";
+
+                        $("#holles").find(".clearfix:last").after($(html));
+                    }else
+                    {
+                    alert("弟弟！");
+                    }
+                });
+            }
+            return false;
+        });
+
+        $('.chapter li').hover(function () {
+            $(this).find('.icon-video').css('color', '#0089D2');
+        }, function () {
+            $(this).find('.icon-video').css('color', '#777');
+        });
+
+        $('.js-open').click(function () {
+            var display = $(this).parent().find('ul').css('display');
+            if (display == 'none') {
+                $(this).parent().find('ul').css('display', 'block');
+                $(this).find('.drop-down').html('▼');
+            } else {
+                $(this).parent().find('ul').css('display', 'none');
+                $(this).find('.drop-down').html('▲');
+            }
+        });
+
+        layui.use(['rate'], function () {
+            var rate = layui.rate;
+            //显示文字
+            rate.render({
+                elem: '#test2',
+                value: 0, //初始值
+                text: true, //开启文本
+                choose: function (value) {
+                    $("#su").val(value);
+                }
+            })
+        });
+
+    });
+</script>
+</body>
+
+</html>

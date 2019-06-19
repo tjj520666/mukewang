@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.PurchaseMapper">
+    <resultMap id="BaseResultMap" type="com.entity.Purchase">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="mvid" jdbcType="VARCHAR" property="mvId" />
+        <result column="uid" jdbcType="INTEGER" property="uId" />
+        <association property="mv" select="com.dao.MvMapper.selectByPrimaryKey" column="mvId">
+
+        </association>
+    </resultMap>
+    <select id="selectByAllJiuYe" resultMap="BaseResultMap" parameterType="Integer">
+        select * from muke_purchase where uid = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete from muke_purchase where id = #{id}
+    </delete>
+
+    <!--<select id="selectByIdSonId" resultMap="BaseResultMap" parameterType="Integer">
+        select * from muke_address_info where parentId = #{id} AND parentId != id
+    </select>-->
+
+   <!-- <select id="selectByIdGrandson">
+        select * from muke_address_info where parentId = #{id} AND parentId = id
+    </select>-->
+</mapper>

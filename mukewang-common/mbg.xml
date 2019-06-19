@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<!-- 
+		targetRuntime="MyBatis3Simple":生成简单版的CRUD
+		MyBatis3:豪华版
+	
+	 -->
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	<commentGenerator>
+		<property name="suppressDate" value="true" />
+		<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+	
+  	<!-- jdbcConnection：指定如何连接到目标数据库 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql:///mukenet"
+        userId="root"
+        password="123456">
+    </jdbcConnection>
+
+	<!--  -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!-- javaModelGenerator：指定javaBean的生成策略 
+	targetPackage="test.model"：目标包名
+	targetProject="\MBGTestProject\src"：目标工程
+	-->
+    <javaModelGenerator targetPackage="com.entity" 
+    		targetProject=".\src\main\java\com\dao">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+	<!-- sqlMapGenerator：sql映射生成策略： -->
+    <sqlMapGenerator targetPackage="mapper"
+    	targetProject=".\src\main\resources\mapper">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!-- javaClientGenerator:指定mapper接口所在的位置 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.dao" 
+    	targetProject=".\src\main\java\com\dao">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+	<!-- 指定要逆向分析哪些表：根据表要创建javaBean -->
+      <table tableName="muke_address" domainObjectName="Address"></table>
+      <table tableName="muke_advertising" domainObjectName="Advertising"></table>
+      <table tableName="muke_article" domainObjectName="Article"></table>
+      <table tableName="muke_carousel" domainObjectName="Carousel"></table>
+      <table tableName="muke_collect" domainObjectName="Collect"></table>
+      <table tableName="muke_comment" domainObjectName="Comment"></table>
+      <table tableName="muke_difficulty" domainObjectName="Difficulty"></table>
+      <table tableName="muke_jurisdiction" domainObjectName="Jurisdiction"></table>
+      <table tableName="muke_lasttime" domainObjectName="Lasttime"></table>
+      <table tableName="muke_mv" domainObjectName="Mv"></table>
+      <table tableName="muke_mv_category" domainObjectName="MvCategory"></table>
+      <table tableName="muke_mvinfo" domainObjectName="Mvinfo"></table>
+      <table tableName="muke_order" domainObjectName="Order"></table>
+      <table tableName="muke_order_detail" domainObjectName="Detail"></table>
+      <table tableName="muke_role" domainObjectName="Role"></table>
+      <table tableName="muke_section" domainObjectName="Section"></table>
+      <table tableName="muke_shoppingcart" domainObjectName="Shoppingcart"></table>
+      <table tableName="muke_stutype" domainObjectName="Stutype"></table>
+      <table tableName="muke_teacher" domainObjectName="Teacher"></table>
+      <table tableName="muke_ujurisdiction" domainObjectName="Ujurisdiction"></table>
+      <table tableName="muke_urole" domainObjectName="Urole"></table>
+      <table tableName="muke_user" domainObjectName="Users"></table>
+      <table tableName="muke_user_course_section" domainObjectName="Course"></table>
+      <table tableName="muke_user_follows" domainObjectName="Follows"></table>
+  </context>
+</generatorConfiguration>

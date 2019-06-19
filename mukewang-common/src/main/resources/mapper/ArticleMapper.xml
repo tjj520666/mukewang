@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Article">
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="article_uid" jdbcType="INTEGER" property="articleUid" />
+    <result column="article_likenum" jdbcType="INTEGER" property="articleLikenum" />
+    <result column="article_image" jdbcType="VARCHAR" property="articleImage" />
+    <result column="article_time" jdbcType="TIMESTAMP" property="articleTime" />
+    <result column="article_personnum" jdbcType="INTEGER" property="articlePersonnum" />
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.entity.Article">
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    article_id, article_title, article_uid, article_likenum, article_image, article_time, article_content,
+    article_personnum
+  </sql>
+  <sql id="Blob_Column_List">
+    article_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.entity.ArticleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from muke_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectByRainAll" resultMap="BaseResultMap" parameterType="Integer">
+  select * from muke_article where article_uid = #{id}
+  </select>
+  <select id="selectByExample" parameterType="com.entity.ArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from muke_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+
+  <!--自定义 selectByExampleId-->
+  <select id="selectByExampleId" parameterType="com.entity.ArticleExample" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from muke_article
+  where article_uid=#{articleUid,jdbcType=INTEGER}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_article
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.ArticleExample">
+    delete from muke_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Article">
+    insert into muke_article (article_id, article_title, article_uid, 
+      article_likenum, article_image, article_time, 
+      article_personnum, article_content)
+    values (#{articleId,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR}, #{articleUid,jdbcType=INTEGER}, 
+      #{articleLikenum,jdbcType=INTEGER}, #{articleImage,jdbcType=VARCHAR}, #{articleTime,jdbcType=TIMESTAMP}, 
+      #{articlePersonnum,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Article">
+    insert into muke_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="articleUid != null">
+        article_uid,
+      </if>
+      <if test="articleLikenum != null">
+        article_likenum,
+      </if>
+      <if test="articleImage != null">
+        article_image,
+      </if>
+      <if test="articleTime != null">
+        article_time,
+      </if>
+      <if test="articlePersonnum != null">
+        article_personnum,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleUid != null">
+        #{articleUid,jdbcType=INTEGER},
+      </if>
+      <if test="articleLikenum != null">
+        #{articleLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="articleImage != null">
+        #{articleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTime != null">
+        #{articleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articlePersonnum != null">
+        #{articlePersonnum,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.ArticleExample" resultType="java.lang.Long">
+    select count(*) from muke_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_article
+    <set>
+      <if test="record.articleId != null">
+        article_id = #{record.articleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleTitle != null">
+        article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleUid != null">
+        article_uid = #{record.articleUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleLikenum != null">
+        article_likenum = #{record.articleLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleImage != null">
+        article_image = #{record.articleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleTime != null">
+        article_time = #{record.articleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.articlePersonnum != null">
+        article_personnum = #{record.articlePersonnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleContent != null">
+        article_content = #{record.articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update muke_article
+    set article_id = #{record.articleId,jdbcType=INTEGER},
+      article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      article_uid = #{record.articleUid,jdbcType=INTEGER},
+      article_likenum = #{record.articleLikenum,jdbcType=INTEGER},
+      article_image = #{record.articleImage,jdbcType=VARCHAR},
+      article_time = #{record.articleTime,jdbcType=TIMESTAMP},
+      article_personnum = #{record.articlePersonnum,jdbcType=INTEGER},
+      article_content = #{record.articleContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_article
+    set article_id = #{record.articleId,jdbcType=INTEGER},
+      article_title = #{record.articleTitle,jdbcType=VARCHAR},
+      article_uid = #{record.articleUid,jdbcType=INTEGER},
+      article_likenum = #{record.articleLikenum,jdbcType=INTEGER},
+      article_image = #{record.articleImage,jdbcType=VARCHAR},
+      article_time = #{record.articleTime,jdbcType=TIMESTAMP},
+      article_personnum = #{record.articlePersonnum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Article">
+    update muke_article
+    <set>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleUid != null">
+        article_uid = #{articleUid,jdbcType=INTEGER},
+      </if>
+      <if test="articleLikenum != null">
+        article_likenum = #{articleLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="articleImage != null">
+        article_image = #{articleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTime != null">
+        article_time = #{articleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articlePersonnum != null">
+        article_personnum = #{articlePersonnum,jdbcType=INTEGER},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.entity.Article">
+    update muke_article
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_uid = #{articleUid,jdbcType=INTEGER},
+      article_likenum = #{articleLikenum,jdbcType=INTEGER},
+      article_image = #{articleImage,jdbcType=VARCHAR},
+      article_time = #{articleTime,jdbcType=TIMESTAMP},
+      article_personnum = #{articlePersonnum,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Article">
+    update muke_article
+    set article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_uid = #{articleUid,jdbcType=INTEGER},
+      article_likenum = #{articleLikenum,jdbcType=INTEGER},
+      article_image = #{articleImage,jdbcType=VARCHAR},
+      article_time = #{articleTime,jdbcType=TIMESTAMP},
+      article_personnum = #{articlePersonnum,jdbcType=INTEGER}
+    where article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+</mapper>

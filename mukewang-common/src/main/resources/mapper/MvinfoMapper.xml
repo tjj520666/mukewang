@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.MvinfoMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Mvinfo">
+    <id column="mvinfo_id" jdbcType="INTEGER" property="mvinfoId" />
+    <result column="mvinfo_name" jdbcType="VARCHAR" property="mvinfoName" />
+    <result column="mvinfo_time" jdbcType="DOUBLE" property="mvinfoTime" />
+    <result column="mvinfo_mv" jdbcType="VARCHAR" property="mvinfoMv" />
+    <result column="mvinfo_section" jdbcType="INTEGER" property="mvinfoSection" />
+    <result column="mvinfo_info" jdbcType="VARCHAR" property="mvinfoInfo" />
+    <association property="section" javaType="com.entity.Section" column="mvinfo_section" select="com.dao.SectionMapper.selectByPrimaryKey"></association>
+    <!--<collection property="sectionList" column="mvinfo_section" select="com.dao.SectionMapper.selectByPrimaryKey"  ofType="Section" javaType="java.util.List"></collection>-->
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mvinfo_id, mvinfo_name, mvinfo_time, mvinfo_mv, mvinfo_section, mvinfo_info
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.MvinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_mvinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from muke_mvinfo
+  where mvinfo_id = #{mvinfoId,jdbcType=INTEGER}
+</select>
+  <select id="selectBySection" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from muke_mvinfo
+    where mvinfo_section = #{sectionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_mvinfo
+    where mvinfo_id = #{mvinfoId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.MvinfoExample">
+    delete from muke_mvinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Mvinfo">
+    insert into muke_mvinfo (mvinfo_id, mvinfo_name, mvinfo_time, 
+      mvinfo_mv, mvinfo_section, mvinfo_info
+      )
+    values (#{mvinfoId,jdbcType=INTEGER}, #{mvinfoName,jdbcType=VARCHAR}, #{mvinfoTime,jdbcType=DOUBLE}, 
+      #{mvinfoMv,jdbcType=VARCHAR}, #{mvinfoSection,jdbcType=INTEGER}, #{mvinfoInfo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Mvinfo">
+    insert into muke_mvinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mvinfoId != null">
+        mvinfo_id,
+      </if>
+      <if test="mvinfoName != null">
+        mvinfo_name,
+      </if>
+      <if test="mvinfoTime != null">
+        mvinfo_time,
+      </if>
+      <if test="mvinfoMv != null">
+        mvinfo_mv,
+      </if>
+      <if test="mvinfoSection != null">
+        mvinfo_section,
+      </if>
+      <if test="mvinfoInfo != null">
+        mvinfo_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mvinfoId != null">
+        #{mvinfoId,jdbcType=INTEGER},
+      </if>
+      <if test="mvinfoName != null">
+        #{mvinfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="mvinfoTime != null">
+        #{mvinfoTime,jdbcType=DOUBLE},
+      </if>
+      <if test="mvinfoMv != null">
+        #{mvinfoMv,jdbcType=VARCHAR},
+      </if>
+      <if test="mvinfoSection != null">
+        #{mvinfoSection,jdbcType=INTEGER},
+      </if>
+      <if test="mvinfoInfo != null">
+        #{mvinfoInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.MvinfoExample" resultType="java.lang.Long">
+    select count(*) from muke_mvinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_mvinfo
+    <set>
+      <if test="record.mvinfoId != null">
+        mvinfo_id = #{record.mvinfoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvinfoName != null">
+        mvinfo_name = #{record.mvinfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mvinfoTime != null">
+        mvinfo_time = #{record.mvinfoTime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mvinfoMv != null">
+        mvinfo_mv = #{record.mvinfoMv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mvinfoSection != null">
+        mvinfo_section = #{record.mvinfoSection,jdbcType=INTEGER},
+      </if>
+      <if test="record.mvinfoInfo != null">
+        mvinfo_info = #{record.mvinfoInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_mvinfo
+    set mvinfo_id = #{record.mvinfoId,jdbcType=INTEGER},
+      mvinfo_name = #{record.mvinfoName,jdbcType=VARCHAR},
+      mvinfo_time = #{record.mvinfoTime,jdbcType=DOUBLE},
+      mvinfo_mv = #{record.mvinfoMv,jdbcType=VARCHAR},
+      mvinfo_section = #{record.mvinfoSection,jdbcType=INTEGER},
+      mvinfo_info = #{record.mvinfoInfo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Mvinfo">
+    update muke_mvinfo
+    <set>
+      <if test="mvinfoName != null">
+        mvinfo_name = #{mvinfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="mvinfoTime != null">
+        mvinfo_time = #{mvinfoTime,jdbcType=DOUBLE},
+      </if>
+      <if test="mvinfoMv != null">
+        mvinfo_mv = #{mvinfoMv,jdbcType=VARCHAR},
+      </if>
+      <if test="mvinfoSection != null">
+        mvinfo_section = #{mvinfoSection,jdbcType=INTEGER},
+      </if>
+      <if test="mvinfoInfo != null">
+        mvinfo_info = #{mvinfoInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mvinfo_id = #{mvinfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Mvinfo">
+    update muke_mvinfo
+    set mvinfo_name = #{mvinfoName,jdbcType=VARCHAR},
+      mvinfo_time = #{mvinfoTime,jdbcType=DOUBLE},
+      mvinfo_mv = #{mvinfoMv,jdbcType=VARCHAR},
+      mvinfo_section = #{mvinfoSection,jdbcType=INTEGER},
+      mvinfo_info = #{mvinfoInfo,jdbcType=VARCHAR}
+    where mvinfo_id = #{mvinfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

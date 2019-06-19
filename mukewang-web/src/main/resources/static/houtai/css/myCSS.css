@@ -1,0 +1,50 @@
+body {
+	border: 1px solid red;
+	background-image: url(../img/login_bg.jpg);
+	background-size: cover;
+	text-align: center;
+}
+
+.login {
+	margin: 0px auto;
+	height: 300px;
+	width: 420px;
+	background-image: url(../img/formBg.png);
+	background-size: cover;
+	
+}
+
+.caidan a {
+	font-weight: 1000;
+	color: #0034AF;
+	font-size: 16px;
+	text-decoration: none;
+	font: "楷体";
+}
+
+.caidan li {
+	padding: 10px 20px;
+	border-bottom: 1px solid silver;
+	list-style-type: none;
+}
+
+.gly {
+	width: 300px;
+}
+
+.gly img {
+	float: left;
+}
+
+.gly li {
+	text-align: center;
+	list-style-type: none;
+}
+
+.gly{
+	text-decoration: none;
+}
+
+img{
+	vertical-align:middle;
+}

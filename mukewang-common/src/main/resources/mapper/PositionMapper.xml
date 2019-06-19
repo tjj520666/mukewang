@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.PositionMapper">
+    <resultMap id="BaseResultMap" type="com.entity.Position">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="positionName" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+    <select id="selectByPositionAll" resultMap="BaseResultMap">
+        select * from `muke_position`
+    </select>
+
+    <select id="selectByPositionId" resultMap="BaseResultMap" parameterType="Integer">
+        select * from muke_position where id = #{id}
+    </select>
+
+</mapper>

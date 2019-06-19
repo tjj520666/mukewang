@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Teacher">
+    <id column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="teacher_uid" jdbcType="INTEGER" property="teacherUid" />
+    <result column="teacher_title" jdbcType="VARCHAR" property="teacherTitle" />
+    <result column="teacher_intro" jdbcType="VARCHAR" property="teacherIntro" />
+    <result column="teacher_mv" jdbcType="VARCHAR" property="teacherMv" />
+    <result column="teacher_shizhan" jdbcType="VARCHAR" property="teacherShizhan" />
+    <result column="teacher_shouji" jdbcType="VARCHAR" property="teacherShouji" />
+    <result column="teacher_fans" jdbcType="INTEGER" property="teacherFans" />
+    <result column="teacher_image" jdbcType="VARCHAR" property="teacherImage" />
+    <association property="users" javaType="com.entity.Users" column="teacher_uid" select="com.dao.UsersMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    teacher_id, teacher_name, teacher_uid, teacher_title, teacher_intro, teacher_mv, 
+    teacher_shizhan, teacher_shouji, teacher_fans, teacher_image
+  </sql>
+  <select id="selectByExample" parameterType="com.entity.TeacherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muke_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from muke_teacher
+  where teacher_id = #{teacherId,jdbcType=INTEGER}
+</select>
+
+  <select id="selectSome"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from muke_teacher
+    ORDER BY `teacher_fans` DESC
+    limit 0,5
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muke_teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.TeacherExample">
+    delete from muke_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Teacher">
+    insert into muke_teacher (teacher_id, teacher_name, teacher_uid, 
+      teacher_title, teacher_intro, teacher_mv, 
+      teacher_shizhan, teacher_shouji, teacher_fans, 
+      teacher_image)
+    values (#{teacherId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, #{teacherUid,jdbcType=INTEGER}, 
+      #{teacherTitle,jdbcType=VARCHAR}, #{teacherIntro,jdbcType=VARCHAR}, #{teacherMv,jdbcType=VARCHAR}, 
+      #{teacherShizhan,jdbcType=VARCHAR}, #{teacherShouji,jdbcType=VARCHAR}, #{teacherFans,jdbcType=INTEGER}, 
+      #{teacherImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Teacher">
+    insert into muke_teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="teacherName != null">
+        teacher_name,
+      </if>
+      <if test="teacherUid != null">
+        teacher_uid,
+      </if>
+      <if test="teacherTitle != null">
+        teacher_title,
+      </if>
+      <if test="teacherIntro != null">
+        teacher_intro,
+      </if>
+      <if test="teacherMv != null">
+        teacher_mv,
+      </if>
+      <if test="teacherShizhan != null">
+        teacher_shizhan,
+      </if>
+      <if test="teacherShouji != null">
+        teacher_shouji,
+      </if>
+      <if test="teacherFans != null">
+        teacher_fans,
+      </if>
+      <if test="teacherImage != null">
+        teacher_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherUid != null">
+        #{teacherUid,jdbcType=INTEGER},
+      </if>
+      <if test="teacherTitle != null">
+        #{teacherTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherIntro != null">
+        #{teacherIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherMv != null">
+        #{teacherMv,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherShizhan != null">
+        #{teacherShizhan,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherShouji != null">
+        #{teacherShouji,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherFans != null">
+        #{teacherFans,jdbcType=INTEGER},
+      </if>
+      <if test="teacherImage != null">
+        #{teacherImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.TeacherExample" resultType="java.lang.Long">
+    select count(*) from muke_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muke_teacher
+    <set>
+      <if test="record.teacherId != null">
+        teacher_id = #{record.teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherName != null">
+        teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherUid != null">
+        teacher_uid = #{record.teacherUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherTitle != null">
+        teacher_title = #{record.teacherTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherIntro != null">
+        teacher_intro = #{record.teacherIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherMv != null">
+        teacher_mv = #{record.teacherMv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherShizhan != null">
+        teacher_shizhan = #{record.teacherShizhan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherShouji != null">
+        teacher_shouji = #{record.teacherShouji,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherFans != null">
+        teacher_fans = #{record.teacherFans,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherImage != null">
+        teacher_image = #{record.teacherImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muke_teacher
+    set teacher_id = #{record.teacherId,jdbcType=INTEGER},
+      teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      teacher_uid = #{record.teacherUid,jdbcType=INTEGER},
+      teacher_title = #{record.teacherTitle,jdbcType=VARCHAR},
+      teacher_intro = #{record.teacherIntro,jdbcType=VARCHAR},
+      teacher_mv = #{record.teacherMv,jdbcType=VARCHAR},
+      teacher_shizhan = #{record.teacherShizhan,jdbcType=VARCHAR},
+      teacher_shouji = #{record.teacherShouji,jdbcType=VARCHAR},
+      teacher_fans = #{record.teacherFans,jdbcType=INTEGER},
+      teacher_image = #{record.teacherImage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Teacher">
+    update muke_teacher
+    <set>
+      <if test="teacherName != null">
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherUid != null">
+        teacher_uid = #{teacherUid,jdbcType=INTEGER},
+      </if>
+      <if test="teacherTitle != null">
+        teacher_title = #{teacherTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherIntro != null">
+        teacher_intro = #{teacherIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherMv != null">
+        teacher_mv = #{teacherMv,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherShizhan != null">
+        teacher_shizhan = #{teacherShizhan,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherShouji != null">
+        teacher_shouji = #{teacherShouji,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherFans != null">
+        teacher_fans = #{teacherFans,jdbcType=INTEGER},
+      </if>
+      <if test="teacherImage != null">
+        teacher_image = #{teacherImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Teacher">
+    update muke_teacher
+    set teacher_name = #{teacherName,jdbcType=VARCHAR},
+      teacher_uid = #{teacherUid,jdbcType=INTEGER},
+      teacher_title = #{teacherTitle,jdbcType=VARCHAR},
+      teacher_intro = #{teacherIntro,jdbcType=VARCHAR},
+      teacher_mv = #{teacherMv,jdbcType=VARCHAR},
+      teacher_shizhan = #{teacherShizhan,jdbcType=VARCHAR},
+      teacher_shouji = #{teacherShouji,jdbcType=VARCHAR},
+      teacher_fans = #{teacherFans,jdbcType=INTEGER},
+      teacher_image = #{teacherImage,jdbcType=VARCHAR}
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+</mapper>

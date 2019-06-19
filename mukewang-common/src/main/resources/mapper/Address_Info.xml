@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.AddressInfoMapper">
+    <resultMap id="BaseResultMap" type="com.entity.AddressInfo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="parentId" jdbcType="INTEGER" property="parentId" />
+    </resultMap>
+    <select id="selectByAllParentId" resultMap="BaseResultMap">
+        select * from muke_address_info where parentId = id
+    </select>
+
+    <select id="selectByIdSonId" resultMap="BaseResultMap" parameterType="Integer">
+        select * from muke_address_info where parentId = #{id} AND parentId != id
+    </select>
+
+   <!-- <select id="selectByIdGrandson">
+        select * from muke_address_info where parentId = #{id} AND parentId = id
+    </select>-->
+</mapper>
